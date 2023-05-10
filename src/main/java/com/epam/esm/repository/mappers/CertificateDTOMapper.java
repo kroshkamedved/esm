@@ -1,8 +1,8 @@
-package com.epam.esm.repositories.mappers;
+package com.epam.esm.repository.mappers;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
-import com.epam.esm.repositories.dto.GiftCertificateDTO;
+import com.epam.esm.dto.dto.GiftCertificateDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

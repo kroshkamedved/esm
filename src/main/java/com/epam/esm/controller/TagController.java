@@ -1,7 +1,7 @@
-package com.epam.esm.controllers;
+package com.epam.esm.controller;
 
 import com.epam.esm.domain.Tag;
-import com.epam.esm.services.TagService;
+import com.epam.esm.service.TagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;

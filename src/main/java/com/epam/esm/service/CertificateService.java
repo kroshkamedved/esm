@@ -1,12 +1,12 @@
-package com.epam.esm.services;
+package com.epam.esm.service;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
 import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.repositories.CertificateRepository;
-import com.epam.esm.repositories.TagRepository;
-import com.epam.esm.repositories.dto.GiftCertificateDTO;
-import com.epam.esm.repositories.mappers.CertificateDTOMapper;
+import com.epam.esm.repository.CertificateRepository;
+import com.epam.esm.repository.TagRepository;
+import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.repository.mappers.CertificateDTOMapper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

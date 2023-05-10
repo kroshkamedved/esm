@@ -1,18 +1,15 @@
-package com.epam.esm.services;
+package com.epam.esm.service;
 
 import com.epam.esm.domain.Tag;
 import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityCannotBeSaved;
 import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.repositories.TagRepository;
+import com.epam.esm.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class TagService {

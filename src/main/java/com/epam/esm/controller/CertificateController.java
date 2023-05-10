@@ -1,9 +1,9 @@
-package com.epam.esm.controllers;
+package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.exception.EntityUpdateException;
-import com.epam.esm.repositories.dto.GiftCertificateDTO;
-import com.epam.esm.services.CertificateService;
+import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.service.CertificateService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +30,7 @@ public class CertificateController {
      *
      * @param id requested certificate id
      *           if it is present in the db
-     * @return GiftCertificate with corresponding id.
-     * @throws com.epam.esm.exception.EntityNotFoundException if id is not valid.
+     * @return found certificate or 404 if no certificate found
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)

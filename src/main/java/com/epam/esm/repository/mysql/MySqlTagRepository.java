@@ -1,8 +1,8 @@
-package com.epam.esm.repositories.mysql;
+package com.epam.esm.repository.mysql;
 
 import com.epam.esm.domain.Tag;
-import com.epam.esm.repositories.TagRepository;
-import com.epam.esm.repositories.mappers.TagMapper;
+import com.epam.esm.repository.TagRepository;
+import com.epam.esm.repository.mappers.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -15,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

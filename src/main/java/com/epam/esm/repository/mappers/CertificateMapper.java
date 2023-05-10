@@ -1,4 +1,4 @@
-package com.epam.esm.repositories.mappers;
+package com.epam.esm.repository.mappers;
 
 import com.epam.esm.domain.GiftCertificate;
 import lombok.Data;

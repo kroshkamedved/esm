@@ -1,10 +1,10 @@
-package com.epam.esm.repositories.mysql;
+package com.epam.esm.repository.mysql;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.repositories.CertificateRepository;
-import com.epam.esm.repositories.dto.GiftCertificateDTO;
-import com.epam.esm.repositories.mappers.CertificateMapper;
+import com.epam.esm.repository.CertificateRepository;
+import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.repository.mappers.CertificateMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;

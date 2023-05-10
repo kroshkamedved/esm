@@ -1,9 +1,8 @@
-package com.epam.esm.repositories.dto;
+package com.epam.esm.dto.dto;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,7 +1,7 @@
-package com.epam.esm.repositories;
+package com.epam.esm.repository;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.repositories.dto.GiftCertificateDTO;
+import com.epam.esm.dto.dto.GiftCertificateDTO;
 
 import java.util.List;
 import java.util.Optional;
