@@ -1,10 +1,10 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.service.CertificateService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import static org.springframework.http.HttpStatus.OK;
  */
 @RestController
 @RequestMapping("certificates")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CertificateController {
 
     private final CertificateService certificateService;
@@ -35,7 +35,7 @@ public class CertificateController {
     @GetMapping("/{id}")
     @ResponseStatus(OK)
     public GiftCertificate getById(@PathVariable long id) {
-        return certificateService.get(id);
+        return certificateService.getCertificate(id);
     }
 
     /**
@@ -59,8 +59,8 @@ public class CertificateController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public GiftCertificateDTO storeCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
-        return certificateService.storeCertificate(certificateDTO);
+    public GiftCertificateDTO addCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
+        return certificateService.addCertificate(certificateDTO);
     }
 
     /**

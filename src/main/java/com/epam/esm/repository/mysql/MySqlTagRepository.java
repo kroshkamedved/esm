@@ -3,6 +3,7 @@ package com.epam.esm.repository.mysql;
 import com.epam.esm.domain.Tag;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.mappers.TagMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -25,12 +26,12 @@ public class MySqlTagRepository implements TagRepository {
     private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS";
     private static final String STORE_NEW_TAG = "insert into tags (tag_name) values(?)";
     private static final String DELETE = "delete from tags where tag_id=?";
-    public static final String ADD_TAG_TO_CERTIFICATE = "insert into certificates_to_tags(certificate_id, tag_id) " +
-            "values(?, ?)";
-    private static final String SELECT_BY_CERTIFICATE_ID = "select t.tag_id, t.tag_name " +
-            "from certificates_to_tags ct join tags t " +
-            "on t.tag_id =  ct.tag_id " +
-            "where certificate_id=?";
+    public static final String ADD_TAG_TO_CERTIFICATE = "insert into certificates_to_tags(certificate_id, tag_id) values(?, ?)";
+    private static final String SELECT_BY_CERTIFICATE_ID = """ 
+            select t.tag_id, t.tag_name 
+            from certificates_to_tags ct 
+            join tags t on t.tag_id = ct.tag_id 
+            where certificate_id=? """;
 
     private final JdbcTemplate jdbcTemplate;
     private final TagMapper tagMapper;
@@ -51,7 +52,7 @@ public class MySqlTagRepository implements TagRepository {
                 return preparedStatement;
             }, keyHolder);
         } catch (DataIntegrityViolationException duplicationError) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Tag = " + tag.getName() + " already present in the DB", duplicationError);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tag = " + tag.getName() + " already present in the DB", duplicationError);
         }
         tag.setId((keyHolder.getKey()).longValue());
         return tag;

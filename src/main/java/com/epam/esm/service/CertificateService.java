@@ -32,12 +32,12 @@ public class CertificateService {
         this.tagRepository = tagRepository;
     }
 
-    public GiftCertificate get(long id) {
+    public GiftCertificate getCertificate(long id) {
         return certificateRepository.getCertificate(id).orElseThrow(() -> new EntityNotFoundException("can't receive GiftCertificate with id = " + id));
     }
 
     @Transactional
-    public GiftCertificateDTO storeCertificate(GiftCertificateDTO certificateDTO) {
+    public GiftCertificateDTO addCertificate(GiftCertificateDTO certificateDTO) {
         GiftCertificate giftCertificate = certificateDTOMapper.toGiftCertificate(certificateDTO);
         GiftCertificate certificateFromDb = certificateRepository.storeCertificate(giftCertificate);
         tagRepository.saveTagsForCertificate(certificateDTO.getTags(), certificateFromDb.getId());

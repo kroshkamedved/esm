@@ -22,7 +22,9 @@ public class TagService {
 
     public Tag storeTag(Tag tag) {
         try {
-            return tagRepository.storeTag(tag);
+            if (tag.getName() != null) {
+                return tagRepository.storeTag(tag);
+            } else throw new EntityCannotBeSaved("tag should have a name");
         } catch (Exception e) {
             throw new EntityCannotBeSaved("Resource cannot be saved (" + e.getMessage() + ")");
         }

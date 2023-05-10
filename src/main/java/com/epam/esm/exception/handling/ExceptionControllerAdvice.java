@@ -29,7 +29,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(EntityCannotBeSaved.class)
     public ResponseEntity<ErrorDetails> handleEntityCannotBeSavedException(EntityCannotBeSaved exception) {
         ErrorDetails errorDetails = ErrorDetails.detailsOf(exception, HttpStatus.CONFLICT.toString());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorDetails);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDetails);
     }
 
     @ExceptionHandler(EmptySetException.class)

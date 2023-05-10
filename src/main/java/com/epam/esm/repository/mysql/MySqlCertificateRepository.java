@@ -6,6 +6,7 @@ import com.epam.esm.repository.CertificateRepository;
 import com.epam.esm.dto.dto.GiftCertificateDTO;
 import com.epam.esm.repository.mappers.CertificateMapper;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -23,23 +24,22 @@ import java.util.StringJoiner;
 
 @Repository
 @Qualifier("MYSQL")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MySqlCertificateRepository implements CertificateRepository {
 
     private static final String GET_ALL_CERTIFICATES = "SELECT * FROM certificates";
     private static final String SELECT_BY_ID = "SELECT * FROM certificates where id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM certificates WHERE id = ?";
     private static final String STORE_NEW_CERTIFICATE = "INSERT INTO certificates (`name`, `description`, `price`, `duration`) VALUES (?, ?, ?, ?);";
-    private static final String SELECT_ALL_CERTIFICATES_WITH_TAGNAME = "SELECT * FROM certificates c \n" +
-            "            JOIN certificates_to_tags ctt\n" +
-            "            ON ctt.certificate_id = c.id\n" +
-            "            LEFT JOIN tags t \n" +
-            "            ON t.tag_id = ctt.tag_id\n" +
-            "            WHERE t.tag_name like \"%\" :tagName \"%\"";
-    private static final String SELECT_ALL_CERTIFICATES_WITH_NAME = "select * from certificates" +
-            " where name like \"%\" ? \"%\"";
-    private static final String SELECT_ALL_CERTIFICATES_WITH_DESCRIPTION = "select * from certificates" +
-            " where description like \"%\" ? \"%\"";
+    private static final String SELECT_ALL_CERTIFICATES_WITH_TAGNAME = """
+            SELECT * FROM certificates c
+            JOIN certificates_to_tags ctt
+              ON ctt.certificate_id = c.id
+                LEFT JOIN tags t 
+                ON t.tag_id = ctt.tag_id
+               WHERE t.tag_name like \"%\" :tagName \"%\"""";
+    private static final String SELECT_ALL_CERTIFICATES_WITH_NAME = "select * from certificates where name like \"%\" ? \"%\"";
+    private static final String SELECT_ALL_CERTIFICATES_WITH_DESCRIPTION = "select * from certificates where description like \"%\" ? \"%\"";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;

@@ -2,7 +2,7 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.Tag;
 import com.epam.esm.service.TagService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import static org.springframework.http.HttpStatus.OK;
 /**
  * REST Controller for basic operation with Tag
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/tags")
 public class TagController {
@@ -55,7 +55,7 @@ public class TagController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public Tag create(@RequestBody Tag tag) {
+    public Tag addTag(@RequestBody Tag tag) {
         return tagService.storeTag(tag);
     }
 
