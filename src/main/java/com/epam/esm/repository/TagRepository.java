@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagRepository {
-    Tag storeTag(Tag tag);
+    Tag createTag(Tag tag);
 
-    Optional<Tag> getTag(long id);
+    Optional<Tag> fetchTag(long id);
 
     void deleteTag(long id);
 
-    List<Tag> getAll();
+    List<Tag> fetchAll();
 
     boolean saveTagsForCertificate(List<Tag> tags, long id);
 
-    List<Tag> getLinkedTags(long certificateId);
+    List<Tag> fetchLinkedTags(long certificateId);
 }

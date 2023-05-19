@@ -7,19 +7,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CertificateRepository {
-    GiftCertificate storeCertificate(GiftCertificate certificate);
+    GiftCertificate createCertificate(GiftCertificate certificate);
 
-    Optional<GiftCertificate> getCertificate(long id);
+    Optional<GiftCertificate> fetchCertificate(long id);
 
     void deleteCertificate(long id);
 
     boolean updateCertificate(GiftCertificateDTO certificate);
 
-    List<GiftCertificate> getAll();
+    List<GiftCertificate> fetchAll();
 
-    List<GiftCertificate> getAllCertificatesWithTagName(String tagName);
+    List<GiftCertificate> fetchAllCertificatesWithTagName(String tagName);
 
-    List<GiftCertificate> getAllCertificatesWithName(String name);
+    List<GiftCertificate> fetchAllCertificatesWithName(String name);
 
-    List<GiftCertificate> getAllCertificatesWithDescription(String description);
+    List<GiftCertificate> fetchAllCertificatesWithDescription(String description);
 }

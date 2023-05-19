@@ -1,13 +1,11 @@
 package com.epam.esm.repository.mysql;
 
 import com.epam.esm.domain.GiftCertificate;
+import com.epam.esm.dto.dto.GiftCertificateDTO;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.repository.CertificateRepository;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
 import com.epam.esm.repository.mappers.CertificateMapper;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,7 +21,6 @@ import java.util.Optional;
 import java.util.StringJoiner;
 
 @Repository
-@Qualifier("MYSQL")
 @RequiredArgsConstructor
 public class MySqlCertificateRepository implements CertificateRepository {
 
@@ -45,8 +42,8 @@ public class MySqlCertificateRepository implements CertificateRepository {
     private final JdbcTemplate jdbcTemplate;
     private final CertificateMapper certificateMapper;
 
-    @Override//TODO add URI header
-    public GiftCertificate storeCertificate(GiftCertificate certificate) {
+    @Override
+    public GiftCertificate createCertificate(GiftCertificate certificate) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
@@ -62,7 +59,7 @@ public class MySqlCertificateRepository implements CertificateRepository {
     }
 
     @Override
-    public Optional<GiftCertificate> getCertificate(long id) {
+    public Optional<GiftCertificate> fetchCertificate(long id) {
         return jdbcTemplate
                 .query(SELECT_BY_ID, certificateMapper, id)
                 .stream()
@@ -77,7 +74,7 @@ public class MySqlCertificateRepository implements CertificateRepository {
     @Override
     public boolean updateCertificate(GiftCertificateDTO certificate) {
 
-        if (certificate.getId() == 0l || !(getCertificate(certificate.getId()).isPresent())) {
+        if (certificate.getId() == 0l || !(fetchCertificate(certificate.getId()).isPresent())) {
             throw new EntityNotFoundException("ID attribute is absent or not valid");
         }
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -113,23 +110,23 @@ public class MySqlCertificateRepository implements CertificateRepository {
     }
 
     @Override
-    public List<GiftCertificate> getAll() {
+    public List<GiftCertificate> fetchAll() {
         return jdbcTemplate.query(GET_ALL_CERTIFICATES, certificateMapper);
     }
 
     @Override
-    public List<GiftCertificate> getAllCertificatesWithTagName(String tagName) {
+    public List<GiftCertificate> fetchAllCertificatesWithTagName(String tagName) {
         SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("tagName", tagName);
         return namedParameterJdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_TAGNAME, parameterSource, certificateMapper);
     }
 
     @Override
-    public List<GiftCertificate> getAllCertificatesWithName(String name) {
+    public List<GiftCertificate> fetchAllCertificatesWithName(String name) {
         return jdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_NAME, certificateMapper, name);
     }
 
     @Override
-    public List<GiftCertificate> getAllCertificatesWithDescription(String description) {
+    public List<GiftCertificate> fetchAllCertificatesWithDescription(String description) {
         return jdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_DESCRIPTION, certificateMapper, description);
     }
 

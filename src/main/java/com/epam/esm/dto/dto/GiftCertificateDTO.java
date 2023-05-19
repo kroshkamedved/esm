@@ -23,16 +23,16 @@ public class GiftCertificateDTO {
 
     private Integer duration;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
-    private Instant create_date;
-    private Instant last_update_date;
+    private Instant creationDate;
+    private Instant updated;
     private List<Tag> tags;
 
     public GiftCertificateDTO(GiftCertificate giftCertificate, List<Tag> tags) {
         if (giftCertificate.getCreate_date() != null) {
-            this.create_date = giftCertificate.getCreate_date();
+            this.creationDate = giftCertificate.getCreate_date();
         }
         if (giftCertificate.getLast_update_date() != null) {
-            this.last_update_date = giftCertificate.getLast_update_date();
+            this.updated = giftCertificate.getLast_update_date();
         }
         this.id = giftCertificate.getId();
         this.name = giftCertificate.getName();

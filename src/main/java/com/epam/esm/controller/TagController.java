@@ -31,7 +31,7 @@ public class TagController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public Tag getById(@PathVariable("id") Long id) {
+    public Tag fetchById(@PathVariable("id") Long id) {
         return tagService.getTag(id);
     }
 
@@ -55,7 +55,7 @@ public class TagController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public Tag addTag(@RequestBody Tag tag) {
+    public Tag createTag(@RequestBody Tag tag) {
         return tagService.storeTag(tag);
     }
 
@@ -66,7 +66,7 @@ public class TagController {
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(OK)
-    public void delete(@PathVariable("id") Long id) {
+    public void deleteById(@PathVariable("id") Long id) {
         tagService.deleteTag(id);
     }
 }

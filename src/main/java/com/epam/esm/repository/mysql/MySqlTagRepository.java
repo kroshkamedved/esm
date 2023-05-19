@@ -3,9 +3,7 @@ package com.epam.esm.repository.mysql;
 import com.epam.esm.domain.Tag;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.mappers.TagMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Qualifier("MYSQL")
 public class MySqlTagRepository implements TagRepository {
     private static final String SELECT_BY_ID = "SELECT tag_id , tag_name FROM TAGS WHERE tag_id = ?";
     private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS";
@@ -43,7 +40,7 @@ public class MySqlTagRepository implements TagRepository {
     }
 
     @Override
-    public Tag storeTag(Tag tag) {
+    public Tag createTag(Tag tag) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         try {
             jdbcTemplate.update(connection -> {
@@ -59,7 +56,7 @@ public class MySqlTagRepository implements TagRepository {
     }
 
     @Override
-    public Optional<Tag> getTag(long id) {
+    public Optional<Tag> fetchTag(long id) {
         return jdbcTemplate.
                 query(SELECT_BY_ID, tagMapper, id)
                 .stream()
@@ -72,21 +69,21 @@ public class MySqlTagRepository implements TagRepository {
     }
 
     @Override
-    public List<Tag> getAll() {
+    public List<Tag> fetchAll() {
         return jdbcTemplate.query(SELECT_ALL_TAGS, tagMapper);
     }
 
     @Override
     public boolean saveTagsForCertificate(List<Tag> tags, long id) {
         boolean newTagLinked = false;
-        List<Tag> tagsInDb = getAll();
-        List<Tag> currentLinkedTags = getLinkedTags(id);
+        List<Tag> tagsInDb = fetchAll();
+        List<Tag> currentLinkedTags = fetchLinkedTags(id);
         for (Tag tag : tags) {
             Optional<Tag> tagForLink = tagsInDb.stream()
                     .filter(dbTag -> dbTag.getName().equals(tag.getName()) || dbTag.getId() == tag.getId())
                     .findAny();
 
-            Tag tagForSaving = (tagForLink.isEmpty()) ? (storeTag(tag)) : tagForLink.get();
+            Tag tagForSaving = (tagForLink.isEmpty()) ? (createTag(tag)) : tagForLink.get();
 
             if (currentLinkedTags.contains(tagForSaving)) {
                 continue;
@@ -98,7 +95,7 @@ public class MySqlTagRepository implements TagRepository {
     }
 
     @Override
-    public List<Tag> getLinkedTags(long certificateId) {
+    public List<Tag> fetchLinkedTags(long certificateId) {
         return jdbcTemplate.query(SELECT_BY_CERTIFICATE_ID, tagMapper, certificateId);
     }
 

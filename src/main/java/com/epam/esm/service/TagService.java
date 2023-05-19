@@ -23,7 +23,7 @@ public class TagService {
     public Tag storeTag(Tag tag) {
         try {
             if (tag.getName() != null) {
-                return tagRepository.storeTag(tag);
+                return tagRepository.createTag(tag);
             } else throw new EntityCannotBeSaved("tag should have a name");
         } catch (Exception e) {
             throw new EntityCannotBeSaved("Resource cannot be saved (" + e.getMessage() + ")");
@@ -31,7 +31,7 @@ public class TagService {
     }
 
     public Tag getTag(long id) {
-        return tagRepository.getTag(id).orElseThrow(
+        return tagRepository.fetchTag(id).orElseThrow(
                 () -> new EntityNotFoundException("Requested resource not found (tag id =" + id + ")")
         );
     }
@@ -41,7 +41,7 @@ public class TagService {
     }
 
     public List<Tag> getAll() {
-        List<Tag> tags = tagRepository.getAll();
+        List<Tag> tags = tagRepository.fetchAll();
         if (tags.isEmpty()) {
             throw new EmptySetException("there are no elements in the list");
         }

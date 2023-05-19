@@ -5,8 +5,13 @@ import com.epam.esm.dto.dto.GiftCertificateDTO;
 import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.service.CertificateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +39,7 @@ public class CertificateController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificate getById(@PathVariable long id) {
+    public GiftCertificate fetchById(@PathVariable long id) {
         return certificateService.getCertificate(id);
     }
 
@@ -59,8 +64,16 @@ public class CertificateController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public GiftCertificateDTO addCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
-        return certificateService.addCertificate(certificateDTO);
+    public ResponseEntity<GiftCertificateDTO> createCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
+        GiftCertificateDTO dto = certificateService.addCertificate(certificateDTO);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+        ResponseEntity<GiftCertificateDTO> responseEntity = ResponseEntity
+                .status(CREATED)
+                .header(HttpHeaders.LOCATION, uri.toString())
+                .body(dto);
+
+        return responseEntity;
     }
 
     /**
@@ -93,12 +106,12 @@ public class CertificateController {
      */
     @GetMapping
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> getAllCertificates(@RequestParam(required = false) String tagName,
-                                                       @RequestParam(required = false) String name,
-                                                       @RequestParam(required = false) String description,
-                                                       @RequestParam(required = false) String sortOrder,
-                                                       @RequestParam(required = false) String sortByDate,
-                                                       @RequestParam(required = false) String sortByName) {
+    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
+                                                                     @RequestParam(required = false) String name,
+                                                                     @RequestParam(required = false) String description,
+                                                                     @RequestParam(required = false) String sortOrder,
+                                                                     @RequestParam(required = false) String sortByDate,
+                                                                     @RequestParam(required = false) String sortByName) {
         List<GiftCertificateDTO> list = null;
         if (tagName != null) {
             list = certificateService.getAllCertificateWithTagName(tagName);
@@ -119,7 +132,7 @@ public class CertificateController {
         sortOrder = (sortOrder == null) ? "ASC" : sortOrder;
 
         Comparator<GiftCertificateDTO> comparatorByName = (a, b) -> a.getName().compareToIgnoreCase(b.getName());
-        Comparator<GiftCertificateDTO> comparatorByDate = Comparator.comparing(GiftCertificateDTO::getCreate_date);
+        Comparator<GiftCertificateDTO> comparatorByDate = Comparator.comparing(GiftCertificateDTO::getCreationDate);
         Comparator<GiftCertificateDTO> doubleComparator = comparatorByName.thenComparing(comparatorByDate);
 
         if (sortOrder.equalsIgnoreCase("DESC")) {
