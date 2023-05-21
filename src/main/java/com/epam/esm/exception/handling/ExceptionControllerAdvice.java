@@ -22,7 +22,7 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleEntityNotFoundException(EntityNotFoundException exception) {
-        ErrorDetails errorDetails = ErrorDetails.detailsOf(exception, HttpStatus.NOT_FOUND.toString());
+        ErrorDetails errorDetails = ErrorDetails.detailsOf(exception, exception.getError());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDetails);
     }
 

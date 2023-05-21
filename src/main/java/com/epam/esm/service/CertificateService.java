@@ -3,6 +3,7 @@ package com.epam.esm.service;
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
 import com.epam.esm.exception.EntityNotFoundException;
+import com.epam.esm.exception.Error;
 import com.epam.esm.repository.CertificateRepository;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.dto.dto.GiftCertificateDTO;
@@ -26,14 +27,14 @@ public class CertificateService {
     private final CertificateDTOAssembler certificateDTOMapper;
 
     @Autowired
-    public CertificateService(@Qualifier("MYSQL") CertificateRepository certificateRepository, CertificateDTOAssembler mapper, TagRepository tagRepository) {
+    public CertificateService(CertificateRepository certificateRepository, CertificateDTOAssembler mapper, TagRepository tagRepository) {
         this.certificateRepository = certificateRepository;
         this.certificateDTOMapper = mapper;
         this.tagRepository = tagRepository;
     }
 
     public GiftCertificate getCertificate(long id) {
-        return certificateRepository.fetchCertificate(id).orElseThrow(() -> new EntityNotFoundException("can't receive GiftCertificate with id = " + id));
+        return certificateRepository.fetchCertificate(id).orElseThrow(() -> new EntityNotFoundException("can't receive GiftCertificate with id = " + id, Error.GiftCertificateNotFound));
     }
 
     @Transactional
@@ -74,7 +75,7 @@ public class CertificateService {
             List<GiftCertificate> certificates = certificateRepository.fetchAll();
             return getGiftCertificateDTOS(certificates);
         } catch (DataAccessException e) {
-            throw new EntityNotFoundException("can't receive GiftCertificate list");
+            throw new EntityNotFoundException("can't receive GiftCertificate list", Error.GiftCertificateNotFound);
         }
     }
 

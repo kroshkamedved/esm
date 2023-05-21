@@ -3,6 +3,7 @@ package com.epam.esm.repository.mysql;
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.dto.GiftCertificateDTO;
 import com.epam.esm.exception.EntityNotFoundException;
+import com.epam.esm.exception.Error;
 import com.epam.esm.repository.CertificateRepository;
 import com.epam.esm.repository.mappers.CertificateMapper;
 import lombok.RequiredArgsConstructor;
@@ -75,7 +76,7 @@ public class MySqlCertificateRepository implements CertificateRepository {
     public boolean updateCertificate(GiftCertificateDTO certificate) {
 
         if (certificate.getId() == 0l || !(fetchCertificate(certificate.getId()).isPresent())) {
-            throw new EntityNotFoundException("ID attribute is absent or not valid");
+            throw new EntityNotFoundException("ID attribute is absent or not valid", Error.GiftCertificateNotFound);
         }
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id", certificate.getId());

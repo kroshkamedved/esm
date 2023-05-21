@@ -4,6 +4,7 @@ import com.epam.esm.domain.Tag;
 import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityCannotBeSaved;
 import com.epam.esm.exception.EntityNotFoundException;
+import com.epam.esm.exception.Error;
 import com.epam.esm.repository.TagRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,7 +17,7 @@ public class TagService {
     private final TagRepository tagRepository;
 
     @Autowired
-    public TagService(@Qualifier("MYSQL") TagRepository tagRepository) {
+    public TagService(TagRepository tagRepository) {
         this.tagRepository = tagRepository;
     }
 
@@ -32,7 +33,7 @@ public class TagService {
 
     public Tag getTag(long id) {
         return tagRepository.fetchTag(id).orElseThrow(
-                () -> new EntityNotFoundException("Requested resource not found (tag id =" + id + ")")
+                () -> new EntityNotFoundException("Requested resource not found (tag id =" + id + ")", Error.TagNotFound)
         );
     }
 
