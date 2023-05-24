@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 @Data
 @Component
-public class CertificateMapper implements RowMapper<GiftCertificate> {
+public class CertificateMapper implements RowMapper<GiftCertificate> { //TODO Name this CertificateRowMapperImpl and put it into impl package
     @Override
     public GiftCertificate mapRow(ResultSet rs, int rowNum) throws SQLException {
         return GiftCertificate.builder()

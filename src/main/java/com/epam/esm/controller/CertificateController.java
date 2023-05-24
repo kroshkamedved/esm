@@ -68,7 +68,7 @@ public class CertificateController {
         GiftCertificateDTO dto = certificateService.addCertificate(certificateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        ResponseEntity<GiftCertificateDTO> responseEntity = ResponseEntity
+        ResponseEntity<GiftCertificateDTO> responseEntity = ResponseEntity //TODO is this needs a variable? Yo can return this
                 .status(CREATED)
                 .header(HttpHeaders.LOCATION, uri.toString())
                 .body(dto);
@@ -88,7 +88,7 @@ public class CertificateController {
     public GiftCertificateDTO updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
         if (certificateService.updateCertificate(certificateDTO)) {
             return certificateService.getCertificateWithTags(certificateDTO.getId());
-        } else throw new EntityUpdateException("no new data for updating");
+        } else throw new EntityUpdateException("no new data for updating"); //TODO please Update this with more clear massage, why here NEW data? Just say Certificate not found
     }
 
     /**
@@ -112,7 +112,7 @@ public class CertificateController {
                                                                      @RequestParam(required = false) String sortOrder,
                                                                      @RequestParam(required = false) String sortByDate,
                                                                      @RequestParam(required = false) String sortByName) {
-        List<GiftCertificateDTO> list = null;
+        List<GiftCertificateDTO> list = null; //TODO Don't forget to split up this method, take a look at CriteriaQuery also
         if (tagName != null) {
             list = certificateService.getAllCertificateWithTagName(tagName);
         }

@@ -1,4 +1,4 @@
-package com.epam.esm.dto.dto;
+package com.epam.esm.dto.dto; //TODO dto.dto?
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class GiftCertificateDTO {
     private long id;
-
+//TODO Remove those empty fields
     private String name;
 
     private String description;

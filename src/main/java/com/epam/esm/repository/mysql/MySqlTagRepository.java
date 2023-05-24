@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MySqlTagRepository implements TagRepository {
+public class MySqlTagRepository implements TagRepository { //TODO same comment as for Certificate
     private static final String SELECT_BY_ID = "SELECT tag_id , tag_name FROM TAGS WHERE tag_id = ?";
     private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS";
     private static final String STORE_NEW_TAG = "insert into tags (tag_name) values(?)";
@@ -83,7 +83,7 @@ public class MySqlTagRepository implements TagRepository {
                     .filter(dbTag -> dbTag.getName().equals(tag.getName()) || dbTag.getId() == tag.getId())
                     .findAny();
 
-            Tag tagForSaving = (tagForLink.isEmpty()) ? (createTag(tag)) : tagForLink.get();
+            Tag tagForSaving = (tagForLink.isEmpty()) ? (createTag(tag)) : tagForLink.get(); //TODO My IDEA says that  (tagForLink.isEmpty()) ? (createTag(tag)) : tagForLink.get() -> tagForLink.orElseGet(() -> (createTag(tag)))
 
             if (currentLinkedTags.contains(tagForSaving)) {
                 continue;

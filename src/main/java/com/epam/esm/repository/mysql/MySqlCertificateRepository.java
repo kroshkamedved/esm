@@ -23,7 +23,7 @@ import java.util.StringJoiner;
 
 @Repository
 @RequiredArgsConstructor
-public class MySqlCertificateRepository implements CertificateRepository {
+public class MySqlCertificateRepository implements CertificateRepository { //TODO MySqlCertificateRepositoryImpl and put into impl
 
     private static final String GET_ALL_CERTIFICATES = "SELECT * FROM certificates";
     private static final String SELECT_BY_ID = "SELECT * FROM certificates where id = ?";
@@ -75,7 +75,7 @@ public class MySqlCertificateRepository implements CertificateRepository {
     @Override
     public boolean updateCertificate(GiftCertificateDTO certificate) {
 
-        if (certificate.getId() == 0l || !(fetchCertificate(certificate.getId()).isPresent())) {
+        if (certificate.getId() == 0l || fetchCertificate(certificate.getId()).isEmpty()) { //TODO Kust listen to your IDEA 0l -> 0L | !(fetchCertificate(certificate.getId()).isPresent()) -> fetchCertificate(certificate.getId()).isEmpty()
             throw new EntityNotFoundException("ID attribute is absent or not valid", Error.GiftCertificateNotFound);
         }
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -112,7 +112,7 @@ public class MySqlCertificateRepository implements CertificateRepository {
 
     @Override
     public List<GiftCertificate> fetchAll() {
-        return jdbcTemplate.query(GET_ALL_CERTIFICATES, certificateMapper);
+        return jdbcTemplate.query(GET_ALL_CERTIFICATES, certificateMapper); //TODO SELECT_ALL_CERTIFICATES
     }
 
     @Override

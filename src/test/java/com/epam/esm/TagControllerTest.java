@@ -26,7 +26,7 @@ public class TagControllerTest {
 
     @Test
     @DisplayName("POST returns HTTP status Bad Request when fields are missing")
-    void createTag_ShouldReturnBadRequest_whenPassingNullFields() throws Exception {
+    void createTag_ShouldReturnBadRequest_whenPassingNullFields() throws Exception { //TODO Good! Now create more tests! :)
         Tag tag = Tag.builder().name(null).build();
 
         mockMvc.perform(

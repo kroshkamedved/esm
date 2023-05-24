@@ -44,7 +44,7 @@ public class CertificateService {
         tagRepository.saveTagsForCertificate(certificateDTO.getTags(), certificateFromDb.getId());
         certificateFromDb = certificateRepository.fetchCertificate(certificateFromDb.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         List<Tag> tagsFromDb = tagRepository.fetchLinkedTags(certificateFromDb.getId());
-        GiftCertificateDTO dto = certificateDTOMapper.mapToDTO(certificateFromDb, tagsFromDb);
+        GiftCertificateDTO dto = certificateDTOMapper.mapToDTO(certificateFromDb, tagsFromDb); //TODO simply return this
         return dto;
     }
 
@@ -60,7 +60,7 @@ public class CertificateService {
         if (certificateDTO.getTags() != null) {
             newTagLinked = tagRepository.saveTagsForCertificate(certificateDTO.getTags(), certificate.getId());
         }
-        boolean updated = (newTagLinked | certificateRepository.updateCertificate(certificateDTO));
+        boolean updated = (newTagLinked | certificateRepository.updateCertificate(certificateDTO)); //TODO simply return this
         return updated;
     }
 

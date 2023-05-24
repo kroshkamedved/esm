@@ -1,4 +1,4 @@
-package com.epam.esm.repository.mappers;
+package com.epam.esm.repository.mappers; //TODO Why assembler located in mappers?
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
@@ -14,7 +14,7 @@ public class CertificateDTOAssembler {
     }
 
     public GiftCertificate mapToCertificate(GiftCertificateDTO giftCertificate) {
-        GiftCertificate certificateFromDTO = GiftCertificate.builder()
+        GiftCertificate certificateFromDTO = GiftCertificate.builder() //TODO is this needs a variable?
                 .name(giftCertificate.getName())
                 .description(giftCertificate.getDescription())
                 .price(giftCertificate.getPrice())
