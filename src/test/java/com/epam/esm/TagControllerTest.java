@@ -35,5 +35,4 @@ public class TagControllerTest {
                                 .content(objectMapper.writeValueAsString(tag)))
                 .andExpect(status().isBadRequest());
     }
-
 }

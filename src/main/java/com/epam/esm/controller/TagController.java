@@ -43,9 +43,9 @@ public class TagController {
     @GetMapping()
     @ResponseStatus(OK)
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tag> getAll() {
+    public List<Tag> fetchAll() {
         return tagService.getAll();
-    } //TODO fetchAll
+    }
 
     /**
      * Create new Tag in db from request body tag

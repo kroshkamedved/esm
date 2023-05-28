@@ -1,21 +1,17 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.service.CertificateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -68,12 +64,10 @@ public class CertificateController {
         GiftCertificateDTO dto = certificateService.addCertificate(certificateDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        ResponseEntity<GiftCertificateDTO> responseEntity = ResponseEntity //TODO is this needs a variable? Yo can return this
+        return ResponseEntity
                 .status(CREATED)
                 .header(HttpHeaders.LOCATION, uri.toString())
                 .body(dto);
-
-        return responseEntity;
     }
 
     /**
@@ -88,7 +82,9 @@ public class CertificateController {
     public GiftCertificateDTO updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
         if (certificateService.updateCertificate(certificateDTO)) {
             return certificateService.getCertificateWithTags(certificateDTO.getId());
-        } else throw new EntityUpdateException("no new data for updating"); //TODO please Update this with more clear massage, why here NEW data? Just say Certificate not found
+        } else
+            throw new EntityUpdateException("no new data for updating");
+        //TODO please Update this with more clear massage, why here NEW data? Just say Certificate not found -> this exception will be thrown only in case when user did not provide any new info for update, but Certifiacte was found in domain.
     }
 
     /**
@@ -110,49 +106,15 @@ public class CertificateController {
                                                                      @RequestParam(required = false) String name,
                                                                      @RequestParam(required = false) String description,
                                                                      @RequestParam(required = false) String sortOrder,
-                                                                     @RequestParam(required = false) String sortByDate,
-                                                                     @RequestParam(required = false) String sortByName) {
-        List<GiftCertificateDTO> list = null; //TODO Don't forget to split up this method, take a look at CriteriaQuery also
-        if (tagName != null) {
-            list = certificateService.getAllCertificateWithTagName(tagName);
-        }
-        if (name != null) {
-            list = (list == null) ? certificateService.getAllCertificateWithName(name) : list.stream()
-                    .filter(dto -> dto.getName().contains(name))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-        if (description != null) {
-            list = (list == null) ? certificateService.getAllCertificateWithDescription(description) : list.stream()
-                    .filter(dto -> dto.getDescription().contains(description))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-        if (list == null) {
-            return certificateService.getAll();
-        }
-        sortOrder = (sortOrder == null) ? "ASC" : sortOrder;
-
-        Comparator<GiftCertificateDTO> comparatorByName = (a, b) -> a.getName().compareToIgnoreCase(b.getName());
-        Comparator<GiftCertificateDTO> comparatorByDate = Comparator.comparing(GiftCertificateDTO::getCreationDate);
-        Comparator<GiftCertificateDTO> doubleComparator = comparatorByName.thenComparing(comparatorByDate);
-
-        if (sortOrder.equalsIgnoreCase("DESC")) {
-            comparatorByName = comparatorByName.reversed();
-            comparatorByDate = comparatorByDate.reversed();
-            doubleComparator = doubleComparator.reversed();
-        }
-        if (sortByName != null) {
-            if (sortByDate != null) {
-                list = list.stream()
-                        .sorted(doubleComparator)
-                        .collect(Collectors.toCollection(ArrayList::new));
-            } else list = list.stream()
-                    .sorted(comparatorByName)
-                    .collect(Collectors.toCollection(ArrayList::new));
-        } else if (sortByDate != null) {
-            list = list.stream()
-                    .sorted(comparatorByDate)
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-        return list;
+                                                                     @RequestParam(required = false) Optional<String> sortByDate,
+                                                                     @RequestParam(required = false) Optional<String> sortByName) {
+        return certificateService.getCirtificatesParametrized(
+                tagName,
+                name,
+                description,
+                sortOrder,
+                sortByDate,
+                sortByName
+        );
     }
 }

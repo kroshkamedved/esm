@@ -1,12 +1,16 @@
-package com.epam.esm.repository.mysql;
+package com.epam.esm.repository.impl;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.repository.CertificateRepository;
-import com.epam.esm.repository.mappers.CertificateMapper;
+import com.epam.esm.repository.mappers.impl.CertificateRowMapperImpl;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,15 +21,16 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
 @Repository
-@RequiredArgsConstructor
-public class MySqlCertificateRepository implements CertificateRepository { //TODO MySqlCertificateRepositoryImpl and put into impl
-
-    private static final String GET_ALL_CERTIFICATES = "SELECT * FROM certificates";
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class MySqlCertificateRepositoryImpl implements CertificateRepository {
+    private static final String SELECT_ALL_CERTIFICATES = "SELECT * FROM certificates";
     private static final String SELECT_BY_ID = "SELECT * FROM certificates where id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM certificates WHERE id = ?";
     private static final String STORE_NEW_CERTIFICATE = "INSERT INTO certificates (`name`, `description`, `price`, `duration`) VALUES (?, ?, ?, ?);";
@@ -41,7 +46,8 @@ public class MySqlCertificateRepository implements CertificateRepository { //TOD
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
-    private final CertificateMapper certificateMapper;
+    private final CertificateRowMapperImpl certificateMapper;
+    private final EntityManager entityManager;
 
     @Override
     public GiftCertificate createCertificate(GiftCertificate certificate) {
@@ -75,7 +81,7 @@ public class MySqlCertificateRepository implements CertificateRepository { //TOD
     @Override
     public boolean updateCertificate(GiftCertificateDTO certificate) {
 
-        if (certificate.getId() == 0l || fetchCertificate(certificate.getId()).isEmpty()) { //TODO Kust listen to your IDEA 0l -> 0L | !(fetchCertificate(certificate.getId()).isPresent()) -> fetchCertificate(certificate.getId()).isEmpty()
+        if (certificate.getId() == 0L || fetchCertificate(certificate.getId()).isEmpty()) { //TODO  !(fetchCertificate(certificate.getId()).isPresent()) -> fetchCertificate(certificate.getId()).isEmpty() -> didn't understand what do i have to do here and why? To invert "if" statement?(i've changed long prefix to 'L')
             throw new EntityNotFoundException("ID attribute is absent or not valid", Error.GiftCertificateNotFound);
         }
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -100,7 +106,7 @@ public class MySqlCertificateRepository implements CertificateRepository { //TOD
         }
         if (certificate.getDuration() != null) {
             stringJoiner.add("c.duration =:duration");
-            mapSqlParameterSource.addValue("duration", certificate.getPrice());
+            mapSqlParameterSource.addValue("duration", certificate.getDuration());
         }
 
         if (mapSqlParameterSource.getValues().size() == 1) {
@@ -112,7 +118,7 @@ public class MySqlCertificateRepository implements CertificateRepository { //TOD
 
     @Override
     public List<GiftCertificate> fetchAll() {
-        return jdbcTemplate.query(GET_ALL_CERTIFICATES, certificateMapper); //TODO SELECT_ALL_CERTIFICATES
+        return jdbcTemplate.query(SELECT_ALL_CERTIFICATES, certificateMapper);
     }
 
     @Override
@@ -129,6 +135,50 @@ public class MySqlCertificateRepository implements CertificateRepository { //TOD
     @Override
     public List<GiftCertificate> fetchAllCertificatesWithDescription(String description) {
         return jdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_DESCRIPTION, certificateMapper, description);
+    }
+
+    @Override
+    public List<GiftCertificate> fetchAllParametrized(String name,
+                                                      String description,
+                                                      String sortOrder,
+                                                      Optional<String> sortByDate,
+                                                      Optional<String> sortByName) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<GiftCertificate> criteriaQuery = criteriaBuilder.createQuery(GiftCertificate.class);
+        Root<GiftCertificate> root = criteriaQuery.from(GiftCertificate.class);
+
+        ArrayList<Predicate> predicates = new ArrayList<>();
+
+        if (description != null) {
+            predicates.add(criteriaBuilder.like(root.get("description"), MessageFormat.format("%{0}%", description)));
+        }
+        if (name != null) {
+            predicates.add(criteriaBuilder.like(root.get("name"), MessageFormat.format("%{0}%", name)));
+        }
+        if (sortOrder != null) {
+            boolean desc = sortOrder.equals("DESC");
+            List<Order> orders = new ArrayList<>();
+            if (desc) {
+                if (sortByDate.isPresent()) {
+                    orders.add(criteriaBuilder.desc(root.get("create_date")));
+                }
+                if (sortByName.isPresent()) {
+                    orders.add(criteriaBuilder.desc(root.get("name")));
+                }
+            } else {
+                if (sortByDate.isPresent()) {
+                    orders.add(criteriaBuilder.asc(root.get("create_date")));
+                }
+                if (sortByName.isPresent()) {
+                    orders.add(criteriaBuilder.asc(root.get("name")));
+                }
+            }
+            criteriaQuery.orderBy(orders);
+        }
+
+        criteriaQuery.select(root).where(predicates.toArray(Predicate[]::new));
+        Query query = entityManager.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 
 }

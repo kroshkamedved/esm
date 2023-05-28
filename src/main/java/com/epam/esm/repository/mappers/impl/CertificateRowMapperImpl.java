@@ -1,4 +1,4 @@
-package com.epam.esm.repository.mappers;
+package com.epam.esm.repository.mappers.impl;
 
 import com.epam.esm.domain.GiftCertificate;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 @Data
 @Component
-public class CertificateMapper implements RowMapper<GiftCertificate> { //TODO Name this CertificateRowMapperImpl and put it into impl package
+public class CertificateRowMapperImpl implements RowMapper<GiftCertificate> {
     @Override
     public GiftCertificate mapRow(ResultSet rs, int rowNum) throws SQLException {
         return GiftCertificate.builder()

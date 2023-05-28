@@ -1,7 +1,7 @@
 package com.epam.esm.repository;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificateDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,4 +22,6 @@ public interface CertificateRepository {
     List<GiftCertificate> fetchAllCertificatesWithName(String name);
 
     List<GiftCertificate> fetchAllCertificatesWithDescription(String description);
+
+    List<GiftCertificate> fetchAllParametrized(String name, String description, String sortOrder, Optional<String> sortByDate, Optional<String> sortByName);
 }

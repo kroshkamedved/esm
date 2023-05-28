@@ -1,8 +1,8 @@
-package com.epam.esm.repository.mappers; //TODO Why assembler located in mappers?
+package com.epam.esm.repository.assembler;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificateDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class CertificateDTOAssembler {
     }
 
     public GiftCertificate mapToCertificate(GiftCertificateDTO giftCertificate) {
-        GiftCertificate certificateFromDTO = GiftCertificate.builder() //TODO is this needs a variable?
+        return GiftCertificate.builder()
                 .name(giftCertificate.getName())
                 .description(giftCertificate.getDescription())
                 .price(giftCertificate.getPrice())
@@ -22,6 +22,5 @@ public class CertificateDTOAssembler {
                 .create_date(giftCertificate.getCreationDate())
                 .last_update_date(giftCertificate.getUpdated())
                 .id(giftCertificate.getId()).build();
-        return certificateFromDTO;
     }
 }

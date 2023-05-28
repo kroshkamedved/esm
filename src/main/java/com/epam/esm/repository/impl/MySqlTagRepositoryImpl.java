@@ -1,8 +1,8 @@
-package com.epam.esm.repository.mysql;
+package com.epam.esm.repository.impl;
 
 import com.epam.esm.domain.Tag;
 import com.epam.esm.repository.TagRepository;
-import com.epam.esm.repository.mappers.TagMapper;
+import com.epam.esm.repository.mappers.impl.TagRowMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class MySqlTagRepository implements TagRepository { //TODO same comment as for Certificate
+public class MySqlTagRepositoryImpl implements TagRepository {
     private static final String SELECT_BY_ID = "SELECT tag_id , tag_name FROM TAGS WHERE tag_id = ?";
     private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS";
     private static final String STORE_NEW_TAG = "insert into tags (tag_name) values(?)";
@@ -31,10 +31,10 @@ public class MySqlTagRepository implements TagRepository { //TODO same comment a
             where certificate_id=? """;
 
     private final JdbcTemplate jdbcTemplate;
-    private final TagMapper tagMapper;
+    private final TagRowMapperImpl tagMapper;
 
     @Autowired
-    public MySqlTagRepository(JdbcTemplate jdbcTemplate, TagMapper tagMapper) {
+    public MySqlTagRepositoryImpl(JdbcTemplate jdbcTemplate, TagRowMapperImpl tagMapper) {
         this.jdbcTemplate = jdbcTemplate;
         this.tagMapper = tagMapper;
     }
@@ -83,8 +83,7 @@ public class MySqlTagRepository implements TagRepository { //TODO same comment a
                     .filter(dbTag -> dbTag.getName().equals(tag.getName()) || dbTag.getId() == tag.getId())
                     .findAny();
 
-            Tag tagForSaving = (tagForLink.isEmpty()) ? (createTag(tag)) : tagForLink.get(); //TODO My IDEA says that  (tagForLink.isEmpty()) ? (createTag(tag)) : tagForLink.get() -> tagForLink.orElseGet(() -> (createTag(tag)))
-
+            Tag tagForSaving = tagForLink.orElseGet(() -> createTag(tag));
             if (currentLinkedTags.contains(tagForSaving)) {
                 continue;
             }
