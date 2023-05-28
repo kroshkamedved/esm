@@ -2,9 +2,12 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.GiftCertificateDTO;
+import com.epam.esm.event.SingleResourceRetrieved;
 import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.service.CertificateService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +26,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("certificates")
 @RequiredArgsConstructor
 public class CertificateController {
-
+    private final ApplicationEventPublisher eventPublisher;
     private final CertificateService certificateService;
 
     /**
@@ -35,7 +38,8 @@ public class CertificateController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificate fetchById(@PathVariable long id) {
+    public GiftCertificate fetchById(@PathVariable long id, HttpServletResponse response) {
+        eventPublisher.publishEvent(new SingleResourceRetrieved(response, this));
         return certificateService.getCertificate(id);
     }
 
@@ -62,7 +66,6 @@ public class CertificateController {
     @ResponseStatus(CREATED)
     public ResponseEntity<GiftCertificateDTO> createCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
         GiftCertificateDTO dto = certificateService.addCertificate(certificateDTO);
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity
                 .status(CREATED)
