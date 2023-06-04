@@ -2,6 +2,7 @@ package com.epam.esm.repository.impl;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.repository.CertificateRepository;
@@ -18,6 +19,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -178,7 +180,15 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
 
         criteriaQuery.select(root).where(predicates.toArray(Predicate[]::new));
         Query query = entityManager.createQuery(criteriaQuery);
-        return query.getResultList();
+        List resultList = query.getResultList();
+        return resultList;
+    }
+
+    @Override
+    @Transactional
+    public void updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto) {
+        GiftCertificate certificate = entityManager.find(GiftCertificate.class, certificatePriceDto.getId());
+        certificate.setPrice(certificatePriceDto.getPrice());
     }
 
 }

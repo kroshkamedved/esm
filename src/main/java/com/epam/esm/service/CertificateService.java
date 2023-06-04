@@ -3,6 +3,7 @@ package com.epam.esm.service;
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
 import com.epam.esm.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.repository.CertificateRepository;
@@ -27,8 +28,10 @@ public class CertificateService {
     private final TagRepository tagRepository;
     private final CertificateDTOAssembler certificateDTOMapper;
 
-    public GiftCertificate getCertificate(long id) {
-        return certificateRepository.fetchCertificate(id).orElseThrow(() -> new EntityNotFoundException("can't receive GiftCertificate with id = " + id, Error.GiftCertificateNotFound));
+    public GiftCertificateDTO getCertificate(long id) {
+        GiftCertificate certificate = certificateRepository.fetchCertificate(id).orElseThrow(() -> new EntityNotFoundException("can't receive GiftCertificate with id = " + id, Error.GiftCertificateNotFound));
+        List<Tag> tags = tagRepository.fetchLinkedTags(id);
+        return certificateDTOMapper.mapToDTO(certificate, tags);
     }
 
     @Transactional
@@ -103,7 +106,9 @@ public class CertificateService {
                                                                 Optional<String> sortByName) {
         List<GiftCertificate> list = certificateRepository.fetchAllParametrized(name, description, sortOrder, sortByDate, sortByName);
         List<GiftCertificateDTO> giftCertificateDTOS = getGiftCertificateDTOS(list);
-
+        if (tagName == null) {
+            return giftCertificateDTOS;
+        }
         return filterByTagName(giftCertificateDTOS, tagName);
     }
 
@@ -113,5 +118,11 @@ public class CertificateService {
                         e -> e.getTags().stream()
                                 .anyMatch(t -> t.getName().contains(tagName))
                 ).toList();
+    }
+
+
+    public GiftCertificateDTO updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto) {
+        certificateRepository.updateCertificatePrice(certificatePriceDto);
+        return getCertificateWithTags(certificatePriceDto.getId());
     }
 }

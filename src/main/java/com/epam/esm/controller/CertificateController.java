@@ -4,6 +4,7 @@ import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.event.SingleResourceRetrieved;
 import com.epam.esm.exception.EntityUpdateException;
+import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.service.CertificateService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ public class CertificateController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificate fetchById(@PathVariable long id, HttpServletResponse response) {
+    public GiftCertificateDTO fetchById(@PathVariable long id, HttpServletResponse response) {
         eventPublisher.publishEvent(new SingleResourceRetrieved(response, this));
         return certificateService.getCertificate(id);
     }
@@ -69,7 +70,7 @@ public class CertificateController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
         return ResponseEntity
                 .status(CREATED)
-                .header(HttpHeaders.LOCATION, uri.toString())
+                .header(HttpHeaders.LOCATION, uri.toASCIIString())
                 .body(dto);
     }
 
@@ -119,5 +120,21 @@ public class CertificateController {
                 sortByDate,
                 sortByName
         );
+    }
+
+    /**
+     * Change single field of gift certificate
+     *
+     * @param certificatePriceDto
+     * @param id
+     * @return GiftCertificateDTO for corresponding certificate with all date obtained from db after patch
+     */
+    @PatchMapping("/{id}")
+    @ResponseStatus()
+    public GiftCertificateDTO changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto, @PathVariable long id) {
+        if (id != certificatePriceDto.getId()) {
+            throw new EntityUpdateException("request body doesn't correspond to id path variable");
+        }
+        return certificateService.updateCertificatePrice(certificatePriceDto);
     }
 }
