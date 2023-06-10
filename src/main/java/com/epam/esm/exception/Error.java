@@ -4,7 +4,10 @@ import lombok.Getter;
 
 @Getter
 public enum Error {
-    GiftCertificateNotFound(40401, "GiftCertificateNotFound"), TagNotFound(40402, "TagNotFound");
+    GiftCertificateNotFound(40401, "GiftCertificate Not Found"),
+    TagNotFound(40402, "Tag Not Found"),
+    UserNotFound(40403, "User Not Found"),
+    OrderNotFound(40404, "Order Not Found");
 
     private final int code;
     private final String description;
