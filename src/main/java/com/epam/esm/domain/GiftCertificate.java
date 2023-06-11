@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.List;
 import java.util.Set;
 
 @Data
@@ -27,9 +26,9 @@ public class GiftCertificate {
     private BigDecimal price;
     private Integer duration;
     @Column(name = "create_time")
-    private Instant create_date;
+    private Instant createDate;
     @Column(name = "update_time")
-    private Instant last_update_date;
+    private Instant lastUpdateDate;
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderCertificates")
     private Set<Order> orders;

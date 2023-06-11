@@ -24,11 +24,11 @@ public class GiftCertificateDTO {
     private List<Tag> tags;
 
     public GiftCertificateDTO(GiftCertificate giftCertificate, List<Tag> tags) {
-        if (giftCertificate.getCreate_date() != null) {
-            this.creationDate = giftCertificate.getCreate_date();
+        if (giftCertificate.getCreateDate() != null) {
+            this.creationDate = giftCertificate.getCreateDate();
         }
-        if (giftCertificate.getLast_update_date() != null) {
-            this.updated = giftCertificate.getLast_update_date();
+        if (giftCertificate.getLastUpdateDate() != null) {
+            this.updated = giftCertificate.getLastUpdateDate();
         }
         this.id = giftCertificate.getId();
         this.name = giftCertificate.getName();

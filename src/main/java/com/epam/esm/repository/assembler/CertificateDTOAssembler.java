@@ -19,8 +19,8 @@ public class CertificateDTOAssembler {
                 .description(giftCertificate.getDescription())
                 .price(giftCertificate.getPrice())
                 .duration(giftCertificate.getDuration())
-                .create_date(giftCertificate.getCreationDate())
-                .last_update_date(giftCertificate.getUpdated())
+                .createDate(giftCertificate.getCreationDate())
+                .lastUpdateDate(giftCertificate.getUpdated())
                 .id(giftCertificate.getId()).build();
     }
 }

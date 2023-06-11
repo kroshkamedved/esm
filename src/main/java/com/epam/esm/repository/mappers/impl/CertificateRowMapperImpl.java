@@ -18,8 +18,8 @@ public class CertificateRowMapperImpl implements RowMapper<GiftCertificate> {
                 .name(rs.getString("name"))
                 .description(rs.getString("description"))
                 .price(rs.getBigDecimal("price"))
-                .create_date(rs.getTimestamp("create_time").toInstant())
-                .last_update_date(rs.getTimestamp("update_time").toInstant())
+                .createDate(rs.getTimestamp("create_time").toInstant())
+                .lastUpdateDate(rs.getTimestamp("update_time").toInstant())
                 .duration(rs.getInt("duration"))
                 .build();
     }

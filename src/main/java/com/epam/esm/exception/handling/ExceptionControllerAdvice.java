@@ -1,9 +1,6 @@
 package com.epam.esm.exception.handling;
 
-import com.epam.esm.exception.EmptySetException;
-import com.epam.esm.exception.EntityCannotBeSaved;
-import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.exception.EntityUpdateException;
+import com.epam.esm.exception.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +49,12 @@ public class ExceptionControllerAdvice {
 
     @ExceptionHandler(EntityUpdateException.class)
     public ResponseEntity<ErrorDetails> handleEntityUpdateException(EntityUpdateException e) {
+        ErrorDetails errorDetails = ErrorDetails.detailsOf(e, HttpStatus.BAD_REQUEST.toString());
+        return ResponseEntity.badRequest().body(errorDetails);
+    }
+
+    @ExceptionHandler(IrrelevantRequestParameterException.class)
+    public ResponseEntity<ErrorDetails> handleIrrelevantRequestParameterException(IrrelevantRequestParameterException e) {
         ErrorDetails errorDetails = ErrorDetails.detailsOf(e, HttpStatus.BAD_REQUEST.toString());
         return ResponseEntity.badRequest().body(errorDetails);
     }

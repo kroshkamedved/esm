@@ -16,7 +16,7 @@ public class User {
     private String login;
     @JsonIgnore
     private String password;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinColumn(name = "user_id")
     private Set<Order> orders;
 
