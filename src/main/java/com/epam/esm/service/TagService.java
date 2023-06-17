@@ -1,24 +1,36 @@
 package com.epam.esm.service;
 
+import com.epam.esm.domain.Order;
 import com.epam.esm.domain.Tag;
+import com.epam.esm.domain.User;
 import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityCannotBeSaved;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
+import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.repository.TagRepository;
+import com.epam.esm.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class TagService {
     private final TagRepository tagRepository;
+    private final UserRepository userRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public TagService(TagRepository tagRepository) {
+    public TagService(TagRepository tagRepository,
+                      UserRepository userRepository,
+                      OrderRepository orderRepository) {
         this.tagRepository = tagRepository;
+        this.userRepository = userRepository;
+        this.orderRepository = orderRepository;
     }
 
     public Tag storeTag(Tag tag) {
@@ -47,5 +59,15 @@ public class TagService {
             throw new EmptySetException("there are no elements in the list");
         }
         return tags;
+    }
+
+    public Tag getFavouriteBestClienTag() {
+        User bestClient = userRepository.fetchUserWithHighestOrdersCost();
+        List<Order> orders = orderRepository.fetchUserOrders(bestClient.getId());
+        Map<Tag, Long> map = orders.stream()
+                .flatMap(o -> o.getOrderCertificates().stream())
+                .flatMap(g -> tagRepository.fetchLinkedTags(g.getId()).stream())
+                .collect(Collectors.groupingBy(tag -> tag, Collectors.counting()));
+        return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 }

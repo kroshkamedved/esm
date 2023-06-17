@@ -69,5 +69,10 @@ public class TagController {
     public void deleteById(@PathVariable("id") Long id) {
         tagService.deleteTag(id);
     }
+
+    @GetMapping("/widelyUsedBestClientTag")
+    public Tag fetchMostWidelyUsedTagOfTheBestClient(){
+        return tagService.getFavouriteBestClienTag();
+    }
 }
 
