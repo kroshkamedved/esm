@@ -6,6 +6,7 @@ import com.epam.esm.dto.GiftCertificatePriceOnly;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface CertificateRepository {
     GiftCertificate createCertificate(GiftCertificate certificate);
@@ -27,4 +28,6 @@ public interface CertificateRepository {
     List<GiftCertificate> fetchAllParametrized(String name, String description, String sortOrder, Optional<String> sortByDate, Optional<String> sortByName);
 
     void updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto);
+
+    Optional<List<GiftCertificateDTO>> fetchAllCertificatesWithTagId(Set<Long> tagsIds);
 }

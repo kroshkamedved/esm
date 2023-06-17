@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -124,5 +125,9 @@ public class CertificateService {
     public GiftCertificateDTO updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto) {
         certificateRepository.updateCertificatePrice(certificatePriceDto);
         return getCertificateWithTags(certificatePriceDto.getId());
+    }
+
+    public Optional<List<GiftCertificateDTO>> getCertificatesWhichContainsTags(Set<Long> tagsIds) {
+        return certificateRepository.fetchAllCertificatesWithTagId(tagsIds);
     }
 }

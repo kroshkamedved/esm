@@ -24,10 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.MessageFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.StringJoiner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -189,6 +187,22 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
     public void updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto) {
         GiftCertificate certificate = entityManager.find(GiftCertificate.class, certificatePriceDto.getId());
         certificate.setPrice(certificatePriceDto.getPrice());
+    }
+//It's work, but I don't like this solution, maybe you could give me a hint
+    @Override
+    public Optional<List<GiftCertificateDTO>> fetchAllCertificatesWithTagId(Set<Long> tagsIds) {
+        String prefix = "select * from certificates c" +
+                " join (select ctt.certificate_id, count(ctt.certificate_id) as cnt" +
+                " from certificates_to_tags ctt" +
+                " where ctt.tag_id in (";
+        String suffix = ") group by ctt.certificate_id having cnt >=" + tagsIds.size() + ") s1 on s1.certificate_id = c.id";
+
+        StringJoiner joiner = new StringJoiner(",", prefix, suffix);
+        for (Long id : tagsIds) {
+            joiner.add(id.toString());
+        }
+        Query nativeQuery = entityManager.createNativeQuery(joiner.toString(), GiftCertificate.class);
+        return Optional.of(nativeQuery.getResultList());
     }
 
 }

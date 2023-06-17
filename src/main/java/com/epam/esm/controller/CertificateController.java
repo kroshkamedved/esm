@@ -1,20 +1,25 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
+import com.epam.esm.domain.Tag;
 import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.event.SingleResourceRetrieved;
+import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.dto.GiftCertificatePriceOnly;
+import com.epam.esm.exception.Error;
 import com.epam.esm.service.CertificateService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.net.http.HttpResponse;
 import java.util.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -130,11 +135,23 @@ public class CertificateController {
      * @return GiftCertificateDTO for corresponding certificate with all date obtained from db after patch
      */
     @PatchMapping("/{id}")
-    @ResponseStatus()
+    @ResponseStatus(OK)
     public GiftCertificateDTO changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto, @PathVariable long id) {
         if (id != certificatePriceDto.getId()) {
             throw new EntityUpdateException("request body doesn't correspond to id path variable");
         }
         return certificateService.updateCertificatePrice(certificatePriceDto);
+    }
+
+    /**
+     * Search for gift certificates by several tags (
+     * @param tagsIds
+     * @return found GiftCertificates or 404 if no certificate found
+     */
+
+    @GetMapping(params = {"tagId"})
+    @ResponseStatus(OK)
+    public List<GiftCertificateDTO> fetchByTags(@RequestParam(required = true, name = "tagId") Set<Long> tagsIds) {
+        return certificateService.getCertificatesWhichContainsTags(tagsIds).orElseThrow(()->new EntityNotFoundException("no certificates with tags : "+tagsIds, Error.GiftCertificateNotFound));
     }
 }
