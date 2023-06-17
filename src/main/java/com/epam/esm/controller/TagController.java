@@ -76,7 +76,7 @@ public class TagController {
      * @return tag
      */
     @GetMapping("/widelyUsedBestClientTag")
-    public Tag fetchMostWidelyUsedTagOfTheBestClient() {
+    public Tag fetchMostWidelyUsedTagOfTheBestClient(){
         return tagService.getFavouriteBestClienTag();
     }
 }
