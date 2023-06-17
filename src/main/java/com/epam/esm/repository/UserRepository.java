@@ -8,4 +8,6 @@ public interface UserRepository {
     User fetchUser(long id);
 
     List<User> fetchAllUsers();
+
+    User fetchUserWithHighestOrdersCost();
 }

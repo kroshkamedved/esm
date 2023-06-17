@@ -1,8 +1,10 @@
 package com.epam.esm.repository.impl;
 
 import com.epam.esm.domain.User;
+import com.epam.esm.dto.BestClientDTO;
 import com.epam.esm.repository.UserRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
@@ -32,5 +34,18 @@ public class MySqlUserRepositoryImpl implements UserRepository {
         Root<User> root = criteriaQuery.from(User.class);
         CriteriaQuery<User> all = criteriaQuery.select(root);
         return entityManager.createQuery(all).getResultList();
+    }
+
+    @Override
+    public User fetchUserWithHighestOrdersCost() {
+        TypedQuery<BestClientDTO> query = entityManager.createQuery(
+                "select new com.epam.esm.dto.BestClientDTO(u.id,u.login,sum(o.orderCost))" +
+                        "  from User u join Order o" +
+                        "  on u.id = o.userId" +
+                        " group by u.id" +
+                        " order by sum(o.orderCost)" +
+                        " DESC limit 1", BestClientDTO.class);
+        BestClientDTO bestClient = query.getSingleResult();
+        return fetchUser(bestClient.getId());
     }
 }

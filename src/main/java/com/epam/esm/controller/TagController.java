@@ -69,5 +69,15 @@ public class TagController {
     public void deleteById(@PathVariable("id") Long id) {
         tagService.deleteTag(id);
     }
+
+    /**
+     * Get the most widely used tag of a user with the highest cost of all orders
+     *
+     * @return tag
+     */
+    @GetMapping("/widelyUsedBestClientTag")
+    public Tag fetchMostWidelyUsedTagOfTheBestClient() {
+        return tagService.getFavouriteBestClienTag();
+    }
 }
 
