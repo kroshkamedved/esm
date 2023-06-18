@@ -10,7 +10,6 @@ import com.epam.esm.hateoas.assembler.GIftCertificateModelAssembler;
 import com.epam.esm.service.CertificateService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
@@ -95,11 +94,8 @@ public class CertificateController {
     @PutMapping()
     @ResponseStatus(OK)
     public GiftCertificateDTO updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
-        if (certificateService.updateCertificate(certificateDTO)) {
-            return certificateService.getCertificateWithTags(certificateDTO.getId());
-        } else
-            throw new EntityUpdateException("no new data for updating");
-        //TODO please Update this with more clear massage, why here NEW data? Just say Certificate not found -> this exception will be thrown only in case when user did not provide any new info for update, but Certifiacte was found in domain.
+        certificateService.updateCertificate(certificateDTO);
+        return certificateService.getCertificateWithTags(certificateDTO.getId());
     }
 
     /**
@@ -117,7 +113,8 @@ public class CertificateController {
      */
     @GetMapping
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
+    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String
+                                                                             tagName,
                                                                      @RequestParam(required = false) String name,
                                                                      @RequestParam(required = false) String description,
                                                                      @RequestParam(required = false) String sortOrder,
@@ -147,7 +144,8 @@ public class CertificateController {
      */
     @PatchMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificateDTO changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto, @PathVariable long id) {
+    public GiftCertificateDTO changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto,
+                                                     @PathVariable long id) {
         if (id != certificatePriceDto.getId()) {
             throw new EntityUpdateException("request body doesn't correspond to id path variable");
         }
@@ -163,7 +161,8 @@ public class CertificateController {
 
     @GetMapping(params = {"tagId"})
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> fetchByTags(@RequestParam(required = true, name = "tagId") Set<Long> tagsIds) {
+    public List<GiftCertificateDTO> fetchByTags
+    (@RequestParam(required = true, name = "tagId") Set<Long> tagsIds) {
         return certificateService.getCertificatesWhichContainsTags(tagsIds).orElseThrow(() -> new EntityNotFoundException("no certificates with tags : " + tagsIds, Error.GiftCertificateNotFound));
     }
 }

@@ -1,12 +1,13 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.Tag;
+import com.epam.esm.pagination.Page;
+import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.epam.esm.pagination.Sort;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -43,8 +44,11 @@ public class TagController {
     @GetMapping()
     @ResponseStatus(OK)
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tag> fetchAll() {
-        return tagService.getAll();
+    public Page<Tag> fetchAll(@RequestParam(defaultValue = "1", name = "page") String page,
+                              @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
+                              @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
+        PageRequest pageRequest = new PageRequest(Integer.valueOf(page), Integer.valueOf(pageSize), sortOrder);
+        return tagService.getAll(pageRequest);
     }
 
     /**
@@ -76,7 +80,7 @@ public class TagController {
      * @return tag
      */
     @GetMapping("/widelyUsedBestClientTag")
-    public Tag fetchMostWidelyUsedTagOfTheBestClient(){
+    public Tag fetchMostWidelyUsedTagOfTheBestClient() {
         return tagService.getFavouriteBestClienTag();
     }
 }

@@ -7,6 +7,8 @@ import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityCannotBeSaved;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
+import com.epam.esm.pagination.Page;
+import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.UserRepository;
@@ -53,12 +55,14 @@ public class TagService {
         tagRepository.deleteTag(id);
     }
 
-    public List<Tag> getAll() {
-        List<Tag> tags = tagRepository.fetchAll();
+    public Page<Tag> getAll(PageRequest pageRequest) {
+        List<Tag> tags = tagRepository.fetchAll(pageRequest);
         if (tags.isEmpty()) {
             throw new EmptySetException("there are no elements in the list");
         }
-        return tags;
+        int totalRecords = tagRepository.getTotalRecords();
+        Page<Tag> page = new Page<>((int)Math.ceil((double) totalRecords/pageRequest.getPageSize()),totalRecords,tags);
+        return page;
     }
 
     public Tag getFavouriteBestClienTag() {

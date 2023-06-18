@@ -1,6 +1,7 @@
 package com.epam.esm.repository.impl;
 
 import com.epam.esm.domain.Tag;
+import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.mappers.impl.TagRowMapperImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import java.util.Optional;
 @Repository
 public class MySqlTagRepositoryImpl implements TagRepository {
     private static final String SELECT_BY_ID = "SELECT tag_id , tag_name FROM TAGS WHERE tag_id = ?";
-    private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS";
+    private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS ORDER BY tag_id /? LIMIT ? OFFSET ? ";
+    private static final String OLD_SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS";
     private static final String STORE_NEW_TAG = "insert into tags (tag_name) values(?)";
     private static final String DELETE = "delete from tags where tag_id=?";
     public static final String ADD_TAG_TO_CERTIFICATE = "insert into certificates_to_tags(certificate_id, tag_id) values(?, ?)";
@@ -69,14 +71,19 @@ public class MySqlTagRepositoryImpl implements TagRepository {
     }
 
     @Override
-    public List<Tag> fetchAll() {
-        return jdbcTemplate.query(SELECT_ALL_TAGS, tagMapper);
+    public List<Tag> fetchAll(PageRequest pageRequest) {
+        return jdbcTemplate.query(SELECT_ALL_TAGS,
+                new Object[]{pageRequest.getSortingOrder().name(),
+                        pageRequest.getPageSize(),
+                        (pageRequest.getPageNumber() - 1) * pageRequest.getPageSize()},
+                tagMapper);
     }
+
 
     @Override
     public boolean saveTagsForCertificate(List<Tag> tags, long id) {
         boolean newTagLinked = false;
-        List<Tag> tagsInDb = fetchAll();
+        List<Tag> tagsInDb = fetchAllFromDb();
         List<Tag> currentLinkedTags = fetchLinkedTags(id);
         for (Tag tag : tags) {
             Optional<Tag> tagForLink = tagsInDb.stream()
@@ -93,9 +100,18 @@ public class MySqlTagRepositoryImpl implements TagRepository {
         return newTagLinked;
     }
 
+    private List<Tag> fetchAllFromDb() {
+        return jdbcTemplate.query(OLD_SELECT_ALL_TAGS, tagMapper);
+    }
+
     @Override
     public List<Tag> fetchLinkedTags(long certificateId) {
         return jdbcTemplate.query(SELECT_BY_CERTIFICATE_ID, tagMapper, certificateId);
+    }
+
+    @Override
+    public int getTotalRecords() {
+        return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM TAGS", Integer.class);
     }
 
     private void linkTagForCertificate(Tag tag, long id) {

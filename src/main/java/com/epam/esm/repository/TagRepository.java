@@ -1,6 +1,7 @@
 package com.epam.esm.repository;
 
 import com.epam.esm.domain.Tag;
+import com.epam.esm.pagination.PageRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,9 +13,11 @@ public interface TagRepository {
 
     void deleteTag(long id);
 
-    List<Tag> fetchAll();
+    List<Tag> fetchAll(PageRequest pageRequest);
 
     boolean saveTagsForCertificate(List<Tag> tags, long id);
 
     List<Tag> fetchLinkedTags(long certificateId);
+
+    int getTotalRecords();
 }
