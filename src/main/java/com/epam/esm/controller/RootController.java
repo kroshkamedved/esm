@@ -24,7 +24,7 @@ public class RootController {
         URI tagsUri = new UriTemplate("{rootUrl}{resource}").expand(rootUrl,"tags");
         URI certificatesUri = new UriTemplate("{rootUrl}{resource}").expand(rootUrl,"certificates");
 
-        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeadre(tagsUri.toASCIIString(),"collection"));
-        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeadre(certificatesUri.toASCIIString(),"collection"));
+        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(tagsUri.toASCIIString(),"collection"));
+        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(certificatesUri.toASCIIString(),"collection"));
     }
 }

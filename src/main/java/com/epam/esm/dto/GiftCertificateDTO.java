@@ -5,6 +5,7 @@ import com.epam.esm.domain.Tag;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class GiftCertificateDTO {
+public class GiftCertificateDTO extends RepresentationModel<GiftCertificateDTO> {
     private long id;
     private String name;
     private String description;

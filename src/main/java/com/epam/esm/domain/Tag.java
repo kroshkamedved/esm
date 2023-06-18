@@ -8,13 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 @Data
 @Builder
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tag {
+public class Tag extends RepresentationModel<Tag> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;

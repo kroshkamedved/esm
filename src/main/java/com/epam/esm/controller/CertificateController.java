@@ -1,27 +1,30 @@
 package com.epam.esm.controller;
 
-import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.domain.Tag;
 import com.epam.esm.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.event.SingleResourceRetrieved;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.EntityUpdateException;
-import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.exception.Error;
+import com.epam.esm.hateoas.assembler.GIftCertificateModelAssembler;
 import com.epam.esm.service.CertificateService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.net.http.HttpResponse;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
+import static com.epam.esm.util.LinkUtil.addSelfLinksToTagAndCertificate;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -31,9 +34,11 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("certificates")
 @RequiredArgsConstructor
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class CertificateController {
     private final ApplicationEventPublisher eventPublisher;
     private final CertificateService certificateService;
+    private final GIftCertificateModelAssembler modelAssembler;
 
     /**
      * return certificate with {id}
@@ -44,9 +49,10 @@ public class CertificateController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificateDTO fetchById(@PathVariable long id, HttpServletResponse response) {
+    public EntityModel<GiftCertificateDTO> fetchById(@PathVariable long id, HttpServletResponse response) {
         eventPublisher.publishEvent(new SingleResourceRetrieved(response, this));
-        return certificateService.getCertificate(id);
+        GiftCertificateDTO certificateDTO = certificateService.getCertificate(id);
+        return modelAssembler.toModel(certificateDTO);
     }
 
     /**
@@ -117,7 +123,7 @@ public class CertificateController {
                                                                      @RequestParam(required = false) String sortOrder,
                                                                      @RequestParam(required = false) Optional<String> sortByDate,
                                                                      @RequestParam(required = false) Optional<String> sortByName) {
-        return certificateService.getCirtificatesParametrized(
+        List<GiftCertificateDTO> cirtificatesParametrized = certificateService.getCirtificatesParametrized(
                 tagName,
                 name,
                 description,
@@ -125,7 +131,12 @@ public class CertificateController {
                 sortByDate,
                 sortByName
         );
+        for (final GiftCertificateDTO certificate : cirtificatesParametrized) {
+            addSelfLinksToTagAndCertificate(certificate);
+        }
+        return cirtificatesParametrized;
     }
+
 
     /**
      * Change single field of gift certificate
@@ -145,6 +156,7 @@ public class CertificateController {
 
     /**
      * Search for gift certificates by several tags (
+     *
      * @param tagsIds
      * @return found GiftCertificates or 404 if no certificate found
      */
@@ -152,6 +164,6 @@ public class CertificateController {
     @GetMapping(params = {"tagId"})
     @ResponseStatus(OK)
     public List<GiftCertificateDTO> fetchByTags(@RequestParam(required = true, name = "tagId") Set<Long> tagsIds) {
-        return certificateService.getCertificatesWhichContainsTags(tagsIds).orElseThrow(()->new EntityNotFoundException("no certificates with tags : "+tagsIds, Error.GiftCertificateNotFound));
+        return certificateService.getCertificatesWhichContainsTags(tagsIds).orElseThrow(() -> new EntityNotFoundException("no certificates with tags : " + tagsIds, Error.GiftCertificateNotFound));
     }
 }

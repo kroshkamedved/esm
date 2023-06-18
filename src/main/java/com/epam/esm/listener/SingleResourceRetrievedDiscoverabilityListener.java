@@ -6,12 +6,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.function.ServerRequest;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Component
@@ -31,7 +29,7 @@ public class SingleResourceRetrievedDiscoverabilityListener implements Applicati
         int positionOfLastSlash = requestUri.lastIndexOf("/");
 
         String uriForResourceCreation = requestUri.substring(0, positionOfLastSlash);
-        String linkHeadreValue = LinkUtil.createLinkHeadre(uriForResourceCreation, "collection");
+        String linkHeadreValue = LinkUtil.createLinkHeader(uriForResourceCreation, "collection");
 
         response.addHeader(HttpHeaders.LINK, linkHeadreValue);
     }
