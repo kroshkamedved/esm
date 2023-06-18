@@ -1,12 +1,15 @@
 package com.epam.esm.controller;
 
+import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.event.SingleResourceRetrieved;
-import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.EntityUpdateException;
-import com.epam.esm.exception.Error;
 import com.epam.esm.hateoas.assembler.GIftCertificateModelAssembler;
+import com.epam.esm.pagination.Page;
+import com.epam.esm.pagination.PageRequest;
+import com.epam.esm.pagination.Sort;
+import com.epam.esm.pagination.assembler.CertificatePageAssambler;
 import com.epam.esm.service.CertificateService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +26,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import static com.epam.esm.util.LinkUtil.addSelfLinksToTagAndCertificate;
+import static com.epam.esm.util.LinkUtil.addSelfLinksToTags;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -38,6 +41,7 @@ public class CertificateController {
     private final ApplicationEventPublisher eventPublisher;
     private final CertificateService certificateService;
     private final GIftCertificateModelAssembler modelAssembler;
+    private final CertificatePageAssambler pageAssambler;
 
     /**
      * return certificate with {id}
@@ -93,9 +97,9 @@ public class CertificateController {
      */
     @PutMapping()
     @ResponseStatus(OK)
-    public GiftCertificateDTO updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
+    public EntityModel<GiftCertificateDTO> updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
         certificateService.updateCertificate(certificateDTO);
-        return certificateService.getCertificateWithTags(certificateDTO.getId());
+        return modelAssembler.toModel(certificateService.getCertificateWithTags(certificateDTO.getId()));
     }
 
     /**
@@ -129,7 +133,7 @@ public class CertificateController {
                 sortByName
         );
         for (final GiftCertificateDTO certificate : cirtificatesParametrized) {
-            addSelfLinksToTagAndCertificate(certificate);
+            addSelfLinksToTags(certificate.getTags());
         }
         return cirtificatesParametrized;
     }
@@ -144,12 +148,12 @@ public class CertificateController {
      */
     @PatchMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificateDTO changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto,
-                                                     @PathVariable long id) {
+    public EntityModel<GiftCertificateDTO> changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto,
+                                                                  @PathVariable long id) {
         if (id != certificatePriceDto.getId()) {
             throw new EntityUpdateException("request body doesn't correspond to id path variable");
         }
-        return certificateService.updateCertificatePrice(certificatePriceDto);
+        return modelAssembler.toModel(certificateService.updateCertificatePrice(certificatePriceDto));
     }
 
     /**
@@ -161,8 +165,14 @@ public class CertificateController {
 
     @GetMapping(params = {"tagId"})
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> fetchByTags
-    (@RequestParam(required = true, name = "tagId") Set<Long> tagsIds) {
-        return certificateService.getCertificatesWhichContainsTags(tagsIds).orElseThrow(() -> new EntityNotFoundException("no certificates with tags : " + tagsIds, Error.GiftCertificateNotFound));
+    public Page<GiftCertificate> fetchByTags
+    (@RequestParam(required = true, name = "tagId") Set<Long> tagsIds,
+     @RequestParam(defaultValue = "1", name = "page") String page,
+     @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
+     @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
+        PageRequest pageRequest = new PageRequest(Integer.valueOf(page), Integer.valueOf(pageSize), sortOrder);
+        int totalRecords = certificateService.getTotalRecordsWithTag(tagsIds);
+        List<GiftCertificate> certificatesWhichContainsTags = certificateService.getCertificatesWhichContainsTags(tagsIds);
+        return pageAssambler.pageOfLinkedWithTags(certificatesWhichContainsTags, pageRequest, totalRecords, tagsIds);
     }
 }

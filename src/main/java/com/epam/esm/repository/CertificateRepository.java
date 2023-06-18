@@ -29,5 +29,7 @@ public interface CertificateRepository {
 
     void updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto);
 
-    Optional<List<GiftCertificateDTO>> fetchAllCertificatesWithTagId(Set<Long> tagsIds);
+    List<GiftCertificate> fetchAllCertificatesWithTagId(Set<Long> tagsIds);
+
+    int countAllCertificatesWithRequestdTags(Set<Long> tagsIds);
 }

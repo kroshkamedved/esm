@@ -5,6 +5,7 @@ import com.epam.esm.domain.Order;
 import com.epam.esm.dto.TinyOrderInfoDTO;
 import com.epam.esm.exception.Error;
 import com.epam.esm.exception.IrrelevantRequestParameterException;
+import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.CertificateRepository;
 import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.repository.assembler.OrderDTOAssembler;
@@ -39,7 +40,7 @@ public class OrderService {
         if (order.getOrderCertificates().isEmpty())
             throw new IrrelevantRequestParameterException("request body does not contain any GiftCertificates. Order creation is impossible", Error.IrrelevantParameters);
         order.getOrderCertificates().stream()
-                .filter(c -> c.getId() == 0l)
+                .filter(c -> c.getId() == 0L)
                 .forEach(certificateRepository::createCertificate);
         updateOrderCost(order);
         return orderRepository.createOrder(order);
@@ -58,11 +59,15 @@ public class OrderService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
     }
 
-    public List<Order> getUserOrders(long userId) {
-        return orderRepository.fetchUserOrders(userId);
+    public List<Order> getUserOrders(long userId, PageRequest pageRequest) {
+        return orderRepository.fetchUserOrdersPaginated(userId,pageRequest);
     }
 
     public TinyOrderInfoDTO getUserOrder(long userId, long orderId) {
         return orderDTOAssembler.assambleDTO(orderRepository.fetchUserOrder(userId, orderId));
+    }
+
+    public int getTotalRecords(long userId) {
+        return orderRepository.countUserOrders(userId);
     }
 }

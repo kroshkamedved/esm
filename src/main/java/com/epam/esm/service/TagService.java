@@ -55,14 +55,12 @@ public class TagService {
         tagRepository.deleteTag(id);
     }
 
-    public Page<Tag> getAll(PageRequest pageRequest) {
+    public List<Tag> getAll(PageRequest pageRequest) {
         List<Tag> tags = tagRepository.fetchAll(pageRequest);
         if (tags.isEmpty()) {
             throw new EmptySetException("there are no elements in the list");
         }
-        int totalRecords = tagRepository.getTotalRecords();
-        Page<Tag> page = new Page<>((int)Math.ceil((double) totalRecords/pageRequest.getPageSize()),totalRecords,tags);
-        return page;
+        return tags;
     }
 
     public Tag getFavouriteBestClienTag() {
@@ -73,5 +71,9 @@ public class TagService {
                 .flatMap(g -> tagRepository.fetchLinkedTags(g.getId()).stream())
                 .collect(Collectors.groupingBy(tag -> tag, Collectors.counting()));
         return Collections.max(map.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
+    public int getTotalRecords() {
+        return tagRepository.getTotalRecords();
     }
 }

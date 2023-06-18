@@ -5,9 +5,11 @@ import com.epam.esm.domain.User;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.exception.IrrelevantRequestParameterException;
+import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
 
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -62,5 +64,20 @@ public class MySqlOrderRepositoryImpl implements OrderRepository {
             throw new IrrelevantRequestParameterException("order id: " + orderId + " does not correspond to user id:" + userId, Error.IrrelevantParameters);
         }
         return fetchById(orderId);
+    }
+
+    @Override
+    public int countUserOrders(long userId) {
+        return ((Number) entityManager.createQuery("Select count(*) from Order o where userId = userId").getSingleResult()).intValue();
+    }
+
+    @Override
+    public List<Order> fetchUserOrdersPaginated(long userId, PageRequest pageRequest) {
+        Query query = entityManager.createQuery("select o from Order o where o.userId = userId order by o.id " +
+                 pageRequest.getSortingOrder()+ " limit :limitPoint offset :offsetPoint", Order.class);
+        query
+                .setParameter("limitPoint", pageRequest.getPageNumber())
+                .setParameter("offsetPoint", (pageRequest.getPageNumber() - 1) * pageRequest.getPageSize());
+        return query.getResultList();
     }
 }

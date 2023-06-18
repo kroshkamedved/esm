@@ -127,7 +127,15 @@ public class CertificateService {
         return getCertificateWithTags(certificatePriceDto.getId());
     }
 
-    public Optional<List<GiftCertificateDTO>> getCertificatesWhichContainsTags(Set<Long> tagsIds) {
-        return certificateRepository.fetchAllCertificatesWithTagId(tagsIds);
+    public List<GiftCertificate> getCertificatesWhichContainsTags(Set<Long> tagsIds) {
+        List<GiftCertificate> list = certificateRepository.fetchAllCertificatesWithTagId(tagsIds);
+        if (list.isEmpty()) {
+            throw new EntityNotFoundException("certificates with coresponding requested tags are absent", Error.GiftCertificateNotFound);
+        }
+        return list;
+    }
+
+    public int getTotalRecordsWithTag(Set<Long> tagsIds) {
+        return certificateRepository.countAllCertificatesWithRequestdTags(tagsIds);
     }
 }

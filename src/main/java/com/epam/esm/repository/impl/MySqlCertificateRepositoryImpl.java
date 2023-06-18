@@ -25,7 +25,6 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -188,9 +187,10 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
         GiftCertificate certificate = entityManager.find(GiftCertificate.class, certificatePriceDto.getId());
         certificate.setPrice(certificatePriceDto.getPrice());
     }
-//It's work, but I don't like this solution, maybe you could give me a hint
+
+    //It's work, but I don't like this solution, maybe you could give me a hint
     @Override
-    public Optional<List<GiftCertificateDTO>> fetchAllCertificatesWithTagId(Set<Long> tagsIds) {
+    public List<GiftCertificate> fetchAllCertificatesWithTagId(Set<Long> tagsIds) {
         String prefix = "select * from certificates c" +
                 " join (select ctt.certificate_id, count(ctt.certificate_id) as cnt" +
                 " from certificates_to_tags ctt" +
@@ -202,7 +202,21 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
             joiner.add(id.toString());
         }
         Query nativeQuery = entityManager.createNativeQuery(joiner.toString(), GiftCertificate.class);
-        return Optional.of(nativeQuery.getResultList());
+        return nativeQuery.getResultList();
     }
 
+    @Override
+    public int countAllCertificatesWithRequestdTags(Set<Long> tagsIds) {
+        String prefix = "select count(*) from certificates c" +
+                " join (select ctt.certificate_id, count(ctt.certificate_id) as cnt" +
+                " from certificates_to_tags ctt" +
+                " where ctt.tag_id in (";
+        String suffix = ") group by ctt.certificate_id having cnt >=" + tagsIds.size() + ") s1 on s1.certificate_id = c.id";
+
+        StringJoiner joiner = new StringJoiner(",", prefix, suffix);
+        for (Long id : tagsIds) {
+            joiner.add(id.toString());
+        }
+        return ((Number)entityManager.createNativeQuery(joiner.toString(), Integer.class).getSingleResult()).intValue();
+    }
 }

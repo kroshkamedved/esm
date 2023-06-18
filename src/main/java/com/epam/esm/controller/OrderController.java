@@ -4,8 +4,14 @@ import com.epam.esm.domain.Order;
 import com.epam.esm.dto.TinyOrderInfoDTO;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
+import com.epam.esm.hateoas.assembler.OrderModelAssembler;
+import com.epam.esm.pagination.Page;
+import com.epam.esm.pagination.PageRequest;
+import com.epam.esm.pagination.Sort;
+import com.epam.esm.pagination.assembler.OrderPageAssembler;
 import com.epam.esm.service.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,16 +20,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("orders")
 @RestController
+@RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
-
-    @Autowired
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-    }
+    private final OrderModelAssembler modelAssembler;
+    private final OrderPageAssembler pageAssembler;
 
     /**
      * return order with {id}
@@ -32,8 +37,8 @@ public class OrderController {
      * @return foud order of 404 if order not exist
      */
     @GetMapping("/{id}")
-    public Order fetchById(@PathVariable long id) {
-        return orderService.getById(id).orElseThrow(() -> new EntityNotFoundException("Requested resource not found (order id =" + id + ")", Error.OrderNotFound));
+    public EntityModel<Order> fetchById(@PathVariable long id) {
+        return modelAssembler.toModel(orderService.getById(id).orElseThrow(() -> new EntityNotFoundException("Requested resource not found (order id =" + id + ")", Error.OrderNotFound)));
     }
 
     /**
@@ -51,8 +56,16 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Order> fetchUserOrders(@RequestParam(name = "user_id", required = true) long userId) {
-        return orderService.getUserOrders(userId);
+    public Page<Order> fetchUserOrders(@RequestParam(name = "user_id", required = true) long userId,
+                                       @RequestParam(name = "page") Optional<Integer> page,
+                                       @RequestParam(name = "pageSize") Optional<Integer> pageSize,
+                                       @RequestParam(name = "sortOrder") Optional<Sort> sortOrder) {
+
+        PageRequest pageRequest = new PageRequest(page.orElse(1), pageSize.orElse(2), sortOrder.orElse(Sort.ASC));
+        int totalRecords = orderService.getTotalRecords(userId);
+        List<Order> userOrders = orderService.getUserOrders(userId, pageRequest);
+
+        return pageAssembler.pageOf(userOrders, pageRequest, totalRecords, userId);
     }
 
     /**

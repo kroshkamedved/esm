@@ -1,13 +1,18 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.Tag;
+import com.epam.esm.hateoas.assembler.TagModelAssembler;
 import com.epam.esm.pagination.Page;
 import com.epam.esm.pagination.PageRequest;
+import com.epam.esm.pagination.assembler.TagPageAssembler;
 import com.epam.esm.service.TagService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import com.epam.esm.pagination.Sort;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -21,6 +26,8 @@ import static org.springframework.http.HttpStatus.OK;
 public class TagController {
 
     private final TagService tagService;
+    private final TagPageAssembler tagPageAssembler;
+    private final TagModelAssembler tagModelAssembler;
 
     /**
      * return tag with {id}
@@ -32,8 +39,8 @@ public class TagController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public Tag fetchById(@PathVariable("id") Long id) {
-        return tagService.getTag(id);
+    public EntityModel<Tag> fetchById(@PathVariable("id") Long id) {
+        return tagModelAssembler.toModel(tagService.getTag(id));
     }
 
     /**
@@ -48,7 +55,9 @@ public class TagController {
                               @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
                               @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
         PageRequest pageRequest = new PageRequest(Integer.valueOf(page), Integer.valueOf(pageSize), sortOrder);
-        return tagService.getAll(pageRequest);
+        int totalRecords = tagService.getTotalRecords();
+        List<Tag> tags = tagService.getAll(pageRequest);
+        return tagPageAssembler.pageOf(tags, pageRequest, totalRecords);
     }
 
     /**
@@ -80,8 +89,8 @@ public class TagController {
      * @return tag
      */
     @GetMapping("/widelyUsedBestClientTag")
-    public Tag fetchMostWidelyUsedTagOfTheBestClient() {
-        return tagService.getFavouriteBestClienTag();
+    public EntityModel<Tag> fetchMostWidelyUsedTagOfTheBestClient() {
+        return tagModelAssembler.toModel(tagService.getFavouriteBestClienTag());
     }
 }
 

@@ -1,14 +1,19 @@
 package com.epam.esm.pagination;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
-import java.util.List;
+import java.util.Collection;
 
 @Data
-@AllArgsConstructor
-public class Page<T> {
+public class Page<T> extends RepresentationModel<Page<T>> {
     int totalPages;
     long totalElements;
-    List<T> content;
+    Collection<T> content;
+
+    public Page(PageRequest pageRequest, long totalElements, Collection<T> content) {
+        this.totalPages = (int) Math.ceil((double) totalElements / pageRequest.getPageSize());
+        this.totalElements = totalElements;
+        this.content = content;
+    }
 }
