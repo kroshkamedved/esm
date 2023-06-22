@@ -1,8 +1,8 @@
-package com.epam.esm.repository.mappers;
+package com.epam.esm.repository.assembler;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificateDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,14 +14,13 @@ public class CertificateDTOAssembler {
     }
 
     public GiftCertificate mapToCertificate(GiftCertificateDTO giftCertificate) {
-        GiftCertificate certificateFromDTO = GiftCertificate.builder()
+        return GiftCertificate.builder()
                 .name(giftCertificate.getName())
                 .description(giftCertificate.getDescription())
                 .price(giftCertificate.getPrice())
                 .duration(giftCertificate.getDuration())
-                .create_date(giftCertificate.getCreationDate())
-                .last_update_date(giftCertificate.getUpdated())
+                .createDate(giftCertificate.getCreationDate())
+                .lastUpdateDate(giftCertificate.getUpdated())
                 .id(giftCertificate.getId()).build();
-        return certificateFromDTO;
     }
 }

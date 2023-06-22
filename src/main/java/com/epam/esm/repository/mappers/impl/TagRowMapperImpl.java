@@ -1,4 +1,4 @@
-package com.epam.esm.repository.mappers;
+package com.epam.esm.repository.mappers.impl;
 
 
 import com.epam.esm.domain.Tag;
@@ -9,13 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Component
-public class TagMapper implements RowMapper {
+public class TagRowMapperImpl implements RowMapper {
     @Override
     public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Tag tag = Tag.builder()
+        return Tag.builder()
                 .id(rs.getLong("tag_id"))
                 .name(rs.getString("tag_name"))
                 .build();
-        return tag;
     }
 }

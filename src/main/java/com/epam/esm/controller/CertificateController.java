@@ -1,22 +1,32 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificateDTO;
+import com.epam.esm.dto.GiftCertificatePriceOnly;
+import com.epam.esm.event.SingleResourceRetrieved;
 import com.epam.esm.exception.EntityUpdateException;
+import com.epam.esm.hateoas.assembler.GIftCertificateModelAssembler;
+import com.epam.esm.pagination.Page;
+import com.epam.esm.pagination.PageRequest;
+import com.epam.esm.pagination.Sort;
+import com.epam.esm.pagination.assembler.CertificatePageAssambler;
 import com.epam.esm.service.CertificateService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.Set;
 
+import static com.epam.esm.util.LinkUtil.addSelfLinksToTags;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -26,9 +36,12 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("certificates")
 @RequiredArgsConstructor
+@EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class CertificateController {
-
+    private final ApplicationEventPublisher eventPublisher;
     private final CertificateService certificateService;
+    private final GIftCertificateModelAssembler modelAssembler;
+    private final CertificatePageAssambler pageAssambler;
 
     /**
      * return certificate with {id}
@@ -39,8 +52,10 @@ public class CertificateController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public GiftCertificate fetchById(@PathVariable long id) {
-        return certificateService.getCertificate(id);
+    public EntityModel<GiftCertificateDTO> fetchById(@PathVariable long id, HttpServletResponse response) {
+        eventPublisher.publishEvent(new SingleResourceRetrieved(response, this));
+        GiftCertificateDTO certificateDTO = certificateService.getCertificate(id);
+        return modelAssembler.toModel(certificateDTO);
     }
 
     /**
@@ -66,14 +81,11 @@ public class CertificateController {
     @ResponseStatus(CREATED)
     public ResponseEntity<GiftCertificateDTO> createCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
         GiftCertificateDTO dto = certificateService.addCertificate(certificateDTO);
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        ResponseEntity<GiftCertificateDTO> responseEntity = ResponseEntity
+        return ResponseEntity
                 .status(CREATED)
-                .header(HttpHeaders.LOCATION, uri.toString())
+                .header(HttpHeaders.LOCATION, uri.toASCIIString())
                 .body(dto);
-
-        return responseEntity;
     }
 
     /**
@@ -85,10 +97,9 @@ public class CertificateController {
      */
     @PutMapping()
     @ResponseStatus(OK)
-    public GiftCertificateDTO updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
-        if (certificateService.updateCertificate(certificateDTO)) {
-            return certificateService.getCertificateWithTags(certificateDTO.getId());
-        } else throw new EntityUpdateException("no new data for updating");
+    public EntityModel<GiftCertificateDTO> updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
+        certificateService.updateCertificate(certificateDTO);
+        return modelAssembler.toModel(certificateService.getCertificateWithTags(certificateDTO.getId()));
     }
 
     /**
@@ -106,53 +117,62 @@ public class CertificateController {
      */
     @GetMapping
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
+    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String
+                                                                             tagName,
                                                                      @RequestParam(required = false) String name,
                                                                      @RequestParam(required = false) String description,
                                                                      @RequestParam(required = false) String sortOrder,
-                                                                     @RequestParam(required = false) String sortByDate,
-                                                                     @RequestParam(required = false) String sortByName) {
-        List<GiftCertificateDTO> list = null;
-        if (tagName != null) {
-            list = certificateService.getAllCertificateWithTagName(tagName);
+                                                                     @RequestParam(required = false) Optional<String> sortByDate,
+                                                                     @RequestParam(required = false) Optional<String> sortByName) {
+        List<GiftCertificateDTO> cirtificatesParametrized = certificateService.getCirtificatesParametrized(
+                tagName,
+                name,
+                description,
+                sortOrder,
+                sortByDate,
+                sortByName
+        );
+        for (final GiftCertificateDTO certificate : cirtificatesParametrized) {
+            addSelfLinksToTags(certificate.getTags());
         }
-        if (name != null) {
-            list = (list == null) ? certificateService.getAllCertificateWithName(name) : list.stream()
-                    .filter(dto -> dto.getName().contains(name))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-        if (description != null) {
-            list = (list == null) ? certificateService.getAllCertificateWithDescription(description) : list.stream()
-                    .filter(dto -> dto.getDescription().contains(description))
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-        if (list == null) {
-            return certificateService.getAll();
-        }
-        sortOrder = (sortOrder == null) ? "ASC" : sortOrder;
+        return cirtificatesParametrized;
+    }
 
-        Comparator<GiftCertificateDTO> comparatorByName = (a, b) -> a.getName().compareToIgnoreCase(b.getName());
-        Comparator<GiftCertificateDTO> comparatorByDate = Comparator.comparing(GiftCertificateDTO::getCreationDate);
-        Comparator<GiftCertificateDTO> doubleComparator = comparatorByName.thenComparing(comparatorByDate);
 
-        if (sortOrder.equalsIgnoreCase("DESC")) {
-            comparatorByName = comparatorByName.reversed();
-            comparatorByDate = comparatorByDate.reversed();
-            doubleComparator = doubleComparator.reversed();
+    /**
+     * Change single field of gift certificate
+     *
+     * @param certificatePriceDto
+     * @param id
+     * @return GiftCertificateDTO for corresponding certificate with all date obtained from db after patch
+     */
+    @PatchMapping("/{id}")
+    @ResponseStatus(OK)
+    public EntityModel<GiftCertificateDTO> changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto,
+                                                                  @PathVariable long id) {
+        if (id != certificatePriceDto.getId()) {
+            throw new EntityUpdateException("request body doesn't correspond to id path variable");
         }
-        if (sortByName != null) {
-            if (sortByDate != null) {
-                list = list.stream()
-                        .sorted(doubleComparator)
-                        .collect(Collectors.toCollection(ArrayList::new));
-            } else list = list.stream()
-                    .sorted(comparatorByName)
-                    .collect(Collectors.toCollection(ArrayList::new));
-        } else if (sortByDate != null) {
-            list = list.stream()
-                    .sorted(comparatorByDate)
-                    .collect(Collectors.toCollection(ArrayList::new));
-        }
-        return list;
+        return modelAssembler.toModel(certificateService.updateCertificatePrice(certificatePriceDto));
+    }
+
+    /**
+     * Search for gift certificates by several tags (
+     *
+     * @param tagsIds
+     * @return found GiftCertificates or 404 if no certificate found
+     */
+
+    @GetMapping(params = {"tagId"})
+    @ResponseStatus(OK)
+    public Page<GiftCertificate> fetchByTags
+    (@RequestParam(required = true, name = "tagId") Set<Long> tagsIds,
+     @RequestParam(defaultValue = "1", name = "page") String page,
+     @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
+     @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
+        PageRequest pageRequest = new PageRequest(Integer.valueOf(page), Integer.valueOf(pageSize), sortOrder);
+        int totalRecords = certificateService.getTotalRecordsWithTag(tagsIds);
+        List<GiftCertificate> certificatesWhichContainsTags = certificateService.getCertificatesWhichContainsTags(tagsIds);
+        return pageAssambler.pageOfLinkedWithTags(certificatesWhichContainsTags, pageRequest, totalRecords, tagsIds);
     }
 }

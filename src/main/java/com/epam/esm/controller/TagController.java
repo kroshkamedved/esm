@@ -1,10 +1,16 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.Tag;
+import com.epam.esm.hateoas.assembler.TagModelAssembler;
+import com.epam.esm.pagination.Page;
+import com.epam.esm.pagination.PageRequest;
+import com.epam.esm.pagination.assembler.TagPageAssembler;
 import com.epam.esm.service.TagService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import com.epam.esm.pagination.Sort;
 
 import java.util.List;
 
@@ -20,6 +26,8 @@ import static org.springframework.http.HttpStatus.OK;
 public class TagController {
 
     private final TagService tagService;
+    private final TagPageAssembler tagPageAssembler;
+    private final TagModelAssembler tagModelAssembler;
 
     /**
      * return tag with {id}
@@ -31,8 +39,8 @@ public class TagController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public Tag fetchById(@PathVariable("id") Long id) {
-        return tagService.getTag(id);
+    public EntityModel<Tag> fetchById(@PathVariable("id") Long id) {
+        return tagModelAssembler.toModel(tagService.getTag(id));
     }
 
     /**
@@ -43,8 +51,13 @@ public class TagController {
     @GetMapping()
     @ResponseStatus(OK)
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Tag> getAll() {
-        return tagService.getAll();
+    public Page<Tag> fetchAll(@RequestParam(defaultValue = "1", name = "page") String page,
+                              @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
+                              @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
+        PageRequest pageRequest = new PageRequest(Integer.parseInt(page), Integer.parseInt(pageSize), sortOrder);
+        int totalRecords = tagService.getTotalRecords();
+        List<Tag> tags = tagService.getAll(pageRequest);
+        return tagPageAssembler.pageOf(tags, pageRequest, totalRecords);
     }
 
     /**
@@ -55,8 +68,8 @@ public class TagController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public Tag createTag(@RequestBody Tag tag) {
-        return tagService.storeTag(tag);
+    public EntityModel<Tag> createTag(@RequestBody Tag tag) {
+        return tagModelAssembler.toModel(tagService.storeTag(tag));
     }
 
     /**
@@ -68,6 +81,16 @@ public class TagController {
     @ResponseStatus(OK)
     public void deleteById(@PathVariable("id") Long id) {
         tagService.deleteTag(id);
+    }
+
+    /**
+     * Get the most widely used tag of a user with the highest cost of all orders
+     *
+     * @return tag
+     */
+    @GetMapping("/widelyUsedBestClientTag")
+    public EntityModel<Tag> fetchMostWidelyUsedTagOfTheBestClient() {
+        return tagModelAssembler.toModel(tagService.getFavouriteBestClienTag());
     }
 }
 

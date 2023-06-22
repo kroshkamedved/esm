@@ -1,19 +1,36 @@
 package com.epam.esm.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.Set;
 
 @Data
 @Builder
-public class GiftCertificate {
-    long id;
-    String name;
-    String description;
-    BigDecimal price;
-    Integer duration;
-    Instant create_date;
-    Instant last_update_date;
+@Entity
+@Table(name = "certificates")
+@NoArgsConstructor
+@AllArgsConstructor
+public class GiftCertificate extends RepresentationModel<GiftCertificate> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private String name;
+    private String description;
+    private BigDecimal price;
+    private Integer duration;
+    @Column(name = "create_time")
+    private Instant createDate;
+    @Column(name = "update_time")
+    private Instant lastUpdateDate;
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderCertificates")
+    private Set<Order> orders;
 }
