@@ -1,8 +1,6 @@
 package com.epam.esm.pagination.assembler;
 
-import com.epam.esm.controller.CertificateController;
 import com.epam.esm.controller.OrderController;
-import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Order;
 import com.epam.esm.pagination.Page;
 import com.epam.esm.pagination.PageRequest;
@@ -17,7 +15,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class OrderPageAssembler {
     public Page<Order> pageOf(Collection<Order> collection, PageRequest request, int totalRecords, long userID) {
         Page<Order> page = new Page<>(request, totalRecords, collection);
-        page.add(linkTo(OrderController.class).withRel("allCertificates"));
+        page.add(linkTo(OrderController.class).withRel("allOrders"));
         addNavigationLinks(page, request.getPageNumber(), request, userID);
         return page;
     }

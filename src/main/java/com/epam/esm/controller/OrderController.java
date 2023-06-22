@@ -35,7 +35,7 @@ public class OrderController {
      * return order with {id}
      *
      * @param id
-     * @return foud order of 404 if order not exist
+     * @return found order of 404 if order not exist
      */
     @GetMapping("/{id}")
     public EntityModel<Order> fetchById(@PathVariable long id) {
@@ -65,7 +65,6 @@ public class OrderController {
         PageRequest pageRequest = new PageRequest(page.orElse(1), pageSize.orElse(2), sortOrder.orElse(Sort.ASC));
         int totalRecords = orderService.getTotalRecords(userId);
         List<Order> userOrders = orderService.getUserOrders(userId, pageRequest);
-        if(userOrders.isEmpty()) throw new EmptySetException("no orders found");
 
         return pageAssembler.pageOf(userOrders, pageRequest, totalRecords, userId);
     }

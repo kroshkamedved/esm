@@ -90,7 +90,7 @@ public class TagController {
      */
     @GetMapping("/widelyUsedBestClientTag")
     public EntityModel<Tag> fetchMostWidelyUsedTagOfTheBestClient() {
-        return tagModelAssembler.toModel(tagService.getFavouriteBestClienTag());
+        return tagModelAssembler.toModel(tagService.getFavouriteBestClientTag());
     }
 }
 

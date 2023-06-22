@@ -12,7 +12,6 @@ import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -56,7 +55,7 @@ public class TagService {
         return tags;
     }
 
-    public Tag getFavouriteBestClienTag() {
+    public Tag getFavouriteBestClientTag() {
         User bestClient = userRepository.fetchUserWithHighestOrdersCost();
         List<Order> orders = orderRepository.fetchUserOrders(bestClient.getId());
         Map<Tag, Long> map = orders.stream()

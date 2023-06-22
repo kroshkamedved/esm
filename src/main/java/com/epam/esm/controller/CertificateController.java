@@ -123,7 +123,7 @@ public class CertificateController {
                                                                      @RequestParam(required = false) String sortOrder,
                                                                      @RequestParam(required = false) Optional<String> sortByDate,
                                                                      @RequestParam(required = false) Optional<String> sortByName) {
-        List<GiftCertificateDTO> cirtificatesParametrized = certificateService.getCirtificatesParametrized(
+        List<GiftCertificateDTO> cirtificatesParametrized = certificateService.getGiftCertificatesParametrized(
                 tagName,
                 name,
                 description,

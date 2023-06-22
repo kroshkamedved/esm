@@ -84,12 +84,12 @@ public class CertificateService {
         return certificateDTOList;
     }
 
-    public List<GiftCertificateDTO> getCirtificatesParametrized(String tagName,
-                                                                String name,
-                                                                String description,
-                                                                String sortOrder,
-                                                                Optional<String> sortByDate,
-                                                                Optional<String> sortByName) {
+    public List<GiftCertificateDTO> getGiftCertificatesParametrized(String tagName,
+                                                                    String name,
+                                                                    String description,
+                                                                    String sortOrder,
+                                                                    Optional<String> sortByDate,
+                                                                    Optional<String> sortByName) {
         List<GiftCertificate> list = certificateRepository.fetchAllParametrized(name, description, sortOrder, sortByDate, sortByName);
         List<GiftCertificateDTO> giftCertificateDTOS = getGiftCertificateDTOS(list);
         if (tagName == null) {
