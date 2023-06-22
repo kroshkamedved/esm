@@ -2,7 +2,6 @@ package com.epam.esm.hateoas.assembler;
 
 import com.epam.esm.controller.CertificateController;
 import com.epam.esm.dto.GiftCertificateDTO;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -12,7 +11,7 @@ import static com.epam.esm.util.LinkUtil.addSelfLinksToTags;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Component
-public class GIftCertificateModelAssembler implements RepresentationModelAssembler<GiftCertificateDTO, EntityModel<GiftCertificateDTO>> {
+public class GiftCertificateModelAssembler implements RepresentationModelAssembler<GiftCertificateDTO, EntityModel<GiftCertificateDTO>> {
 
     @Override
     public EntityModel<GiftCertificateDTO> toModel(GiftCertificateDTO entity) {

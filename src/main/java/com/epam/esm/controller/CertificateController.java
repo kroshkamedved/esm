@@ -5,11 +5,11 @@ import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.event.SingleResourceRetrieved;
 import com.epam.esm.exception.EntityUpdateException;
-import com.epam.esm.hateoas.assembler.GIftCertificateModelAssembler;
+import com.epam.esm.hateoas.assembler.GiftCertificateModelAssembler;
 import com.epam.esm.pagination.Page;
 import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.pagination.Sort;
-import com.epam.esm.pagination.assembler.CertificatePageAssambler;
+import com.epam.esm.pagination.assembler.CertificatePageAssembler;
 import com.epam.esm.service.CertificateService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +40,8 @@ import static org.springframework.http.HttpStatus.OK;
 public class CertificateController {
     private final ApplicationEventPublisher eventPublisher;
     private final CertificateService certificateService;
-    private final GIftCertificateModelAssembler modelAssembler;
-    private final CertificatePageAssambler pageAssambler;
+    private final GiftCertificateModelAssembler modelAssembler;
+    private final CertificatePageAssembler pageAssambler;
 
     /**
      * return certificate with {id}

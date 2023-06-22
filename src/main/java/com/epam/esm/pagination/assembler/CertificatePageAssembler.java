@@ -3,7 +3,6 @@ package com.epam.esm.pagination.assembler;
 import com.epam.esm.controller.CertificateController;
 import com.epam.esm.controller.TagController;
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.pagination.Page;
 import com.epam.esm.pagination.PageRequest;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class CertificatePageAssambler{
+public class CertificatePageAssembler {
 
     public Page<GiftCertificate> pageOfLinkedWithTags(Collection<GiftCertificate> collection, PageRequest request, int totalRecords, Set<Long> tagsIds) {
         Page<GiftCertificate> page = new Page<>(request, totalRecords, collection);
