@@ -2,6 +2,7 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.Order;
 import com.epam.esm.dto.TinyOrderInfoDTO;
+import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.hateoas.assembler.OrderModelAssembler;
@@ -64,6 +65,7 @@ public class OrderController {
         PageRequest pageRequest = new PageRequest(page.orElse(1), pageSize.orElse(2), sortOrder.orElse(Sort.ASC));
         int totalRecords = orderService.getTotalRecords(userId);
         List<Order> userOrders = orderService.getUserOrders(userId, pageRequest);
+        if(userOrders.isEmpty()) throw new EmptySetException("no orders found");
 
         return pageAssembler.pageOf(userOrders, pageRequest, totalRecords, userId);
     }

@@ -54,7 +54,7 @@ public class TagController {
     public Page<Tag> fetchAll(@RequestParam(defaultValue = "1", name = "page") String page,
                               @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
                               @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
-        PageRequest pageRequest = new PageRequest(Integer.valueOf(page), Integer.valueOf(pageSize), sortOrder);
+        PageRequest pageRequest = new PageRequest(Integer.parseInt(page), Integer.parseInt(pageSize), sortOrder);
         int totalRecords = tagService.getTotalRecords();
         List<Tag> tags = tagService.getAll(pageRequest);
         return tagPageAssembler.pageOf(tags, pageRequest, totalRecords);
@@ -68,8 +68,8 @@ public class TagController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public Tag createTag(@RequestBody Tag tag) {
-        return tagService.storeTag(tag);
+    public EntityModel<Tag> createTag(@RequestBody Tag tag) {
+        return tagModelAssembler.toModel(tagService.storeTag(tag));
     }
 
     /**

@@ -159,14 +159,14 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
             List<Order> orders = new ArrayList<>();
             if (desc) {
                 if (sortByDate.isPresent()) {
-                    orders.add(criteriaBuilder.desc(root.get("create_date")));
+                    orders.add(criteriaBuilder.desc(root.get("createDate")));
                 }
                 if (sortByName.isPresent()) {
                     orders.add(criteriaBuilder.desc(root.get("name")));
                 }
             } else {
                 if (sortByDate.isPresent()) {
-                    orders.add(criteriaBuilder.asc(root.get("create_date")));
+                    orders.add(criteriaBuilder.asc(root.get("createDate")));
                 }
                 if (sortByName.isPresent()) {
                     orders.add(criteriaBuilder.asc(root.get("name")));

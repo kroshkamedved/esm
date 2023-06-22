@@ -1,6 +1,7 @@
 package com.epam.esm.pagination.assembler;
 
 import com.epam.esm.controller.CertificateController;
+import com.epam.esm.controller.TagController;
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.pagination.Page;
@@ -18,7 +19,8 @@ public class CertificatePageAssambler{
 
     public Page<GiftCertificate> pageOfLinkedWithTags(Collection<GiftCertificate> collection, PageRequest request, int totalRecords, Set<Long> tagsIds) {
         Page<GiftCertificate> page = new Page<>(request, totalRecords, collection);
-        page.add(linkTo(CertificateController.class).withRel("allOrders"));
+        page.add(linkTo(CertificateController.class).withRel("allCertificates"));
+        page.add(linkTo(TagController.class).withRel("allTags"));
         addNavigationLinks(page, request.getPageNumber(), request, tagsIds);
         return page;
     }

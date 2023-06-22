@@ -23,8 +23,12 @@ public class RootController {
 
         URI tagsUri = new UriTemplate("{rootUrl}{resource}").expand(rootUrl,"tags");
         URI certificatesUri = new UriTemplate("{rootUrl}{resource}").expand(rootUrl,"certificates");
+        URI ordersUri = new UriTemplate("{rootUrl}{resource}").expand(rootUrl,"orders");
+        URI usersUri = new UriTemplate("{rootUrl}{resource}").expand(rootUrl,"users");
 
-        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(tagsUri.toASCIIString(),"collection"));
-        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(certificatesUri.toASCIIString(),"collection"));
+        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(tagsUri.toASCIIString(),"tags"));
+        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(certificatesUri.toASCIIString(),"certificates"));
+        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(ordersUri.toASCIIString(),"orders"));
+        response.addHeader(HttpHeaders.LINK, LinkUtil.createLinkHeader(usersUri.toASCIIString(),"users"));
     }
 }

@@ -51,7 +51,7 @@ public class MySqlTagRepositoryImpl implements TagRepository {
                 return preparedStatement;
             }, keyHolder);
         } catch (DataIntegrityViolationException duplicationError) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tag = " + tag.getName() + " already present in the DB", duplicationError);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tag = " + tag.getName() + duplicationError.getMessage() + "", duplicationError);
         }
         tag.setId((keyHolder.getKey()).longValue());
         return tag;
