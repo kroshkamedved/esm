@@ -6,7 +6,6 @@ import com.epam.esm.exception.Error;
 import com.epam.esm.hateoas.assembler.UserModelAssembler;
 import com.epam.esm.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,7 +38,7 @@ public class UserController {
      * @return List of User
      */
     @GetMapping()
-    public List<User> featchAllUers() {
+    public List<User> fetchAllUsers() {
         return userService.getAllUsers();
     }
 }

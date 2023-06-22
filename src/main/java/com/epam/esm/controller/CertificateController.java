@@ -117,8 +117,7 @@ public class CertificateController {
      */
     @GetMapping
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String
-                                                                             tagName,
+    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
                                                                      @RequestParam(required = false) String name,
                                                                      @RequestParam(required = false) String description,
                                                                      @RequestParam(required = false) String sortOrder,

@@ -19,17 +19,11 @@ public interface CertificateRepository {
 
     List<GiftCertificate> fetchAll();
 
-    List<GiftCertificate> fetchAllCertificatesWithTagName(String tagName);
-
-    List<GiftCertificate> fetchAllCertificatesWithName(String name);
-
-    List<GiftCertificate> fetchAllCertificatesWithDescription(String description);
-
     List<GiftCertificate> fetchAllParametrized(String name, String description, String sortOrder, Optional<String> sortByDate, Optional<String> sortByName);
 
     void updateCertificatePrice(GiftCertificatePriceOnly certificatePriceDto);
 
     List<GiftCertificate> fetchAllCertificatesWithTagId(Set<Long> tagsIds);
 
-    int countAllCertificatesWithRequestdTags(Set<Long> tagsIds);
+    int countAllCertificatesWithRequestedTags(Set<Long> tagsIds);
 }

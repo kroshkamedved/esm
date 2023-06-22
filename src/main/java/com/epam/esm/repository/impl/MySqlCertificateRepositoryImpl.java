@@ -33,16 +33,6 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
     private static final String SELECT_BY_ID = "SELECT * FROM certificates where id = ?";
     private static final String DELETE_BY_ID = "DELETE FROM certificates WHERE id = ?";
     private static final String STORE_NEW_CERTIFICATE = "INSERT INTO certificates (`name`, `description`, `price`, `duration`) VALUES (?, ?, ?, ?);";
-    private static final String SELECT_ALL_CERTIFICATES_WITH_TAGNAME = """
-            SELECT * FROM certificates c
-            JOIN certificates_to_tags ctt
-              ON ctt.certificate_id = c.id
-                LEFT JOIN tags t 
-                ON t.tag_id = ctt.tag_id
-               WHERE t.tag_name like \"%\" :tagName \"%\"""";
-    private static final String SELECT_ALL_CERTIFICATES_WITH_NAME = "select * from certificates where name like \"%\" ? \"%\"";
-    private static final String SELECT_ALL_CERTIFICATES_WITH_DESCRIPTION = "select * from certificates where description like \"%\" ? \"%\"";
-
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
     private final CertificateRowMapperImpl certificateMapper;
@@ -121,22 +111,6 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
     }
 
     @Override
-    public List<GiftCertificate> fetchAllCertificatesWithTagName(String tagName) {
-        SqlParameterSource parameterSource = new MapSqlParameterSource().addValue("tagName", tagName);
-        return namedParameterJdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_TAGNAME, parameterSource, certificateMapper);
-    }
-
-    @Override
-    public List<GiftCertificate> fetchAllCertificatesWithName(String name) {
-        return jdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_NAME, certificateMapper, name);
-    }
-
-    @Override
-    public List<GiftCertificate> fetchAllCertificatesWithDescription(String description) {
-        return jdbcTemplate.query(SELECT_ALL_CERTIFICATES_WITH_DESCRIPTION, certificateMapper, description);
-    }
-
-    @Override
     public List<GiftCertificate> fetchAllParametrized(String name,
                                                       String description,
                                                       String sortOrder,
@@ -206,7 +180,7 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
     }
 
     @Override
-    public int countAllCertificatesWithRequestdTags(Set<Long> tagsIds) {
+    public int countAllCertificatesWithRequestedTags(Set<Long> tagsIds) {
         String prefix = "select count(*) from certificates c" +
                 " join (select ctt.certificate_id, count(ctt.certificate_id) as cnt" +
                 " from certificates_to_tags ctt" +
@@ -217,6 +191,6 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
         for (Long id : tagsIds) {
             joiner.add(id.toString());
         }
-        return ((Number)entityManager.createNativeQuery(joiner.toString(), Integer.class).getSingleResult()).intValue();
+        return ((Number) entityManager.createNativeQuery(joiner.toString(), Integer.class).getSingleResult()).intValue();
     }
 }

@@ -7,11 +7,11 @@ import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityCannotBeSaved;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
-import com.epam.esm.pagination.Page;
 import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.OrderRepository;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,19 +21,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TagService {
     private final TagRepository tagRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
 
-    @Autowired
-    public TagService(TagRepository tagRepository,
-                      UserRepository userRepository,
-                      OrderRepository orderRepository) {
-        this.tagRepository = tagRepository;
-        this.userRepository = userRepository;
-        this.orderRepository = orderRepository;
-    }
 
     public Tag storeTag(Tag tag) {
         try {

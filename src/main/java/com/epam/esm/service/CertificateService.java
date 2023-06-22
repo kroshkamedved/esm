@@ -9,7 +9,7 @@ import com.epam.esm.exception.Error;
 import com.epam.esm.repository.CertificateRepository;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.assembler.CertificateDTOAssembler;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CertificateService {
     private final CertificateRepository certificateRepository;
     private final TagRepository tagRepository;
@@ -84,21 +84,6 @@ public class CertificateService {
         return certificateDTOList;
     }
 
-    public List<GiftCertificateDTO> getAllCertificateWithTagName(String tagName) {
-        List<GiftCertificate> list = certificateRepository.fetchAllCertificatesWithTagName(tagName);
-        return getGiftCertificateDTOS(list);
-    }
-
-    public List<GiftCertificateDTO> getAllCertificateWithName(String name) {
-        List<GiftCertificate> list = certificateRepository.fetchAllCertificatesWithName(name);
-        return getGiftCertificateDTOS(list);
-    }
-
-    public List<GiftCertificateDTO> getAllCertificateWithDescription(String description) {
-        List<GiftCertificate> list = certificateRepository.fetchAllCertificatesWithDescription(description);
-        return getGiftCertificateDTOS(list);
-    }
-
     public List<GiftCertificateDTO> getCirtificatesParametrized(String tagName,
                                                                 String name,
                                                                 String description,
@@ -136,6 +121,6 @@ public class CertificateService {
     }
 
     public int getTotalRecordsWithTag(Set<Long> tagsIds) {
-        return certificateRepository.countAllCertificatesWithRequestdTags(tagsIds);
+        return certificateRepository.countAllCertificatesWithRequestedTags(tagsIds);
     }
 }

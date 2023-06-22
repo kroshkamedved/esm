@@ -29,8 +29,8 @@ public class SingleResourceRetrievedDiscoverabilityListener implements Applicati
         int positionOfLastSlash = requestUri.lastIndexOf("/");
 
         String uriForResourceCreation = requestUri.substring(0, positionOfLastSlash);
-        String linkHeadreValue = LinkUtil.createLinkHeader(uriForResourceCreation, "collection");
+        String linkHeaderValue = LinkUtil.createLinkHeader(uriForResourceCreation, "collection");
 
-        response.addHeader(HttpHeaders.LINK, linkHeadreValue);
+        response.addHeader(HttpHeaders.LINK, linkHeaderValue);
     }
 }

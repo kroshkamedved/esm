@@ -4,6 +4,7 @@ import com.epam.esm.domain.Tag;
 import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.mappers.impl.TagRowMapperImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class MySqlTagRepositoryImpl implements TagRepository {
     private static final String SELECT_BY_ID = "SELECT tag_id , tag_name FROM TAGS WHERE tag_id = ?";
     private static final String SELECT_ALL_TAGS = "SELECT tag_id , tag_name FROM TAGS ORDER BY tag_id /? LIMIT ? OFFSET ? ";
@@ -34,12 +36,6 @@ public class MySqlTagRepositoryImpl implements TagRepository {
 
     private final JdbcTemplate jdbcTemplate;
     private final TagRowMapperImpl tagMapper;
-
-    @Autowired
-    public MySqlTagRepositoryImpl(JdbcTemplate jdbcTemplate, TagRowMapperImpl tagMapper) {
-        this.jdbcTemplate = jdbcTemplate;
-        this.tagMapper = tagMapper;
-    }
 
     @Override
     public Tag createTag(Tag tag) {
@@ -59,10 +55,7 @@ public class MySqlTagRepositoryImpl implements TagRepository {
 
     @Override
     public Optional<Tag> fetchTag(long id) {
-        return jdbcTemplate.
-                query(SELECT_BY_ID, tagMapper, id)
-                .stream()
-                .findAny();
+        return jdbcTemplate.query(SELECT_BY_ID, tagMapper, id).stream().findAny();
     }
 
     @Override
@@ -86,9 +79,7 @@ public class MySqlTagRepositoryImpl implements TagRepository {
         List<Tag> tagsInDb = fetchAllFromDb();
         List<Tag> currentLinkedTags = fetchLinkedTags(id);
         for (Tag tag : tags) {
-            Optional<Tag> tagForLink = tagsInDb.stream()
-                    .filter(dbTag -> dbTag.getName().equals(tag.getName()) || dbTag.getId() == tag.getId())
-                    .findAny();
+            Optional<Tag> tagForLink = tagsInDb.stream().filter(dbTag -> dbTag.getName().equals(tag.getName()) || dbTag.getId() == tag.getId()).findAny();
 
             Tag tagForSaving = tagForLink.orElseGet(() -> createTag(tag));
             if (currentLinkedTags.contains(tagForSaving)) {
