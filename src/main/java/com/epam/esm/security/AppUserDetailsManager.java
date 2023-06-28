@@ -1,10 +1,7 @@
 package com.epam.esm.security;
 
-import com.epam.esm.exception.EntityNotFoundException;
-import com.epam.esm.exception.Error;
 import com.epam.esm.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -13,8 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class AppUserDetailsManager implements UserDetailsManager {
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
 
     @Override
@@ -43,6 +39,6 @@ public class AppUserDetailsManager implements UserDetailsManager {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userService.getUser(username).get();
+        return userService.loadUserByUsername(username);
     }
 }
