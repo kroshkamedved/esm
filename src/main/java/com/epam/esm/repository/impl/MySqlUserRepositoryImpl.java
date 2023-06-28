@@ -10,6 +10,7 @@ import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -47,5 +48,11 @@ public class MySqlUserRepositoryImpl implements UserRepository {
                         " DESC limit 1", BestClientDTO.class);
         BestClientDTO bestClient = query.getSingleResult();
         return fetchUser(bestClient.getId());
+    }
+
+    @Override
+    public void createUser(UserDetails user) {
+        User newUser = new User(user.getUsername(), user.getPassword());
+        entityManager.persist(newUser);
     }
 }

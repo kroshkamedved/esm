@@ -7,10 +7,7 @@ import com.epam.esm.hateoas.assembler.UserModelAssembler;
 import com.epam.esm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,10 @@ public class UserController {
     @GetMapping()
     public List<User> fetchAllUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping(params = {"login"})
+    public EntityModel<User> fetchByLogin(@RequestParam(required = true) String login) {
+        return modelAssembler.toModel(userService.getUser(login).orElseThrow(() -> new EntityNotFoundException("User not found", Error.UserNotFound)));
     }
 }
