@@ -4,7 +4,6 @@ import com.epam.esm.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 

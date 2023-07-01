@@ -2,7 +2,6 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.Order;
 import com.epam.esm.dto.TinyOrderInfoDTO;
-import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.hateoas.assembler.OrderModelAssembler;
@@ -16,6 +15,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -57,6 +57,7 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole(T(com.epam.esm.domain.Role).ROLE_ADMIN)")
     public Page<Order> fetchUserOrders(@RequestParam(name = "user_id", required = true) long userId,
                                        @RequestParam(name = "page") Optional<Integer> page,
                                        @RequestParam(name = "pageSize") Optional<Integer> pageSize,
