@@ -57,7 +57,7 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole(T(com.epam.esm.domain.Role).ROLE_ADMIN)")
+
     public Page<Order> fetchUserOrders(@RequestParam(name = "user_id", required = true) long userId,
                                        @RequestParam(name = "page") Optional<Integer> page,
                                        @RequestParam(name = "pageSize") Optional<Integer> pageSize,
