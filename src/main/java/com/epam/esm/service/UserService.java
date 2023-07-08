@@ -37,7 +37,8 @@ public class UserService implements UserDetailsService {
     }
 
     public void addUser(UserDetails user) {
-        userRepository.createUser(user);
+        User newUSer = (User) user;
+        userRepositorySpringData.save(newUSer);
     }
 
     public void updateUserInfo(String oldPassword, String newPassword) {
