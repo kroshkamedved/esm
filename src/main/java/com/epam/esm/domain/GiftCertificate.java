@@ -6,15 +6,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @Builder
 @Entity
+@DynamicInsert
+@DynamicUpdate
 @Table(name = "certificates")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,7 +35,7 @@ public class GiftCertificate extends RepresentationModel<GiftCertificate> {
     private Instant createDate;
     @Column(name = "update_time")
     private Instant lastUpdateDate;
-    @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "orderCertificates")
-    private Set<Order> orders;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    @JoinTable(name = "certificates_to_tags", joinColumns = @JoinColumn(name = "certificate_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    List<Tag> tags;
 }

@@ -1,4 +1,4 @@
-package com.epam.esm.repository;
+package com.epam.esm.repository.springdata;
 
 import com.epam.esm.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserRepositorySpringData extends CrudRepository<User, Long> {
+public interface SpringDataUserRepository extends CrudRepository<User, Long> {
 
     @Modifying
     @Query("UPDATE User u set u.password = ?1 where u.login = ?2")

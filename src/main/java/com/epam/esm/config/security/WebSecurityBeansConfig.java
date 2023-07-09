@@ -16,7 +16,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig {
+public class WebSecurityBeansConfig {
     private final UserDetailsManager userDetailsManager;
 
     @Bean

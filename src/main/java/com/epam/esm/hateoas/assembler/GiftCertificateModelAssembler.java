@@ -1,25 +1,24 @@
 package com.epam.esm.hateoas.assembler;
 
 import com.epam.esm.controller.CertificateController;
+import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.dto.GiftCertificateDTO;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
+import com.epam.esm.hateoas.model.CertificateModel;
+import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
-import static com.epam.esm.util.LinkUtil.addSelfLinksToTags;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Component
-public class GiftCertificateModelAssembler implements RepresentationModelAssembler<GiftCertificateDTO, EntityModel<GiftCertificateDTO>> {
+public class GiftCertificateModelAssembler implements RepresentationModelAssembler<GiftCertificate, CertificateModel> {
 
     @Override
-    public EntityModel<GiftCertificateDTO> toModel(GiftCertificateDTO entity) {
-        EntityModel<GiftCertificateDTO> entityModel = EntityModel.of(entity);
-        Link collectionLink = linkTo(CertificateController.class).withRel("GiftCertificates");
-        entityModel.add(linkTo(CertificateController.class).slash(entity.getId()).withSelfRel());
-        addSelfLinksToTags(entity.getTags());
-        entityModel.add(collectionLink);
-        return entityModel;
+    public CertificateModel toModel(GiftCertificate entity) {
+        CertificateModel model = new CertificateModel();
+        BeanUtils.copyProperties(entity, model);
+        model.add(linkTo(methodOn(CertificateController.class).fetchById(entity.getId())).withSelfRel());
+        return model;
     }
 }

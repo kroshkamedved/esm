@@ -4,6 +4,7 @@ import com.epam.esm.domain.User;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.hateoas.assembler.UserModelAssembler;
+import com.epam.esm.hateoas.model.UserModel;
 import com.epam.esm.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.hateoas.EntityModel;
@@ -25,7 +26,7 @@ public class UserController {
      * @return found user or 404 if user not exist
      */
     @GetMapping("/{id}")
-    public EntityModel<User> fetchById(@PathVariable long id) {
+    public UserModel fetchById(@PathVariable long id) {
         return modelAssembler.toModel(userService.getUser(id).orElseThrow(() -> new EntityNotFoundException("Requested resource not found (user id =" + id + ")", Error.UserNotFound)));
     }
 
@@ -40,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping(params = {"login"})
-    public EntityModel<User> fetchByLogin(@RequestParam(required = true) String login) {
+    public UserModel fetchByLogin(@RequestParam(required = true) String login) {
         return modelAssembler.toModel(userService.getUser(login).orElseThrow(() -> new EntityNotFoundException("User not found", Error.UserNotFound)));
     }
 }
