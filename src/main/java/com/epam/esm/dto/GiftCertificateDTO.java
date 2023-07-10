@@ -13,7 +13,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class GiftCertificateDTO extends RepresentationModel<GiftCertificateDTO> {
+public class GiftCertificateDTO{
     private long id;
     private String name;
     private String description;

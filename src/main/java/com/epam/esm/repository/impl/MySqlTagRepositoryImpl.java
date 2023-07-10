@@ -1,11 +1,9 @@
 package com.epam.esm.repository.impl;
 
 import com.epam.esm.domain.Tag;
-import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.TagRepository;
 import com.epam.esm.repository.mappers.impl.TagRowMapperImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,14 +61,6 @@ public class MySqlTagRepositoryImpl implements TagRepository {
         jdbcTemplate.update(DELETE, id);
     }
 
-    @Override
-    public List<Tag> fetchAll(PageRequest pageRequest) {
-        return jdbcTemplate.query(SELECT_ALL_TAGS,
-                new Object[]{pageRequest.getSortingOrder().name(),
-                        pageRequest.getPageSize(),
-                        (pageRequest.getPageNumber() - 1) * pageRequest.getPageSize()},
-                tagMapper);
-    }
 
 
     @Override
