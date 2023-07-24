@@ -7,8 +7,8 @@ import com.epam.esm.hateoas.assembler.UserModelAssembler;
 import com.epam.esm.hateoas.model.UserModel;
 import com.epam.esm.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 

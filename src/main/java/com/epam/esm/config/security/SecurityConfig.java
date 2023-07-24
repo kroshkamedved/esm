@@ -28,23 +28,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http = http.cors()
-                .disable()
+        return http.cors()
+                .and()
                 .csrf()
-                .disable();
-
-        http = http.sessionManagement()
+                .disable()
+                .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and();
-
-        http = http
+                .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(
                         (request, response, authException) ->
                                 response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage())
-                ).and();
-
-        http
+                )
+                .and()
                 .authorizeHttpRequests(
                         (authz) -> authz
                                 .requestMatchers("api/public/login", "api/public/signup").permitAll()
@@ -52,10 +48,9 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "orders/**").authenticated()
                                 .requestMatchers(HttpMethod.GET, "orders/**", "tags/**").hasAnyAuthority(Role.ROLE_ADMIN.getAuthority(), Role.ROLE_USER.getAuthority())
                                 .anyRequest().hasAuthority(Role.ROLE_ADMIN.getAuthority())
-                );
-        http.authenticationProvider(authenticationProvider);
-        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+                )
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 
     @Bean

@@ -2,7 +2,6 @@ package com.epam.esm.service;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Tag;
-import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.dto.GiftCertificatePriceOnly;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
@@ -40,7 +39,6 @@ public class CertificateService {
 
     @Transactional
     public GiftCertificate addCertificate(GiftCertificate certificate) {
-        // TODO Is it possible to do it in one row? Without usage of tagsRepo or EntityManager??
         List<Tag> tags = certificate.getTags();
         tags = springDataTagRepository.saveAll(tags);
         tags.stream()
@@ -65,7 +63,9 @@ public class CertificateService {
         certificate.setTags(certificate1.getTags());
         certificate.setCreateDate(certificate1.getCreateDate());
         certificate.setLastUpdateDate(certificate1.getLastUpdateDate());
-        if(certificate.getDuration()==null) certificate.setDuration(certificate1.getDuration());
+        if (certificate.getDuration() == null) {
+            certificate.setDuration(certificate1.getDuration());
+        }
         giftCertificateRepository.save(certificate);
     }
 

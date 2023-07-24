@@ -2,7 +2,7 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.Role;
 import com.epam.esm.domain.User;
-import com.epam.esm.dto.LoginRequest;
+import com.epam.esm.dto.LoginRequestDTO;
 import com.epam.esm.security.AppUserDetailsManager;
 import com.epam.esm.util.JwtTokenUtil;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,16 +29,14 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
 
     @PostMapping("login")
-    public String login(@RequestBody LoginRequest user, HttpServletResponse response) {
-
+    public String login(@RequestBody LoginRequestDTO user, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.username(), user.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtTokenUtil.generateJwtToken(authentication);
-
     }
 
     @PostMapping("signup")
-    public String signup(@RequestBody LoginRequest user, HttpServletResponse response) {
+    public String signup(@RequestBody LoginRequestDTO user, HttpServletResponse response) {
         User newUser = new User();
         newUser.setPassword(passwordEncoder.encode(user.password()));
         newUser.setLogin(user.username());

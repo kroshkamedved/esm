@@ -2,7 +2,6 @@ package com.epam.esm.hateoas.model;
 
 import com.epam.esm.domain.GiftCertificate;
 import com.epam.esm.domain.Order;
-import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 
