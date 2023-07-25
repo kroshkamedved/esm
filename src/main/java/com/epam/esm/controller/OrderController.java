@@ -8,16 +8,12 @@ import com.epam.esm.hateoas.assembler.OrderModelAssembler;
 import com.epam.esm.hateoas.model.OrderModel;
 import com.epam.esm.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
 
 @RequestMapping("orders")
 @RestController
@@ -54,7 +50,7 @@ public class OrderController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public PagedModel<OrderModel> fetchUserOrders(@PathVariable long id, Pageable pageable) {
-        org.springframework.data.domain.Page<Order> userOrders = orderService.getUserOrders(id, pageable);
+        Page<Order> userOrders = orderService.getUserOrders(id, pageable);
 
         return pagedResourcesAssembler.toModel(userOrders, modelAssembler);
     }

@@ -105,7 +105,7 @@ public class CertificateController {
                                                                    @RequestParam(required = false) String sortOrder,
                                                                    @RequestParam(required = false) Optional<String> sortByDate,
                                                                    @RequestParam(required = false) Optional<String> sortByName) {
-        List<GiftCertificate> cirtificatesParametrized = certificateService.getGiftCertificatesParametrized(
+        List<GiftCertificate> certificatesParametrized = certificateService.getGiftCertificatesParametrized(
                 tagName,
                 name,
                 description,
@@ -113,8 +113,8 @@ public class CertificateController {
                 sortByDate,
                 sortByName
         );
-        LinkUtil.addSelfLinksToTags(cirtificatesParametrized.stream().flatMap(c -> c.getTags().stream()).collect(Collectors.toList()));
-        return cirtificatesParametrized.stream()
+        LinkUtil.addSelfLinksToTags(certificatesParametrized.stream().flatMap(c -> c.getTags().stream()).collect(Collectors.toList()));
+        return certificatesParametrized.stream()
                 .map(modelAssembler::toModel).collect(Collectors.toList());
     }
 

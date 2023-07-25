@@ -28,14 +28,14 @@ public class AuthController {
     private final AppUserDetailsManager userDetailsManager;
     private final PasswordEncoder passwordEncoder;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public String login(@RequestBody LoginRequestDTO user, HttpServletResponse response) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.username(), user.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtTokenUtil.generateJwtToken(authentication);
     }
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public String signup(@RequestBody LoginRequestDTO user, HttpServletResponse response) {
         User newUser = new User();
         newUser.setPassword(passwordEncoder.encode(user.password()));
@@ -47,7 +47,6 @@ public class AuthController {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.username(), user.password()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return jwtTokenUtil.generateJwtToken(authentication);
-
     }
 
 }
