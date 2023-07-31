@@ -7,7 +7,6 @@ import com.epam.esm.exception.Error;
 import com.epam.esm.exception.IrrelevantRequestParameterException;
 import com.epam.esm.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;

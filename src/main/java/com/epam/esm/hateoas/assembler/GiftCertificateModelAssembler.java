@@ -2,7 +2,6 @@ package com.epam.esm.hateoas.assembler;
 
 import com.epam.esm.controller.CertificateController;
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.hateoas.model.CertificateModel;
 import org.springframework.beans.BeanUtils;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
