@@ -18,9 +18,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,11 +41,11 @@ public class CertificateService {
 
     @Transactional
     public GiftCertificate addCertificate(GiftCertificate certificate) {
-        List<Tag> tags = certificate.getTags();
-        tags = springDataTagRepository.saveAll(tags);
-        tags.stream()
+        Set<Tag> tags = certificate.getTags();
+        List<Tag> tagsList = springDataTagRepository.saveAll(tags);
+        tagsList.stream()
                 .forEach(entityManager::refresh);
-        certificate.setTags(tags);
+        certificate.setTags(new HashSet<>(tagsList));
         GiftCertificate saved = giftCertificateRepository.save(certificate);
         entityManager.refresh(saved);
         return saved;

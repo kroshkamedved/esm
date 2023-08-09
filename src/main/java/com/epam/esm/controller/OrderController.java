@@ -58,7 +58,6 @@ public class OrderController {
     @ResponseStatus(HttpStatus.OK)
     public PagedModel<OrderModel> fetchUserOrders(@RequestParam(name = "user_id") long id, Pageable pageable) {
         Page<Order> userOrders = orderService.getUserOrders(id, pageable);
-
         return pagedResourcesAssembler.toModel(userOrders, modelAssembler);
     }
 

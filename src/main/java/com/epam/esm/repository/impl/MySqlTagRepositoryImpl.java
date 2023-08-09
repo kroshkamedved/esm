@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 @RequiredArgsConstructor
@@ -64,7 +65,7 @@ public class MySqlTagRepositoryImpl implements TagRepository {
 
 
     @Override
-    public boolean saveTagsForCertificate(List<Tag> tags, long id) {
+    public boolean saveTagsForCertificate(Set<Tag> tags, long id) {
         boolean newTagLinked = false;
         List<Tag> tagsInDb = fetchAllFromDb();
         List<Tag> currentLinkedTags = fetchLinkedTags(id);

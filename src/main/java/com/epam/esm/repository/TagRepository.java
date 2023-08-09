@@ -4,6 +4,7 @@ import com.epam.esm.domain.Tag;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TagRepository {
     Tag createTag(Tag tag);
@@ -13,7 +14,7 @@ public interface TagRepository {
     void deleteTag(long id);
 
 
-    boolean saveTagsForCertificate(List<Tag> tags, long id);
+    boolean saveTagsForCertificate(Set<Tag> tags, long id);
 
     List<Tag> fetchLinkedTags(long certificateId);
 

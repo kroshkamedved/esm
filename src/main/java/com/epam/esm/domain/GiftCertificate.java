@@ -22,6 +22,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -45,5 +46,5 @@ public class GiftCertificate extends RepresentationModel<GiftCertificate> {
     private Instant lastUpdateDate;
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     @JoinTable(name = "certificates_to_tags", joinColumns = @JoinColumn(name = "certificate_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    List<Tag> tags;
+    Set<Tag> tags;
 }
