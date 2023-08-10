@@ -8,9 +8,4 @@ node {
       sh "${mvn}/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=esm"
     }
   }
-  stage('Build') {
-    steps {
-      sh "${mvn} -B -DskipTests clean package"
-    }
-  }
 }
