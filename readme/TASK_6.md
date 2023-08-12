@@ -2,6 +2,8 @@
 
 ## Materials
 
+JENKINS CREDENTIALS: login : dev, password : password
+
 1. [Continuous Integration with Jenkins](https://courses.epam.com/courses/course-v1:EPAM+CIJ+0819/about)
 2. [SonarQube](https://learn.epam.com/detailsPage?id=1ba43583-1c71-4545-8233-a4620807dce6)
 
