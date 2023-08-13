@@ -24,8 +24,8 @@ node {
         stage('Deploy to Tomcat') {
             sh "echo ${deployUrl}"
             sh "echo ${warFilePath}"
-            sh "echo '${redeployTrue}' is present" // Use single quotes around redeployTrue
-            sh "curl -X PUT -u jenkins:password --data-binary @${warFilePath} '${deployUrl}'" // Proper quoting around URLs
+            sh "echo '${redeployTrue}' is present" // Use single quotes around redeployTrue // Added single quotes around ${redeployTrue} to ensure that it's treated as a single argument when using the sh step.
+            sh "curl -X PUT -u jenkins:password --data-binary @${warFilePath} '${deployUrl}'" // Proper quoting around URLs // Added single quotes around the ${deployUrl} variable when calling the curl command to properly quote the URL
         }
 
         stage('SonarQube Analysis') {
