@@ -22,13 +22,12 @@ node {
         }
 
         stage('Deploy to Tomcat') {
-                    sh "echo ${deployUrl}"
-                    sh "echo ${warFilePath}"
-                    sh "echo ${redeployTrue} is present"
-                  //sh 'curl -X PUT -u jenkins:password --data-binary @/var/jenkins_home/workspace/esm/target/esm.war "http://192.168.88.17:8080/manager/text/deploy?path=/esm"'
-                 sh "echo -X PUT -u jenkins:password --data-binary @${warFilePath}&update=true"
-                 sh "curl -X PUT -u jenkins:password --data-binary @${warFilePath}&update=true"
+            sh "echo ${deployUrl}"
+            sh "echo ${warFilePath}"
+            sh "echo '${redeployTrue}' is present" // Use single quotes around redeployTrue
+            sh "curl -X PUT -u jenkins:password --data-binary @${warFilePath} '${deployUrl}'" // Proper quoting around URLs
         }
+
         stage('SonarQube Analysis') {
             def mvn = tool 'mvn'
             withSonarQubeEnv() {
