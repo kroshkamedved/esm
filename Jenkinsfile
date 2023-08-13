@@ -5,7 +5,8 @@ node {
     def warFileName = "esm.war"
     def currentDir = sh(script: 'pwd', returnStdout: true).trim();
     def warFilePath = "${currentDir}/target/${warFileName}"
-    def deployUrl = "${tomcatUrl}/deploy?path=/esm"
+    def redeployTrue = "&update=true"
+    def deployUrl = "${tomcatUrl}/deploy?path=/esm${redeployTrue}"
 
     try {
         stage('SCM') {
@@ -23,8 +24,10 @@ node {
         stage('Deploy to Tomcat') {
                     sh "echo ${deployUrl}"
                     sh "echo ${warFilePath}"
+                    sh "echo ${redeployTrue} is present"
                   //sh 'curl -X PUT -u jenkins:password --data-binary @/var/jenkins_home/workspace/esm/target/esm.war "http://192.168.88.17:8080/manager/text/deploy?path=/esm"'
-                 sh "curl -X PUT -u jenkins:password --data-binary @${warFilePath} ${deployUrl}"
+                 sh "echo -X PUT -u jenkins:password --data-binary @${warFilePath}&update=true"
+                 sh "curl -X PUT -u jenkins:password --data-binary @${warFilePath}&update=true"
         }
         stage('SonarQube Analysis') {
             def mvn = tool 'mvn'
