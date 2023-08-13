@@ -10,7 +10,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class EsmApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        System.setProperty("jasypt.encryptor.password", "key");
         SpringApplication.run(EsmApplication.class, args);
     }
 }
