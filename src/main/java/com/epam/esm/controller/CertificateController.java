@@ -1,32 +1,32 @@
 package com.epam.esm.controller;
 
 import com.epam.esm.domain.GiftCertificate;
-import com.epam.esm.dto.GiftCertificateDTO;
 import com.epam.esm.dto.GiftCertificatePriceOnly;
-import com.epam.esm.event.SingleResourceRetrieved;
 import com.epam.esm.exception.EntityUpdateException;
 import com.epam.esm.hateoas.assembler.GiftCertificateModelAssembler;
-import com.epam.esm.pagination.Page;
-import com.epam.esm.pagination.PageRequest;
-import com.epam.esm.pagination.Sort;
-import com.epam.esm.pagination.assembler.CertificatePageAssembler;
+import com.epam.esm.hateoas.model.CertificateModel;
 import com.epam.esm.service.CertificateService;
-import jakarta.servlet.http.HttpServletResponse;
+import com.epam.esm.util.LinkUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.hateoas.EntityModel;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
-import static com.epam.esm.util.LinkUtil.addSelfLinksToTags;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -38,10 +38,9 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 @EnableHypermediaSupport(type = EnableHypermediaSupport.HypermediaType.HAL)
 public class CertificateController {
-    private final ApplicationEventPublisher eventPublisher;
     private final CertificateService certificateService;
     private final GiftCertificateModelAssembler modelAssembler;
-    private final CertificatePageAssembler pageAssambler;
+    private final PagedResourcesAssembler<GiftCertificate> pagedResourcesAssembler;
 
     /**
      * return certificate with {id}
@@ -52,10 +51,8 @@ public class CertificateController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public EntityModel<GiftCertificateDTO> fetchById(@PathVariable long id, HttpServletResponse response) {
-        eventPublisher.publishEvent(new SingleResourceRetrieved(response, this));
-        GiftCertificateDTO certificateDTO = certificateService.getCertificate(id);
-        return modelAssembler.toModel(certificateDTO);
+    public CertificateModel fetchById(@PathVariable long id) {
+        return modelAssembler.toModel(certificateService.getCertificate(id));
     }
 
     /**
@@ -74,32 +71,27 @@ public class CertificateController {
      * Create new GiftCertificate
      * and save it to the db with all tags which was linked to the certificate in certificateDTO
      *
-     * @param certificateDTO - dto with certificate and linked tags
+     * @param certificate - certificate and linked tags
      * @return certificateDTO with info from db for newly created certificate
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public ResponseEntity<GiftCertificateDTO> createCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
-        GiftCertificateDTO dto = certificateService.addCertificate(certificateDTO);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
-        return ResponseEntity
-                .status(CREATED)
-                .header(HttpHeaders.LOCATION, uri.toASCIIString())
-                .body(dto);
+    public CertificateModel createCertificate(@RequestBody GiftCertificate certificate) {
+        return modelAssembler.toModel(certificateService.addCertificate(certificate));
     }
 
     /**
      * Update certificate with info from dto. Certificate id is mandatory for request body.
      *
-     * @param certificateDTO - dto with all certificate fields and linked tags.
-     * @return GiftCertificateDTO for corresponding certificate with all date obtained from db after update
+     * @param certificate - dto with all certificate fields and linked tags.
+     * @return CertificateModel for corresponding certificate with all date obtained from db after update
      * @throws EntityUpdateException in case of absence of new relevant date in request body.
      */
     @PutMapping()
     @ResponseStatus(OK)
-    public EntityModel<GiftCertificateDTO> updateCertificate(@RequestBody GiftCertificateDTO certificateDTO) {
-        certificateService.updateCertificate(certificateDTO);
-        return modelAssembler.toModel(certificateService.getCertificateWithTags(certificateDTO.getId()));
+    public CertificateModel updateCertificate(@RequestBody GiftCertificate certificate) {
+        certificateService.updateCertificate(certificate);
+        return modelAssembler.toModel(certificateService.getCertificate(certificate.getId()));
     }
 
     /**
@@ -117,13 +109,13 @@ public class CertificateController {
      */
     @GetMapping
     @ResponseStatus(OK)
-    public List<GiftCertificateDTO> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
-                                                                     @RequestParam(required = false) String name,
-                                                                     @RequestParam(required = false) String description,
-                                                                     @RequestParam(required = false) String sortOrder,
-                                                                     @RequestParam(required = false) Optional<String> sortByDate,
-                                                                     @RequestParam(required = false) Optional<String> sortByName) {
-        List<GiftCertificateDTO> cirtificatesParametrized = certificateService.getGiftCertificatesParametrized(
+    public List<CertificateModel> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
+                                                                   @RequestParam(required = false) String name,
+                                                                   @RequestParam(required = false) String description,
+                                                                   @RequestParam(required = false) String sortOrder,
+                                                                   @RequestParam(required = false) Optional<String> sortByDate,
+                                                                   @RequestParam(required = false) Optional<String> sortByName) {
+        List<GiftCertificate> certificatesParametrized = certificateService.getGiftCertificatesParametrized(
                 tagName,
                 name,
                 description,
@@ -131,10 +123,9 @@ public class CertificateController {
                 sortByDate,
                 sortByName
         );
-        for (final GiftCertificateDTO certificate : cirtificatesParametrized) {
-            addSelfLinksToTags(certificate.getTags());
-        }
-        return cirtificatesParametrized;
+        LinkUtil.addSelfLinksToTags(certificatesParametrized.stream().flatMap(c -> c.getTags().stream()).collect(Collectors.toList()));
+        return certificatesParametrized.stream()
+                .map(modelAssembler::toModel).collect(Collectors.toList());
     }
 
 
@@ -147,8 +138,8 @@ public class CertificateController {
      */
     @PatchMapping("/{id}")
     @ResponseStatus(OK)
-    public EntityModel<GiftCertificateDTO> changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto,
-                                                                  @PathVariable long id) {
+    public CertificateModel changeCertificatePrice(@RequestBody GiftCertificatePriceOnly certificatePriceDto,
+                                                   @PathVariable long id) {
         if (id != certificatePriceDto.getId()) {
             throw new EntityUpdateException("request body doesn't correspond to id path variable");
         }
@@ -164,14 +155,11 @@ public class CertificateController {
 
     @GetMapping(params = {"tagId"})
     @ResponseStatus(OK)
-    public Page<GiftCertificate> fetchByTags
-    (@RequestParam(required = true, name = "tagId") Set<Long> tagsIds,
-     @RequestParam(defaultValue = "1", name = "page") String page,
-     @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
-     @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
-        PageRequest pageRequest = new PageRequest(Integer.valueOf(page), Integer.valueOf(pageSize), sortOrder);
-        int totalRecords = certificateService.getTotalRecordsWithTag(tagsIds);
+    public List<CertificateModel> fetchByTags
+    (@RequestParam(required = true, name = "tagId") Set<Long> tagsIds) {
         List<GiftCertificate> certificatesWhichContainsTags = certificateService.getCertificatesWhichContainsTags(tagsIds);
-        return pageAssambler.pageOfLinkedWithTags(certificatesWhichContainsTags, pageRequest, totalRecords, tagsIds);
+        return certificatesWhichContainsTags.stream()
+                .map(modelAssembler::toModel)
+                .collect(Collectors.toList());
     }
 }

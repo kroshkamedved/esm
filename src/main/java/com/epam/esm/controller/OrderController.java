@@ -2,26 +2,25 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.Order;
 import com.epam.esm.dto.TinyOrderInfoDTO;
-import com.epam.esm.exception.EmptySetException;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.hateoas.assembler.OrderModelAssembler;
-import com.epam.esm.pagination.Page;
-import com.epam.esm.pagination.PageRequest;
-import com.epam.esm.pagination.Sort;
-import com.epam.esm.pagination.assembler.OrderPageAssembler;
+import com.epam.esm.hateoas.model.OrderModel;
 import com.epam.esm.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.http.HttpHeaders;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("orders")
 @RestController
@@ -29,7 +28,7 @@ import java.util.Optional;
 public class OrderController {
     private final OrderService orderService;
     private final OrderModelAssembler modelAssembler;
-    private final OrderPageAssembler pageAssembler;
+    private final PagedResourcesAssembler<Order> pagedResourcesAssembler;
 
     /**
      * return order with {id}
@@ -38,7 +37,7 @@ public class OrderController {
      * @return found order of 404 if order not exist
      */
     @GetMapping("/{id}")
-    public EntityModel<Order> fetchById(@PathVariable long id) {
+    public OrderModel fetchById(@PathVariable long id) {
         return modelAssembler.toModel(orderService.getById(id).orElseThrow(() -> new EntityNotFoundException("Requested resource not found (order id =" + id + ")", Error.OrderNotFound)));
     }
 
@@ -55,18 +54,12 @@ public class OrderController {
         return orderService.getUserOrder(userId, orderId);
     }
 
-    @GetMapping
+    @GetMapping(params = {"user_id"})
     @ResponseStatus(HttpStatus.OK)
-    public Page<Order> fetchUserOrders(@RequestParam(name = "user_id", required = true) long userId,
-                                       @RequestParam(name = "page") Optional<Integer> page,
-                                       @RequestParam(name = "pageSize") Optional<Integer> pageSize,
-                                       @RequestParam(name = "sortOrder") Optional<Sort> sortOrder) {
+    public PagedModel<OrderModel> fetchUserOrders(@RequestParam(name = "user_id") long id, Pageable pageable) {
+        Page<Order> userOrders = orderService.getUserOrders(id, pageable);
 
-        PageRequest pageRequest = new PageRequest(page.orElse(1), pageSize.orElse(2), sortOrder.orElse(Sort.ASC));
-        int totalRecords = orderService.getTotalRecords(userId);
-        List<Order> userOrders = orderService.getUserOrders(userId, pageRequest);
-
-        return pageAssembler.pageOf(userOrders, pageRequest, totalRecords, userId);
+        return pagedResourcesAssembler.toModel(userOrders, modelAssembler);
     }
 
     /**
@@ -76,9 +69,8 @@ public class OrderController {
      * @return created Order
      */
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestBody(required = true) Order order) {
+    public OrderModel createOrder(@RequestBody(required = true) Order order) {
         Order persistedOrder = orderService.addOrder(order);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(persistedOrder.getId()).toUri();
-        return ResponseEntity.status(HttpStatus.CREATED).header(HttpHeaders.LOCATION, uri.toASCIIString()).body(persistedOrder);
+        return modelAssembler.toModel(persistedOrder);
     }
 }

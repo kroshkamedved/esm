@@ -2,17 +2,21 @@ package com.epam.esm.controller;
 
 import com.epam.esm.domain.Tag;
 import com.epam.esm.hateoas.assembler.TagModelAssembler;
-import com.epam.esm.pagination.Page;
-import com.epam.esm.pagination.PageRequest;
-import com.epam.esm.pagination.assembler.TagPageAssembler;
+import com.epam.esm.hateoas.model.TagModel;
 import com.epam.esm.service.TagService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.hateoas.EntityModel;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
-import com.epam.esm.pagination.Sort;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -26,8 +30,8 @@ import static org.springframework.http.HttpStatus.OK;
 public class TagController {
 
     private final TagService tagService;
-    private final TagPageAssembler tagPageAssembler;
     private final TagModelAssembler tagModelAssembler;
+    private final PagedResourcesAssembler<Tag> pagedResourcesAssembler;
 
     /**
      * return tag with {id}
@@ -39,7 +43,7 @@ public class TagController {
      */
     @GetMapping("/{id}")
     @ResponseStatus(OK)
-    public EntityModel<Tag> fetchById(@PathVariable("id") Long id) {
+    public TagModel fetchById(@PathVariable("id") Long id) {
         return tagModelAssembler.toModel(tagService.getTag(id));
     }
 
@@ -51,13 +55,8 @@ public class TagController {
     @GetMapping()
     @ResponseStatus(OK)
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<Tag> fetchAll(@RequestParam(defaultValue = "1", name = "page") String page,
-                              @RequestParam(defaultValue = "2", name = "pageSize") String pageSize,
-                              @RequestParam(defaultValue = "ASC", name = "sortOrder") Sort sortOrder) {
-        PageRequest pageRequest = new PageRequest(Integer.parseInt(page), Integer.parseInt(pageSize), sortOrder);
-        int totalRecords = tagService.getTotalRecords();
-        List<Tag> tags = tagService.getAll(pageRequest);
-        return tagPageAssembler.pageOf(tags, pageRequest, totalRecords);
+    public PagedModel<TagModel> fetchAll(Pageable pageable) {
+        return pagedResourcesAssembler.toModel(tagService.getAll(pageable), tagModelAssembler);
     }
 
     /**
@@ -68,7 +67,7 @@ public class TagController {
      */
     @PostMapping
     @ResponseStatus(CREATED)
-    public EntityModel<Tag> createTag(@RequestBody Tag tag) {
+    public TagModel createTag(@RequestBody Tag tag) {
         return tagModelAssembler.toModel(tagService.storeTag(tag));
     }
 
@@ -89,7 +88,7 @@ public class TagController {
      * @return tag
      */
     @GetMapping("/widelyUsedBestClientTag")
-    public EntityModel<Tag> fetchMostWidelyUsedTagOfTheBestClient() {
+    public TagModel fetchMostWidelyUsedTagOfTheBestClient() {
         return tagModelAssembler.toModel(tagService.getFavouriteBestClientTag());
     }
 }

@@ -5,17 +5,13 @@ import com.epam.esm.domain.User;
 import com.epam.esm.exception.EntityNotFoundException;
 import com.epam.esm.exception.Error;
 import com.epam.esm.exception.IrrelevantRequestParameterException;
-import com.epam.esm.pagination.PageRequest;
 import com.epam.esm.repository.OrderRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,18 +66,8 @@ public class MySqlOrderRepositoryImpl implements OrderRepository {
         try {
             User user = entityManager.createQuery("Select u from User u where u.id = :userId", User.class).setParameter("userId", userId).getSingleResult();
         } catch (Exception e) {
-            throw new EntityNotFoundException("user: " + userId + " id is not valid",Error.UserNotFound);
+            throw new EntityNotFoundException("user: " + userId + " id is not valid", Error.UserNotFound);
         }
         return ((Number) entityManager.createQuery("Select count(*) from Order o where o.userId = :userId ").setParameter("userId", userId).getSingleResult()).intValue();
-    }
-
-    @Override
-    public List<Order> fetchUserOrdersPaginated(long userId, PageRequest pageRequest) {
-        Query query = entityManager.createQuery("select o from Order o where o.userId = :userId order by o.id " +
-                pageRequest.getSortingOrder() + " limit :limitPoint offset :offsetPoint", Order.class).setParameter("userId", userId);
-        query
-                .setParameter("limitPoint", pageRequest.getPageSize())
-                .setParameter("offsetPoint", (pageRequest.getPageNumber() - 1) * pageRequest.getPageSize());
-        return query.getResultList();
     }
 }
