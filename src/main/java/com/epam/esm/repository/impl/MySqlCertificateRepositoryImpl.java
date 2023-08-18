@@ -77,7 +77,7 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
     @Override
     public boolean updateCertificate(GiftCertificateDTO certificate) {
 
-        if (certificate.getId() == 0L || fetchCertificate(certificate.getId()).isEmpty()) { //TODO  !(fetchCertificate(certificate.getId()).isPresent()) -> fetchCertificate(certificate.getId()).isEmpty() -> didn't understand what do i have to do here and why? To invert "if" statement?(i've changed long prefix to 'L')
+        if (certificate.getId() == 0L || fetchCertificate(certificate.getId()).isEmpty()) {
             throw new EntityNotFoundException("ID attribute is absent or not valid", Error.GiftCertificateNotFound);
         }
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
