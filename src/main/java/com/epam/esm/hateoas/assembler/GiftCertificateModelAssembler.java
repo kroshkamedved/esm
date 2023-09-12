@@ -13,6 +13,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @Component
 public class GiftCertificateModelAssembler implements RepresentationModelAssembler<GiftCertificate, CertificateModel> {
 
+
     @Override
     public CertificateModel toModel(GiftCertificate entity) {
         CertificateModel model = new CertificateModel();
