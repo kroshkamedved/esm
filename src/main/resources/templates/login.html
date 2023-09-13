@@ -1,31 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8" dir="ltr">
-    <title>Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1,shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
-    <link rel="stylesheet" href="../css/esm_stylesheet.css">
-    <link rel="icon" type="image/x-icon" href="../static/enter.png">
-    <script src="../javascript/js_whistles.js"></script>
+    <link rel="stylesheet" href="../css/login.css"/>
+    <script src="../javascript/login.js"></script>
 </head>
 <body>
 <header>
-    <section class="header_line">
-            <span class="material-symbols-outlined" id="menu-trigger">menu
+    <div class="header_container">
+        <div class="left-part">
+            <div id="menuToggle" style="padding-top: 1rem">
+                <input type="checkbox" id="menu-checkbox"/>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <img class="logo"
+                 src="../static/vecteezy_school-bus-icon-vector_9098275_213/vecteezy_school-bus-icon-vector_9098275.jpg"
+                 alt="logo">
+        </div>
+        <div class="central-part">
+            <input id="search-field" type="search" placeholder="Search by item name"/>
+            <div class="dropdown">
+                <select class="custom-select">
+                    <option selected>All Categories</option>
+                    <option>Action</option>
+                    <option>For Two</option>
+                    <option>Education</option>
+                </select>
+            </div>
+        </div>
+        <div class="right-part">
             <nav>
-                <ul id="menu-list">
-                    <li>
-                        <a href="#FIRST">FIRST</a>
-                    </li>
-                    <li>#SECOND</li>
-                    <li>#THIRD</li>
-                </ul>
+                <a href="#favorite"><i><img class="right-side-icons"
+                                            src="../static/favorite_FILL0_wght400_GRAD0_opsz24.svg" alt="favorite"></i></a>
+                <a href="#shoppingCart"><i><img class="right-side-icons"
+                                                src="../static/shopping_cart_FILL0_wght400_GRAD0_opsz24.svg" alt="cart"></i></a>
+                <a id="login" href="#login">Login</a>
+                <a id="signup" href="#Signup">Sign Up</a>
             </nav>
-            </span>
-        <img class="logo" alt="logo" src="../static/crowdsource_FILL0_wght400_GRAD0_opsz24.svg">
-    </section>
+        </div>
+    </div>
+    <nav id="menu-list" class="menu-list">
+        <a href="#">Certificates</a>
+        <a href="#">Orders</a>
+        <a href="#">Checkout</a>
+    </nav>
 </header>
+<main>
+    <div id="main-container">
+        <img id="main-logo"
+             src="../static/vecteezy_school-bus-icon-vector_9098275_213/vecteezy_school-bus-icon-vector_9098275.jpg"
+             alt="logo">
+        <div id="login-form">
+            <input class="login-input" type="text" placeholder="Login">
+            <input class="login-input" type="password" placeholder="Password">
+            <button class="login-input" type="submit">Login</button>
+        </div>
+    </div>
+</main>
 </body>
 </html>
