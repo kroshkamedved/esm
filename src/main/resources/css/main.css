@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -203,6 +204,7 @@ a {
     width: 15rem;
     margin: 5px 0 0 0;
     font-weight: bold;
+    padding: 0 1rem;
 }
 .login-input::placeholder{
     text-align: center;
@@ -212,4 +214,3 @@ button[class$=login-input] {
     background-color: darkseagreen;
     color: white;
 }
-
