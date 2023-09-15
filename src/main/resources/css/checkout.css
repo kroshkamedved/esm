@@ -1,0 +1,66 @@
+@import "registration.css";
+
+.total-container {
+    width: 100%;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.total-container p {
+    margin-right: 3%;
+}
+
+.total-container span {
+    padding-left: 3rem;
+    font-size: 1.5rem;
+}
+
+
+.add-new-div h2 {
+    background-color: darkgrey;
+    color: white;
+    font-weight: bold;
+    padding: 1.3rem 0 1.3rem 15%;
+}
+
+#checkout-div {
+    padding: 4% 15%;
+    background-color: white;
+}
+
+.item-list {
+    padding-bottom: 20px;
+    border-bottom: solid;
+    border-width: 3px;
+    border-color: darkgrey;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.image-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: lightgray;
+    flex-shrink: 0;
+}
+
+.middle-row{
+    padding-left: 1rem;
+    max-width: 60%;
+}
+
+li {
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.last-row{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 3%;
+}
