@@ -1,10 +1,11 @@
 @import "main.css";
 
 .detail-container {
-    width: 60%;
     display: flex;
     flex-direction: column;
-    margin-top: 3rem;
+    margin-left: 5%;
+    margin-top: 3%;
+    width: 60%;
 }
 
 .detail-container p {
@@ -12,28 +13,29 @@
 }
 
 .image-placeholder {
+    margin-left: 5%;
+    margin-top: 3%;
     width: 60%;
     background-color: darkgrey;
 }
 
 main {
-    margin-top: 3rem;
-    margin-left: 4rem;
     display: flex;
     flex-wrap: wrap;
 }
 
 .coupon-description {
-    margin: 0 4rem 0 4rem;
+    margin-top: 3%;
+    margin-left: 4.5%;
     background-color: white;
-    width: 27%;
+    width: 30%;
     padding: 1rem 1rem 1rem 1rem;
     flex-shrink: 0;
 }
 
 h2 + p {
-    padding-top: 1rem;
-    padding-bottom: 3rem;
+    padding-top: 3%;
+    padding-bottom: 13%;
 }
 
 p + label {
@@ -46,23 +48,18 @@ br + span {
     font-size: 1rem;
 }
 
-.details-bottom-line {
-    margin-top: 35%;
-}
-
-.details-bottom-line a {
-    margin-left: 45%;
-}
-
-.details-bottom-line a {
-    color: lightskyblue;
-    font-weight: 600;
-}
-
-.details-bottom-line span {
-    font-weight: 700;
-}
-
-i {
+#price {
     vertical-align: middle;
+}
+
+.details-bottom-line{
+    margin-top: 10%;
+    font-weight: bold;
+    font-size: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.details-bottom-line > a{
+    color: lightskyblue;
 }

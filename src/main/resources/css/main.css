@@ -86,7 +86,7 @@ a {
 }
 
 .right-side-icons {
-    justify-items: center;
+    vertical-align: middle;
 }
 
 #signup {
