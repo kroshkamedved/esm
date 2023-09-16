@@ -1,0 +1,76 @@
+@import "main.css";
+
+.category-catalog {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: darkgrey;
+}
+
+.category-unit {
+    padding: 0.6% 0 0.2% 0;
+    display: flex;
+    flex-direction: column;
+    font-weight: normal;
+}
+
+.image-placeholder {
+    background-color: white;
+    height: 4rem;
+    width: 4rem;
+}
+
+.coupon-image-placeholder {
+    background-color: darkgrey;
+    height: 12rem;
+    width: 100%;
+}
+
+.coupon-info {
+    padding: 4% 4% 0 4%;
+    background-color: white;
+}
+
+.coupon-info-parts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-item-button {
+    /*appearance: none;*/
+    /*border: darkgrey;*/
+    /*border-width: 2px;*/
+    /*border-style: solid;*/
+}
+
+.coupon-info > img {
+    vertical-align: middle;
+}
+
+
+.coupon-grid {
+    padding: 2% 3%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; /* Three columns of equal width */
+    grid-gap: 1rem;
+}
+
+h4 {
+    color: black;
+    font-weight: 500;
+}
+
+.brief-desc {
+    font-size: x-small;
+}
+
+.coupon-info-parts > label {
+    color: darkgrey;
+    font-size: xx-small;
+}
+
+.coupon-info-parts:last-child{
+    padding: 5% 0;
+    display: flex;
+    align-items: flex-end;
+}
