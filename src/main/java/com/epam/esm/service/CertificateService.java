@@ -13,6 +13,8 @@ import com.epam.esm.repository.springdata.SpringDataTagRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,9 +77,9 @@ public class CertificateService {
         return certificateRepository.fetchCertificate(certificateId).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
     }
 
-    public List<GiftCertificate> getAll() {
+    public Page<GiftCertificate> getAll(Pageable pageable) {
         try {
-            return giftCertificateRepository.findAll();
+            return giftCertificateRepository.findAll(pageable);
         } catch (DataAccessException e) {
             throw new EntityNotFoundException("can't receive GiftCertificate list", Error.GiftCertificateNotFound);
         }

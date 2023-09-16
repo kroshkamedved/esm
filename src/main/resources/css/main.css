@@ -4,16 +4,20 @@
     padding: 0;
     box-sizing: border-box;
     font-family: "Roboto Light", sans-serif;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 
 body {
     width: 100%;
     background-color: lightgray;
 }
+main{
+    margin-top: 60px;
+}
 
 .header_container {
+    position: fixed;
+    top: 0;
+    width: 100%;
     font-weight: bold;
     padding: 0 20px 0 20px;
     background-color: white;
@@ -57,6 +61,9 @@ body {
 }
 
 .menu-list {
+    position: relative;
+    width: 100%;
+    top: 60px;
     padding-left: 1rem;
     padding-bottom: 0.5rem;
     display: none;

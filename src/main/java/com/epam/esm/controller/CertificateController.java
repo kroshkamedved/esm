@@ -8,7 +8,10 @@ import com.epam.esm.hateoas.model.CertificateModel;
 import com.epam.esm.service.CertificateService;
 import com.epam.esm.util.LinkUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.config.EnableHypermediaSupport;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -161,5 +164,10 @@ public class CertificateController {
         return certificatesWhichContainsTags.stream()
                 .map(modelAssembler::toModel)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/all")
+    public PagedModel<CertificateModel> fetchAll(Pageable pageable){
+        return pagedResourcesAssembler.toModel(certificateService.getAll(pageable),modelAssembler);
     }
 }
