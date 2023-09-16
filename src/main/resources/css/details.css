@@ -1,0 +1,68 @@
+@import "main.css";
+
+.detail-container {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3rem;
+}
+
+.detail-container p {
+    padding-top: 1rem;
+}
+
+.image-placeholder {
+    width: 60%;
+    background-color: darkgrey;
+}
+
+main {
+    margin-top: 3rem;
+    margin-left: 4rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.coupon-description {
+    margin: 0 4rem 0 4rem;
+    background-color: white;
+    width: 27%;
+    padding: 1rem 1rem 1rem 1rem;
+    flex-shrink: 0;
+}
+
+h2 + p {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+}
+
+p + label {
+    font-weight: lighter;
+    font-size: small;
+}
+
+br + span {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.details-bottom-line {
+    margin-top: 35%;
+}
+
+.details-bottom-line a {
+    margin-left: 45%;
+}
+
+.details-bottom-line a {
+    color: lightskyblue;
+    font-weight: 600;
+}
+
+.details-bottom-line span {
+    font-weight: 700;
+}
+
+i {
+    vertical-align: middle;
+}
