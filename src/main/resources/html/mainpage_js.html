@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="../css/mainpage.css"/>
+    <script src="../javascript/headerImport.js"></script>
+    <link rel="icon" href="../static/icons/vecteezy_school-bus.jpg">
+    <link rel="stylesheet" href="../css/mainpage_js.css"/>
+</head>
+<body>
+<div id="header-for-all"></div>
+<main>
+    <div class="category-catalog">
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+        <div class="category-unit">
+            <div class="image-placeholder"></div>
+            <h4>Category</h4>
+        </div>
+    </div>
+    <div class="coupon-grid">
+        <div class="coupon-unit">
+            <div class="coupon-image-placeholder"></div>
+            <div class="coupon-info">
+                <div class="coupon-info-parts">
+                    <span>Coupon name</span>
+                    <a href="#add_to_favourite"><img src="../static/icons/favorite_FILL0_wght400_GRAD0_opsz24.svg"
+                                                     alt="favourite"></a>
+                </div>
+                <div class="coupon-info-parts">
+                    <span class="brief-desc">Some brief description</span>
+                    <label>Expires in 3 days</label>
+                </div>
+                <hr>
+                <div class="coupon-info-parts">
+                    <span>$235</span>
+                    <button type="button" class="add-item-button">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loader">
+        <div class="sceleton-coupon-unit"></div>
+        <div class="sceleton-coupon-unit"></div>
+        <div class="sceleton-coupon-unit"></div>
+        <div class="sceleton-coupon-unit"></div>
+        <div class="sceleton-coupon-unit"></div>
+    </div>
+    <div class="coupon-action">
+        <span>Showing
+            <span id="coupon-count"></span> of
+            <span id="coupon-total"></span> coupons
+        </span>
+    </div>
+</main>
+<script src="../javascript/infinite_scroll.js"></script>
+</body>
+</html>

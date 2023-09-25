@@ -6,7 +6,6 @@ if(quantity == 'NaN' ||  quantity == undefined || quantity == null ){
 }
 
 form.addEventListener('submit',(e)=>{
-    e.preventDefault();
    const formData = new FormData(form);
     // const obj = Object.fromEntries(formData);
     // const jsonObj = JSON.stringify(obj);
@@ -52,6 +51,7 @@ form.addEventListener('submit',(e)=>{
     let currentQuantity  = Number.parseInt(quantity);
     currentQuantity++;
     localStorage.setItem('certificatesQuantity', currentQuantity.toString());
+    e.preventDefault();
 })
  
 
@@ -76,4 +76,25 @@ let month = date.getMonth();
 let year = date.getFullYear();
 
 let currentDate = `${year}-${month}-${day}`;
+
+document.getElementById('chooseJsons').addEventListener('change',(event)=>{
+    const file = event.target.files[0];
+    if(!file){
+        console.error('No file selected');
+        return;
+    }
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const fileContent = e.target.result;
+    try {
+        const jsonArray = JSON.parse(fileContent);
+        localStorage.setItem('couponCollection', JSON.stringify(jsonArray));
+        console.log('json saved to the local storage')
+    } catch (error) {
+        console.log('Error parsing JSON');
+    }
+};
+reader.readAsText(file);
+})
 

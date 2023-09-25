@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
+    <link rel="stylesheet" href="../css/main.css"/>
+    <link rel="stylesheet" href="../css/addnew.css">
+    <script src="../javascript/headerImport.js"></script>
+    <link rel="icon" type="image/x-icon" href="../static/icons/vecteezy_school-bus.jpg">
+</head>
+<body>
+<div id="header-for-all"></div>
+<main>
+    <div class="add-new-div">
+        <h2>Add New Coupon</h2>
+        <form>
+            <div id="adding-coupon-input">
+                <div class="coupon-field">
+                    <label for="company-name">Company</label>
+                    <input type="text" name="company-name" id="company-name">
+                </div>
+                <div class="coupon-field">
+                    <label for="item-name">Item Name</label>
+                    <input type="text" name="item-name" id="item-name">
+                </div>
+                <div class="coupon-field">
+                    <div class="double-field">
+                        <label for="tags">Category</label>
+                        <select name="tags" id="tags" multiple required>
+                            <!-- <option value="" disabled selected>Category Name</option> -->
+                            <option>some-select</option>
+                            <option>some-more-select</option>
+                            <option>even-more-select</option>
+                        </select>
+                        <label for="valid-to-date" class="double-row-lable">Vaild to</label>
+                        <input type="date" name="valid-to-date" id="valid-to-date" min="2023-09-01">
+                    </div>
+                </div>
+                <div class="coupon-field double">
+                    <label for="short-description">Short description</label>
+                    <textarea id="short-description" name="short-description"></textarea>
+                </div>
+                <div class="coupon-field">
+                    <div class="double-field">
+                        <label for="price">Price</label>
+                        <input type="number" name="price" id="price" step="0.01" min="0.1">
+                        <label for="chooseFile" class="double-row-lable">Images</label>
+                        <div class="file-upload">
+                            <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input type="file" name="chooseFile" id="chooseFile">
+                            </div>
+                        </div>
+                        <div class="file-upload">
+                            <div class="file-select">
+                                <div class="file-select-button" id="fileName">Choose File With JSONs</div>
+                                <div class="file-select-name" id="noFile">No file chosen...</div>
+                                <input type="file" name="chooseJsons" id="chooseJsons">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="coupon-field double">
+                    <label for="long-description">Long description</label>
+                    <textarea id="long-description" name="long-description"></textarea>
+                </div>
+                <div class="registration-buttons-div">
+                    <button type="reset">Back</button>
+                    <button type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<script src="../javascript/jsonSaver.js"></script>
+</body>
+</html>
