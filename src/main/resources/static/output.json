@@ -1,1349 +1,1442 @@
 [
   {
-    "company-name": "Company 1",
-    "item-name": "Item 1",
-    "valid-to-date": "2023-10-10",
-    "short-description": "Short description for Item 1",
-    "price": "68.21",
+    "companyName": "Company 1",
+    "itemName": "Item 1",
+    "validToDate": "2023-10-06",
+    "shortDescription": "Short description for Item 1",
+    "price": "84.17",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4041268.jpg"
+      "name": "pexels-jj-jordan-9304725.jpg"
     },
     "long-description": "Long description for Item 1",
     "tags": [
-      "tag7",
-      "tag6"
-    ]
+      "tag6",
+      "tag5",
+      "tag4"
+    ],
+    "creationDate": "2023-07-18"
   },
   {
-    "company-name": "Company 2",
-    "item-name": "Item 2",
-    "valid-to-date": "2023-10-08",
-    "short-description": "Short description for Item 2",
-    "price": "95.28",
+    "companyName": "Company 2",
+    "itemName": "Item 2",
+    "validToDate": "2023-10-23",
+    "shortDescription": "Short description for Item 2",
+    "price": "58.09",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4041268.jpg"
+      "name": "pexels-murillo-molissani-10854279.jpg"
     },
     "long-description": "Long description for Item 2",
     "tags": [
+      "tag5",
       "tag3",
-      "tag1",
       "tag7"
-    ]
+    ],
+    "creationDate": "2023-01-30"
   },
   {
-    "company-name": "Company 3",
-    "item-name": "Item 3",
-    "valid-to-date": "2023-10-04",
-    "short-description": "Short description for Item 3",
-    "price": "36.16",
-    "chooseFile": {
-      "name": "pexels-dids-3844788.jpg"
-    },
-    "long-description": "Long description for Item 3",
-    "tags": [
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 4",
-    "item-name": "Item 4",
-    "valid-to-date": "2023-10-17",
-    "short-description": "Short description for Item 4",
-    "price": "79.52",
-    "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
-    },
-    "long-description": "Long description for Item 4",
-    "tags": [
-      "tag5",
-      "tag6",
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 5",
-    "item-name": "Item 5",
-    "valid-to-date": "2023-10-16",
-    "short-description": "Short description for Item 5",
-    "price": "83.47",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4033323.jpg"
-    },
-    "long-description": "Long description for Item 5",
-    "tags": [
-      "tag5",
-      "tag1",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 6",
-    "item-name": "Item 6",
-    "valid-to-date": "2023-10-23",
-    "short-description": "Short description for Item 6",
-    "price": "63.29",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4033323.jpg"
-    },
-    "long-description": "Long description for Item 6",
-    "tags": [
-      "tag1"
-    ]
-  },
-  {
-    "company-name": "Company 7",
-    "item-name": "Item 7",
-    "valid-to-date": "2023-10-20",
-    "short-description": "Short description for Item 7",
-    "price": "44.11",
+    "companyName": "Company 3",
+    "itemName": "Item 3",
+    "validToDate": "2023-10-24",
+    "shortDescription": "Short description for Item 3",
+    "price": "86.87",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-6956661.jpg"
     },
-    "long-description": "Long description for Item 7",
-    "tags": [
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 8",
-    "item-name": "Item 8",
-    "valid-to-date": "2023-10-19",
-    "short-description": "Short description for Item 8",
-    "price": "79.11",
-    "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
-    },
-    "long-description": "Long description for Item 8",
-    "tags": [
-      "tag7"
-    ]
-  },
-  {
-    "company-name": "Company 9",
-    "item-name": "Item 9",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 9",
-    "price": "97.49",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
-    },
-    "long-description": "Long description for Item 9",
+    "long-description": "Long description for Item 3",
     "tags": [
       "tag1",
       "tag5"
-    ]
+    ],
+    "creationDate": "2023-05-22"
   },
   {
-    "company-name": "Company 10",
-    "item-name": "Item 10",
-    "valid-to-date": "2023-10-19",
-    "short-description": "Short description for Item 10",
-    "price": "74.45",
+    "companyName": "Company 4",
+    "itemName": "Item 4",
+    "validToDate": "2023-10-11",
+    "shortDescription": "Short description for Item 4",
+    "price": "5.50",
     "chooseFile": {
-      "name": "pexels-dids-3799324.jpg"
+      "name": "pexels-steve-johnson-1000366.jpg"
+    },
+    "long-description": "Long description for Item 4",
+    "tags": [
+      "tag5"
+    ],
+    "creationDate": "2023-06-26"
+  },
+  {
+    "companyName": "Company 5",
+    "itemName": "Item 5",
+    "validToDate": "2023-10-15",
+    "shortDescription": "Short description for Item 5",
+    "price": "4.63",
+    "chooseFile": {
+      "name": "pexels-dids-3844788.jpg"
+    },
+    "long-description": "Long description for Item 5",
+    "tags": [
+      "tag3"
+    ],
+    "creationDate": "2023-03-26"
+  },
+  {
+    "companyName": "Company 6",
+    "itemName": "Item 6",
+    "validToDate": "2023-10-08",
+    "shortDescription": "Short description for Item 6",
+    "price": "86.24",
+    "chooseFile": {
+      "name": "pexels-erik-mclean-6654177.jpg"
+    },
+    "long-description": "Long description for Item 6",
+    "tags": [
+      "tag3",
+      "tag5",
+      "tag1"
+    ],
+    "creationDate": "2023-02-09"
+  },
+  {
+    "companyName": "Company 7",
+    "itemName": "Item 7",
+    "validToDate": "2023-10-15",
+    "shortDescription": "Short description for Item 7",
+    "price": "39.00",
+    "chooseFile": {
+      "name": "pexels-monstera-production-7794266.jpg"
+    },
+    "long-description": "Long description for Item 7",
+    "tags": [
+      "tag7",
+      "tag5"
+    ],
+    "creationDate": "2023-05-23"
+  },
+  {
+    "companyName": "Company 8",
+    "itemName": "Item 8",
+    "validToDate": "2023-10-03",
+    "shortDescription": "Short description for Item 8",
+    "price": "67.91",
+    "chooseFile": {
+      "name": "pexels-erik-mclean-7524996.jpg"
+    },
+    "long-description": "Long description for Item 8",
+    "tags": [
+      "tag6",
+      "tag3"
+    ],
+    "creationDate": "2023-05-20"
+  },
+  {
+    "companyName": "Company 9",
+    "itemName": "Item 9",
+    "validToDate": "2023-10-10",
+    "shortDescription": "Short description for Item 9",
+    "price": "6.35",
+    "chooseFile": {
+      "name": "pexels-cottonbro-studio-9818645.jpg"
+    },
+    "long-description": "Long description for Item 9",
+    "tags": [
+      "tag6"
+    ],
+    "creationDate": "2022-10-20"
+  },
+  {
+    "companyName": "Company 10",
+    "itemName": "Item 10",
+    "validToDate": "2023-10-11",
+    "shortDescription": "Short description for Item 10",
+    "price": "24.80",
+    "chooseFile": {
+      "name": "pexels-cottonbro-studio-9818645.jpg"
     },
     "long-description": "Long description for Item 10",
     "tags": [
-      "tag3",
       "tag4",
-      "tag7"
-    ]
+      "tag2"
+    ],
+    "creationDate": "2023-09-16"
   },
   {
-    "company-name": "Company 11",
-    "item-name": "Item 11",
-    "valid-to-date": "2023-10-07",
-    "short-description": "Short description for Item 11",
-    "price": "87.28",
+    "companyName": "Company 11",
+    "itemName": "Item 11",
+    "validToDate": "2023-10-11",
+    "shortDescription": "Short description for Item 11",
+    "price": "29.11",
     "chooseFile": {
-      "name": "pexels-murillo-molissani-10854279.jpg"
+      "name": "pexels-monstera-production-7794266.jpg"
     },
     "long-description": "Long description for Item 11",
     "tags": [
       "tag5",
-      "tag7"
-    ]
+      "tag6"
+    ],
+    "creationDate": "2023-01-31"
   },
   {
-    "company-name": "Company 12",
-    "item-name": "Item 12",
-    "valid-to-date": "2023-09-27",
-    "short-description": "Short description for Item 12",
-    "price": "79.98",
+    "companyName": "Company 12",
+    "itemName": "Item 12",
+    "validToDate": "2023-10-02",
+    "shortDescription": "Short description for Item 12",
+    "price": "20.17",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-6956661.jpg"
+      "name": "pexels-erik-mclean-7524996.jpg"
     },
     "long-description": "Long description for Item 12",
     "tags": [
-      "tag5",
-      "tag2"
-    ]
+      "tag6"
+    ],
+    "creationDate": "2023-04-09"
   },
   {
-    "company-name": "Company 13",
-    "item-name": "Item 13",
-    "valid-to-date": "2023-10-04",
-    "short-description": "Short description for Item 13",
-    "price": "88.35",
+    "companyName": "Company 13",
+    "itemName": "Item 13",
+    "validToDate": "2023-10-20",
+    "shortDescription": "Short description for Item 13",
+    "price": "11.79",
     "chooseFile": {
-      "name": "pexels-dids-3844788.jpg"
+      "name": "pexels-dids-3799324.jpg"
     },
     "long-description": "Long description for Item 13",
     "tags": [
       "tag6",
+      "tag5",
       "tag7"
-    ]
+    ],
+    "creationDate": "2023-03-16"
   },
   {
-    "company-name": "Company 14",
-    "item-name": "Item 14",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 14",
-    "price": "3.45",
+    "companyName": "Company 14",
+    "itemName": "Item 14",
+    "validToDate": "2023-10-25",
+    "shortDescription": "Short description for Item 14",
+    "price": "93.16",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4033323.jpg"
+      "name": "pexels-monstera-production-7794266.jpg"
     },
     "long-description": "Long description for Item 14",
     "tags": [
-      "tag3",
-      "tag7",
-      "tag2"
-    ]
+      "tag1"
+    ],
+    "creationDate": "2023-02-27"
   },
   {
-    "company-name": "Company 15",
-    "item-name": "Item 15",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 15",
-    "price": "0.55",
+    "companyName": "Company 15",
+    "itemName": "Item 15",
+    "validToDate": "2023-09-28",
+    "shortDescription": "Short description for Item 15",
+    "price": "56.07",
     "chooseFile": {
-      "name": "pexels-dids-3844788.jpg"
+      "name": "pexels-cottonbro-studio-9818645.jpg"
     },
     "long-description": "Long description for Item 15",
     "tags": [
-      "tag2",
+      "tag6",
       "tag1"
-    ]
+    ],
+    "creationDate": "2022-10-04"
   },
   {
-    "company-name": "Company 16",
-    "item-name": "Item 16",
-    "valid-to-date": "2023-10-17",
-    "short-description": "Short description for Item 16",
-    "price": "93.00",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4041268.jpg"
-    },
-    "long-description": "Long description for Item 16",
-    "tags": [
-      "tag3",
-      "tag6"
-    ]
-  },
-  {
-    "company-name": "Company 17",
-    "item-name": "Item 17",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 17",
-    "price": "40.19",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
-    },
-    "long-description": "Long description for Item 17",
-    "tags": [
-      "tag1",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 18",
-    "item-name": "Item 18",
-    "valid-to-date": "2023-10-15",
-    "short-description": "Short description for Item 18",
-    "price": "3.31",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4041268.jpg"
-    },
-    "long-description": "Long description for Item 18",
-    "tags": [
-      "tag7"
-    ]
-  },
-  {
-    "company-name": "Company 19",
-    "item-name": "Item 19",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 19",
-    "price": "76.99",
-    "chooseFile": {
-      "name": "pexels-steve-johnson-1000366.jpg"
-    },
-    "long-description": "Long description for Item 19",
-    "tags": [
-      "tag3",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 20",
-    "item-name": "Item 20",
-    "valid-to-date": "2023-10-17",
-    "short-description": "Short description for Item 20",
-    "price": "52.04",
+    "companyName": "Company 16",
+    "itemName": "Item 16",
+    "validToDate": "2023-10-15",
+    "shortDescription": "Short description for Item 16",
+    "price": "71.46",
     "chooseFile": {
       "name": "pexels-jj-jordan-9304725.jpg"
     },
-    "long-description": "Long description for Item 20",
+    "long-description": "Long description for Item 16",
     "tags": [
+      "tag4",
       "tag6",
       "tag5"
-    ]
+    ],
+    "creationDate": "2023-01-07"
   },
   {
-    "company-name": "Company 21",
-    "item-name": "Item 21",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 21",
-    "price": "37.45",
+    "companyName": "Company 17",
+    "itemName": "Item 17",
+    "validToDate": "2023-10-15",
+    "shortDescription": "Short description for Item 17",
+    "price": "58.53",
+    "chooseFile": {
+      "name": "pexels-monstera-production-7794266.jpg"
+    },
+    "long-description": "Long description for Item 17",
+    "tags": [
+      "tag1"
+    ],
+    "creationDate": "2022-11-16"
+  },
+  {
+    "companyName": "Company 18",
+    "itemName": "Item 18",
+    "validToDate": "2023-10-24",
+    "shortDescription": "Short description for Item 18",
+    "price": "43.90",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4226881.jpg"
     },
-    "long-description": "Long description for Item 21",
+    "long-description": "Long description for Item 18",
     "tags": [
-      "tag6"
-    ]
+      "tag1"
+    ],
+    "creationDate": "2023-07-17"
   },
   {
-    "company-name": "Company 22",
-    "item-name": "Item 22",
-    "valid-to-date": "2023-10-22",
-    "short-description": "Short description for Item 22",
-    "price": "78.79",
+    "companyName": "Company 19",
+    "itemName": "Item 19",
+    "validToDate": "2023-10-16",
+    "shortDescription": "Short description for Item 19",
+    "price": "70.48",
+    "chooseFile": {
+      "name": "pexels-murillo-molissani-10854279.jpg"
+    },
+    "long-description": "Long description for Item 19",
+    "tags": [
+      "tag3"
+    ],
+    "creationDate": "2022-10-17"
+  },
+  {
+    "companyName": "Company 20",
+    "itemName": "Item 20",
+    "validToDate": "2023-10-23",
+    "shortDescription": "Short description for Item 20",
+    "price": "71.24",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 20",
+    "tags": [
+      "tag2",
+      "tag6",
+      "tag5"
+    ],
+    "creationDate": "2023-08-27"
+  },
+  {
+    "companyName": "Company 21",
+    "itemName": "Item 21",
+    "validToDate": "2023-09-28",
+    "shortDescription": "Short description for Item 21",
+    "price": "80.44",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4386404.jpg"
+    },
+    "long-description": "Long description for Item 21",
+    "tags": [
+      "tag4",
+      "tag3"
+    ],
+    "creationDate": "2023-09-24"
+  },
+  {
+    "companyName": "Company 22",
+    "itemName": "Item 22",
+    "validToDate": "2023-10-17",
+    "shortDescription": "Short description for Item 22",
+    "price": "85.86",
+    "chooseFile": {
+      "name": "pexels-monstera-production-7794266.jpg"
     },
     "long-description": "Long description for Item 22",
     "tags": [
       "tag6",
-      "tag1",
-      "tag2"
-    ]
+      "tag4",
+      "tag5"
+    ],
+    "creationDate": "2023-09-08"
   },
   {
-    "company-name": "Company 23",
-    "item-name": "Item 23",
-    "valid-to-date": "2023-10-11",
-    "short-description": "Short description for Item 23",
-    "price": "54.13",
+    "companyName": "Company 23",
+    "itemName": "Item 23",
+    "validToDate": "2023-10-22",
+    "shortDescription": "Short description for Item 23",
+    "price": "84.96",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
+      "name": "pexels-karolina-grabowska-4022082.jpg"
     },
     "long-description": "Long description for Item 23",
     "tags": [
-      "tag7",
-      "tag2"
-    ]
+      "tag3"
+    ],
+    "creationDate": "2023-02-06"
   },
   {
-    "company-name": "Company 24",
-    "item-name": "Item 24",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 24",
-    "price": "8.06",
+    "companyName": "Company 24",
+    "itemName": "Item 24",
+    "validToDate": "2023-10-17",
+    "shortDescription": "Short description for Item 24",
+    "price": "56.67",
     "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
+      "name": "pexels-murillo-molissani-10854279.jpg"
     },
     "long-description": "Long description for Item 24",
     "tags": [
-      "tag2"
-    ]
+      "tag4"
+    ],
+    "creationDate": "2023-07-30"
   },
   {
-    "company-name": "Company 25",
-    "item-name": "Item 25",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 25",
-    "price": "88.17",
+    "companyName": "Company 25",
+    "itemName": "Item 25",
+    "validToDate": "2023-10-01",
+    "shortDescription": "Short description for Item 25",
+    "price": "34.37",
     "chooseFile": {
-      "name": "pexels-dids-3799324.jpg"
+      "name": "pexels-karolina-grabowska-4041268.jpg"
     },
     "long-description": "Long description for Item 25",
     "tags": [
-      "tag7"
-    ]
+      "tag2"
+    ],
+    "creationDate": "2023-04-16"
   },
   {
-    "company-name": "Company 26",
-    "item-name": "Item 26",
-    "valid-to-date": "2023-10-10",
-    "short-description": "Short description for Item 26",
-    "price": "48.72",
+    "companyName": "Company 26",
+    "itemName": "Item 26",
+    "validToDate": "2023-10-10",
+    "shortDescription": "Short description for Item 26",
+    "price": "62.89",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
+      "name": "pexels-dids-3799324.jpg"
     },
     "long-description": "Long description for Item 26",
     "tags": [
+      "tag5",
       "tag3"
-    ]
+    ],
+    "creationDate": "2023-08-04"
   },
   {
-    "company-name": "Company 27",
-    "item-name": "Item 27",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 27",
-    "price": "37.83",
+    "companyName": "Company 27",
+    "itemName": "Item 27",
+    "validToDate": "2023-10-02",
+    "shortDescription": "Short description for Item 27",
+    "price": "77.13",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
+      "name": "pexels-jj-jordan-9304725.jpg"
     },
     "long-description": "Long description for Item 27",
     "tags": [
       "tag7",
-      "tag2",
-      "tag1"
-    ]
+      "tag3",
+      "tag2"
+    ],
+    "creationDate": "2022-09-27"
   },
   {
-    "company-name": "Company 28",
-    "item-name": "Item 28",
-    "valid-to-date": "2023-10-24",
-    "short-description": "Short description for Item 28",
-    "price": "37.13",
-    "chooseFile": {
-      "name": "pexels-erik-mclean-6654177.jpg"
-    },
-    "long-description": "Long description for Item 28",
-    "tags": [
-      "tag1"
-    ]
-  },
-  {
-    "company-name": "Company 29",
-    "item-name": "Item 29",
-    "valid-to-date": "2023-10-13",
-    "short-description": "Short description for Item 29",
-    "price": "7.07",
-    "chooseFile": {
-      "name": "pexels-murillo-molissani-10854279.jpg"
-    },
-    "long-description": "Long description for Item 29",
-    "tags": [
-      "tag1",
-      "tag5"
-    ]
-  },
-  {
-    "company-name": "Company 30",
-    "item-name": "Item 30",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 30",
-    "price": "49.11",
+    "companyName": "Company 28",
+    "itemName": "Item 28",
+    "validToDate": "2023-10-05",
+    "shortDescription": "Short description for Item 28",
+    "price": "84.21",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4386402.jpg"
     },
-    "long-description": "Long description for Item 30",
-    "tags": [
-      "tag1",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 31",
-    "item-name": "Item 31",
-    "valid-to-date": "2023-10-17",
-    "short-description": "Short description for Item 31",
-    "price": "68.15",
-    "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
-    },
-    "long-description": "Long description for Item 31",
-    "tags": [
-      "tag7",
-      "tag5",
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 32",
-    "item-name": "Item 32",
-    "valid-to-date": "2023-10-01",
-    "short-description": "Short description for Item 32",
-    "price": "33.74",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4022082.jpg"
-    },
-    "long-description": "Long description for Item 32",
-    "tags": [
-      "tag3",
-      "tag5"
-    ]
-  },
-  {
-    "company-name": "Company 33",
-    "item-name": "Item 33",
-    "valid-to-date": "2023-10-03",
-    "short-description": "Short description for Item 33",
-    "price": "90.26",
-    "chooseFile": {
-      "name": "pexels-erik-mclean-6654177.jpg"
-    },
-    "long-description": "Long description for Item 33",
+    "long-description": "Long description for Item 28",
     "tags": [
       "tag6",
-      "tag1",
-      "tag7"
-    ]
+      "tag5",
+      "tag4"
+    ],
+    "creationDate": "2022-10-21"
   },
   {
-    "company-name": "Company 34",
-    "item-name": "Item 34",
-    "valid-to-date": "2023-09-29",
-    "short-description": "Short description for Item 34",
-    "price": "93.09",
+    "companyName": "Company 29",
+    "itemName": "Item 29",
+    "validToDate": "2023-10-06",
+    "shortDescription": "Short description for Item 29",
+    "price": "33.78",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-6956661.jpg"
+    },
+    "long-description": "Long description for Item 29",
+    "tags": [
+      "tag6",
+      "tag3"
+    ],
+    "creationDate": "2023-08-02"
+  },
+  {
+    "companyName": "Company 30",
+    "itemName": "Item 30",
+    "validToDate": "2023-10-20",
+    "shortDescription": "Short description for Item 30",
+    "price": "47.76",
     "chooseFile": {
       "name": "pexels-dids-3799324.jpg"
     },
-    "long-description": "Long description for Item 34",
+    "long-description": "Long description for Item 30",
     "tags": [
-      "tag6",
-      "tag3"
-    ]
+      "tag1"
+    ],
+    "creationDate": "2023-03-29"
   },
   {
-    "company-name": "Company 35",
-    "item-name": "Item 35",
-    "valid-to-date": "2023-09-30",
-    "short-description": "Short description for Item 35",
-    "price": "79.00",
+    "companyName": "Company 31",
+    "itemName": "Item 31",
+    "validToDate": "2023-10-16",
+    "shortDescription": "Short description for Item 31",
+    "price": "21.00",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
+      "name": "pexels-dids-3799324.jpg"
+    },
+    "long-description": "Long description for Item 31",
+    "tags": [
+      "tag4",
+      "tag5"
+    ],
+    "creationDate": "2022-11-18"
+  },
+  {
+    "companyName": "Company 32",
+    "itemName": "Item 32",
+    "validToDate": "2023-10-04",
+    "shortDescription": "Short description for Item 32",
+    "price": "69.48",
+    "chooseFile": {
+      "name": "pexels-monstera-production-7794266.jpg"
+    },
+    "long-description": "Long description for Item 32",
+    "tags": [
+      "tag7"
+    ],
+    "creationDate": "2023-09-23"
+  },
+  {
+    "companyName": "Company 33",
+    "itemName": "Item 33",
+    "validToDate": "2023-10-19",
+    "shortDescription": "Short description for Item 33",
+    "price": "26.58",
+    "chooseFile": {
+      "name": "pexels-dids-3844788.jpg"
+    },
+    "long-description": "Long description for Item 33",
+    "tags": [
+      "tag1",
+      "tag7"
+    ],
+    "creationDate": "2023-06-17"
+  },
+  {
+    "companyName": "Company 34",
+    "itemName": "Item 34",
+    "validToDate": "2023-10-20",
+    "shortDescription": "Short description for Item 34",
+    "price": "18.79",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4041268.jpg"
+    },
+    "long-description": "Long description for Item 34",
+    "tags": [
+      "tag2",
+      "tag3"
+    ],
+    "creationDate": "2023-04-30"
+  },
+  {
+    "companyName": "Company 35",
+    "itemName": "Item 35",
+    "validToDate": "2023-10-05",
+    "shortDescription": "Short description for Item 35",
+    "price": "87.50",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
     },
     "long-description": "Long description for Item 35",
     "tags": [
-      "tag2",
-      "tag4",
-      "tag3"
-    ]
+      "tag7",
+      "tag6"
+    ],
+    "creationDate": "2023-05-01"
   },
   {
-    "company-name": "Company 36",
-    "item-name": "Item 36",
-    "valid-to-date": "2023-10-24",
-    "short-description": "Short description for Item 36",
-    "price": "25.47",
+    "companyName": "Company 36",
+    "itemName": "Item 36",
+    "validToDate": "2023-10-01",
+    "shortDescription": "Short description for Item 36",
+    "price": "10.80",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4033323.jpg"
+      "name": "pexels-karolina-grabowska-4386402.jpg"
     },
     "long-description": "Long description for Item 36",
     "tags": [
-      "tag4"
-    ]
+      "tag4",
+      "tag6"
+    ],
+    "creationDate": "2022-11-17"
   },
   {
-    "company-name": "Company 37",
-    "item-name": "Item 37",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 37",
-    "price": "33.48",
+    "companyName": "Company 37",
+    "itemName": "Item 37",
+    "validToDate": "2023-10-04",
+    "shortDescription": "Short description for Item 37",
+    "price": "53.48",
     "chooseFile": {
       "name": "pexels-jj-jordan-9304725.jpg"
     },
     "long-description": "Long description for Item 37",
     "tags": [
       "tag3",
-      "tag2"
-    ]
-  },
-  {
-    "company-name": "Company 38",
-    "item-name": "Item 38",
-    "valid-to-date": "2023-09-26",
-    "short-description": "Short description for Item 38",
-    "price": "97.41",
-    "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
-    },
-    "long-description": "Long description for Item 38",
-    "tags": [
-      "tag1",
-      "tag5"
-    ]
-  },
-  {
-    "company-name": "Company 39",
-    "item-name": "Item 39",
-    "valid-to-date": "2023-10-08",
-    "short-description": "Short description for Item 39",
-    "price": "52.32",
-    "chooseFile": {
-      "name": "pexels-dids-3844788.jpg"
-    },
-    "long-description": "Long description for Item 39",
-    "tags": [
-      "tag6",
-      "tag4",
       "tag1"
-    ]
+    ],
+    "creationDate": "2023-07-29"
   },
   {
-    "company-name": "Company 40",
-    "item-name": "Item 40",
-    "valid-to-date": "2023-09-29",
-    "short-description": "Short description for Item 40",
-    "price": "62.83",
-    "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
-    },
-    "long-description": "Long description for Item 40",
-    "tags": [
-      "tag1"
-    ]
-  },
-  {
-    "company-name": "Company 41",
-    "item-name": "Item 41",
-    "valid-to-date": "2023-10-21",
-    "short-description": "Short description for Item 41",
-    "price": "45.74",
+    "companyName": "Company 38",
+    "itemName": "Item 38",
+    "validToDate": "2023-09-26",
+    "shortDescription": "Short description for Item 38",
+    "price": "2.85",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4033323.jpg"
     },
-    "long-description": "Long description for Item 41",
+    "long-description": "Long description for Item 38",
     "tags": [
-      "tag4",
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 42",
-    "item-name": "Item 42",
-    "valid-to-date": "2023-10-16",
-    "short-description": "Short description for Item 42",
-    "price": "84.59",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-6956661.jpg"
-    },
-    "long-description": "Long description for Item 42",
-    "tags": [
-      "tag7",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 43",
-    "item-name": "Item 43",
-    "valid-to-date": "2023-10-12",
-    "short-description": "Short description for Item 43",
-    "price": "59.48",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
-    },
-    "long-description": "Long description for Item 43",
-    "tags": [
-      "tag5",
-      "tag3",
-      "tag2"
-    ]
-  },
-  {
-    "company-name": "Company 44",
-    "item-name": "Item 44",
-    "valid-to-date": "2023-10-04",
-    "short-description": "Short description for Item 44",
-    "price": "20.34",
-    "chooseFile": {
-      "name": "pexels-jj-jordan-9304725.jpg"
-    },
-    "long-description": "Long description for Item 44",
-    "tags": [
-      "tag7",
       "tag2",
+      "tag5",
       "tag1"
-    ]
+    ],
+    "creationDate": "2022-12-25"
   },
   {
-    "company-name": "Company 45",
-    "item-name": "Item 45",
-    "valid-to-date": "2023-10-18",
-    "short-description": "Short description for Item 45",
-    "price": "95.33",
+    "companyName": "Company 39",
+    "itemName": "Item 39",
+    "validToDate": "2023-09-30",
+    "shortDescription": "Short description for Item 39",
+    "price": "11.04",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4041268.jpg"
+      "name": "pexels-dids-3799324.jpg"
     },
-    "long-description": "Long description for Item 45",
+    "long-description": "Long description for Item 39",
     "tags": [
-      "tag2"
-    ]
+      "tag6"
+    ],
+    "creationDate": "2023-09-22"
   },
   {
-    "company-name": "Company 46",
-    "item-name": "Item 46",
-    "valid-to-date": "2023-10-21",
-    "short-description": "Short description for Item 46",
-    "price": "79.99",
+    "companyName": "Company 40",
+    "itemName": "Item 40",
+    "validToDate": "2023-10-07",
+    "shortDescription": "Short description for Item 40",
+    "price": "58.17",
     "chooseFile": {
-      "name": "pexels-erik-mclean-6654177.jpg"
+      "name": "pexels-karolina-grabowska-4022082.jpg"
     },
-    "long-description": "Long description for Item 46",
+    "long-description": "Long description for Item 40",
     "tags": [
-      "tag1",
-      "tag3",
-      "tag4"
-    ]
+      "tag2",
+      "tag6",
+      "tag1"
+    ],
+    "creationDate": "2023-01-19"
   },
   {
-    "company-name": "Company 47",
-    "item-name": "Item 47",
-    "valid-to-date": "2023-10-12",
-    "short-description": "Short description for Item 47",
-    "price": "89.50",
-    "chooseFile": {
-      "name": "pexels-steve-johnson-1000366.jpg"
-    },
-    "long-description": "Long description for Item 47",
-    "tags": [
-      "tag3",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 48",
-    "item-name": "Item 48",
-    "valid-to-date": "2023-10-13",
-    "short-description": "Short description for Item 48",
-    "price": "73.79",
+    "companyName": "Company 41",
+    "itemName": "Item 41",
+    "validToDate": "2023-09-28",
+    "shortDescription": "Short description for Item 41",
+    "price": "40.36",
     "chooseFile": {
       "name": "pexels-dids-3844788.jpg"
     },
-    "long-description": "Long description for Item 48",
+    "long-description": "Long description for Item 41",
     "tags": [
+      "tag7",
+      "tag5"
+    ],
+    "creationDate": "2023-02-22"
+  },
+  {
+    "companyName": "Company 42",
+    "itemName": "Item 42",
+    "validToDate": "2023-10-19",
+    "shortDescription": "Short description for Item 42",
+    "price": "21.35",
+    "chooseFile": {
+      "name": "pexels-monstera-production-7794266.jpg"
+    },
+    "long-description": "Long description for Item 42",
+    "tags": [
+      "tag6"
+    ],
+    "creationDate": "2023-06-27"
+  },
+  {
+    "companyName": "Company 43",
+    "itemName": "Item 43",
+    "validToDate": "2023-10-09",
+    "shortDescription": "Short description for Item 43",
+    "price": "30.31",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 43",
+    "tags": [
+      "tag1",
       "tag4"
-    ]
+    ],
+    "creationDate": "2023-03-08"
   },
   {
-    "company-name": "Company 49",
-    "item-name": "Item 49",
-    "valid-to-date": "2023-10-03",
-    "short-description": "Short description for Item 49",
-    "price": "29.86",
-    "chooseFile": {
-      "name": "pexels-steve-johnson-1000366.jpg"
-    },
-    "long-description": "Long description for Item 49",
-    "tags": [
-      "tag1"
-    ]
-  },
-  {
-    "company-name": "Company 50",
-    "item-name": "Item 50",
-    "valid-to-date": "2023-10-16",
-    "short-description": "Short description for Item 50",
-    "price": "44.61",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
-    },
-    "long-description": "Long description for Item 50",
-    "tags": [
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 51",
-    "item-name": "Item 51",
-    "valid-to-date": "2023-09-30",
-    "short-description": "Short description for Item 51",
-    "price": "30.03",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
-    },
-    "long-description": "Long description for Item 51",
-    "tags": [
-      "tag2",
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 52",
-    "item-name": "Item 52",
-    "valid-to-date": "2023-09-27",
-    "short-description": "Short description for Item 52",
-    "price": "51.17",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
-    },
-    "long-description": "Long description for Item 52",
-    "tags": [
-      "tag7"
-    ]
-  },
-  {
-    "company-name": "Company 53",
-    "item-name": "Item 53",
-    "valid-to-date": "2023-10-13",
-    "short-description": "Short description for Item 53",
-    "price": "70.85",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386402.jpg"
-    },
-    "long-description": "Long description for Item 53",
-    "tags": [
-      "tag3"
-    ]
-  },
-  {
-    "company-name": "Company 54",
-    "item-name": "Item 54",
-    "valid-to-date": "2023-10-06",
-    "short-description": "Short description for Item 54",
-    "price": "50.10",
-    "chooseFile": {
-      "name": "pexels-murillo-molissani-10854279.jpg"
-    },
-    "long-description": "Long description for Item 54",
-    "tags": [
-      "tag6",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 55",
-    "item-name": "Item 55",
-    "valid-to-date": "2023-10-05",
-    "short-description": "Short description for Item 55",
-    "price": "45.80",
+    "companyName": "Company 44",
+    "itemName": "Item 44",
+    "validToDate": "2023-10-23",
+    "shortDescription": "Short description for Item 44",
+    "price": "60.64",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-6956661.jpg"
     },
-    "long-description": "Long description for Item 55",
+    "long-description": "Long description for Item 44",
     "tags": [
       "tag4",
-      "tag5",
-      "tag7"
-    ]
+      "tag5"
+    ],
+    "creationDate": "2023-02-06"
   },
   {
-    "company-name": "Company 56",
-    "item-name": "Item 56",
-    "valid-to-date": "2023-10-11",
-    "short-description": "Short description for Item 56",
-    "price": "69.69",
+    "companyName": "Company 45",
+    "itemName": "Item 45",
+    "validToDate": "2023-10-18",
+    "shortDescription": "Short description for Item 45",
+    "price": "31.34",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4226881.jpg"
     },
+    "long-description": "Long description for Item 45",
+    "tags": [
+      "tag4",
+      "tag3"
+    ],
+    "creationDate": "2023-06-13"
+  },
+  {
+    "companyName": "Company 46",
+    "itemName": "Item 46",
+    "validToDate": "2023-10-18",
+    "shortDescription": "Short description for Item 46",
+    "price": "71.59",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4386404.jpg"
+    },
+    "long-description": "Long description for Item 46",
+    "tags": [
+      "tag1"
+    ],
+    "creationDate": "2023-07-01"
+  },
+  {
+    "companyName": "Company 47",
+    "itemName": "Item 47",
+    "validToDate": "2023-10-11",
+    "shortDescription": "Short description for Item 47",
+    "price": "88.06",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 47",
+    "tags": [
+      "tag7",
+      "tag3"
+    ],
+    "creationDate": "2022-11-29"
+  },
+  {
+    "companyName": "Company 48",
+    "itemName": "Item 48",
+    "validToDate": "2023-09-26",
+    "shortDescription": "Short description for Item 48",
+    "price": "26.50",
+    "chooseFile": {
+      "name": "pexels-erik-mclean-7524996.jpg"
+    },
+    "long-description": "Long description for Item 48",
+    "tags": [
+      "tag7",
+      "tag6",
+      "tag3"
+    ],
+    "creationDate": "2023-01-13"
+  },
+  {
+    "companyName": "Company 49",
+    "itemName": "Item 49",
+    "validToDate": "2023-10-17",
+    "shortDescription": "Short description for Item 49",
+    "price": "75.55",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4226881.jpg"
+    },
+    "long-description": "Long description for Item 49",
+    "tags": [
+      "tag6",
+      "tag4",
+      "tag7"
+    ],
+    "creationDate": "2023-04-18"
+  },
+  {
+    "companyName": "Company 50",
+    "itemName": "Item 50",
+    "validToDate": "2023-10-04",
+    "shortDescription": "Short description for Item 50",
+    "price": "92.18",
+    "chooseFile": {
+      "name": "pexels-steve-johnson-1000366.jpg"
+    },
+    "long-description": "Long description for Item 50",
+    "tags": [
+      "tag1",
+      "tag6"
+    ],
+    "creationDate": "2023-07-20"
+  },
+  {
+    "companyName": "Company 51",
+    "itemName": "Item 51",
+    "validToDate": "2023-10-17",
+    "shortDescription": "Short description for Item 51",
+    "price": "23.46",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4386402.jpg"
+    },
+    "long-description": "Long description for Item 51",
+    "tags": [
+      "tag3"
+    ],
+    "creationDate": "2023-08-08"
+  },
+  {
+    "companyName": "Company 52",
+    "itemName": "Item 52",
+    "validToDate": "2023-10-16",
+    "shortDescription": "Short description for Item 52",
+    "price": "36.69",
+    "chooseFile": {
+      "name": "pexels-jj-jordan-9304725.jpg"
+    },
+    "long-description": "Long description for Item 52",
+    "tags": [
+      "tag6",
+      "tag7",
+      "tag4"
+    ],
+    "creationDate": "2023-02-04"
+  },
+  {
+    "companyName": "Company 53",
+    "itemName": "Item 53",
+    "validToDate": "2023-10-11",
+    "shortDescription": "Short description for Item 53",
+    "price": "80.25",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-6956661.jpg"
+    },
+    "long-description": "Long description for Item 53",
+    "tags": [
+      "tag7",
+      "tag6",
+      "tag5"
+    ],
+    "creationDate": "2023-06-11"
+  },
+  {
+    "companyName": "Company 54",
+    "itemName": "Item 54",
+    "validToDate": "2023-10-10",
+    "shortDescription": "Short description for Item 54",
+    "price": "89.18",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 54",
+    "tags": [
+      "tag4",
+      "tag2"
+    ],
+    "creationDate": "2023-08-02"
+  },
+  {
+    "companyName": "Company 55",
+    "itemName": "Item 55",
+    "validToDate": "2023-10-14",
+    "shortDescription": "Short description for Item 55",
+    "price": "29.98",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 55",
+    "tags": [
+      "tag2",
+      "tag7"
+    ],
+    "creationDate": "2022-11-29"
+  },
+  {
+    "companyName": "Company 56",
+    "itemName": "Item 56",
+    "validToDate": "2023-10-12",
+    "shortDescription": "Short description for Item 56",
+    "price": "74.42",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4033323.jpg"
+    },
     "long-description": "Long description for Item 56",
+    "tags": [
+      "tag1"
+    ],
+    "creationDate": "2023-05-10"
+  },
+  {
+    "companyName": "Company 57",
+    "itemName": "Item 57",
+    "validToDate": "2023-10-16",
+    "shortDescription": "Short description for Item 57",
+    "price": "11.05",
+    "chooseFile": {
+      "name": "pexels-steve-johnson-1000366.jpg"
+    },
+    "long-description": "Long description for Item 57",
     "tags": [
       "tag2",
       "tag7",
       "tag6"
-    ]
+    ],
+    "creationDate": "2023-08-27"
   },
   {
-    "company-name": "Company 57",
-    "item-name": "Item 57",
-    "valid-to-date": "2023-10-15",
-    "short-description": "Short description for Item 57",
-    "price": "92.15",
+    "companyName": "Company 58",
+    "itemName": "Item 58",
+    "validToDate": "2023-10-19",
+    "shortDescription": "Short description for Item 58",
+    "price": "25.68",
     "chooseFile": {
-      "name": "pexels-dids-3799324.jpg"
-    },
-    "long-description": "Long description for Item 57",
-    "tags": [
-      "tag1",
-      "tag3",
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 58",
-    "item-name": "Item 58",
-    "valid-to-date": "2023-09-26",
-    "short-description": "Short description for Item 58",
-    "price": "59.02",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
+      "name": "pexels-monstera-production-7794266.jpg"
     },
     "long-description": "Long description for Item 58",
     "tags": [
-      "tag5",
-      "tag7",
-      "tag2"
-    ]
+      "tag3"
+    ],
+    "creationDate": "2023-04-23"
   },
   {
-    "company-name": "Company 59",
-    "item-name": "Item 59",
-    "valid-to-date": "2023-09-26",
-    "short-description": "Short description for Item 59",
-    "price": "59.36",
+    "companyName": "Company 59",
+    "itemName": "Item 59",
+    "validToDate": "2023-10-06",
+    "shortDescription": "Short description for Item 59",
+    "price": "1.65",
     "chooseFile": {
-      "name": "pexels-erik-mclean-7524996.jpg"
+      "name": "pexels-karolina-grabowska-4041268.jpg"
     },
     "long-description": "Long description for Item 59",
     "tags": [
-      "tag7"
-    ]
+      "tag3",
+      "tag1",
+      "tag2"
+    ],
+    "creationDate": "2023-01-28"
   },
   {
-    "company-name": "Company 60",
-    "item-name": "Item 60",
-    "valid-to-date": "2023-10-11",
-    "short-description": "Short description for Item 60",
-    "price": "66.39",
+    "companyName": "Company 60",
+    "itemName": "Item 60",
+    "validToDate": "2023-10-10",
+    "shortDescription": "Short description for Item 60",
+    "price": "91.25",
     "chooseFile": {
-      "name": "pexels-murillo-molissani-10854279.jpg"
+      "name": "pexels-karolina-grabowska-4386404.jpg"
     },
     "long-description": "Long description for Item 60",
     "tags": [
-      "tag7"
-    ]
+      "tag7",
+      "tag2"
+    ],
+    "creationDate": "2022-10-11"
   },
   {
-    "company-name": "Company 61",
-    "item-name": "Item 61",
-    "valid-to-date": "2023-09-27",
-    "short-description": "Short description for Item 61",
-    "price": "59.05",
+    "companyName": "Company 61",
+    "itemName": "Item 61",
+    "validToDate": "2023-10-10",
+    "shortDescription": "Short description for Item 61",
+    "price": "56.99",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386402.jpg"
+      "name": "pexels-karolina-grabowska-4041268.jpg"
     },
     "long-description": "Long description for Item 61",
     "tags": [
-      "tag5",
       "tag1",
-      "tag7"
-    ]
+      "tag3"
+    ],
+    "creationDate": "2023-05-25"
   },
   {
-    "company-name": "Company 62",
-    "item-name": "Item 62",
-    "valid-to-date": "2023-10-22",
-    "short-description": "Short description for Item 62",
-    "price": "8.09",
+    "companyName": "Company 62",
+    "itemName": "Item 62",
+    "validToDate": "2023-10-22",
+    "shortDescription": "Short description for Item 62",
+    "price": "7.90",
     "chooseFile": {
-      "name": "pexels-murillo-molissani-10854279.jpg"
+      "name": "pexels-erik-mclean-7524996.jpg"
     },
     "long-description": "Long description for Item 62",
     "tags": [
-      "tag1",
-      "tag5",
-      "tag4"
-    ]
+      "tag2",
+      "tag7",
+      "tag6"
+    ],
+    "creationDate": "2022-10-11"
   },
   {
-    "company-name": "Company 63",
-    "item-name": "Item 63",
-    "valid-to-date": "2023-10-21",
-    "short-description": "Short description for Item 63",
-    "price": "90.41",
+    "companyName": "Company 63",
+    "itemName": "Item 63",
+    "validToDate": "2023-10-04",
+    "shortDescription": "Short description for Item 63",
+    "price": "44.20",
     "chooseFile": {
-      "name": "pexels-cottonbro-studio-9818645.jpg"
+      "name": "pexels-murillo-molissani-10854279.jpg"
     },
     "long-description": "Long description for Item 63",
     "tags": [
-      "tag5",
-      "tag4",
-      "tag7"
-    ]
+      "tag1",
+      "tag7",
+      "tag2"
+    ],
+    "creationDate": "2023-04-04"
   },
   {
-    "company-name": "Company 64",
-    "item-name": "Item 64",
-    "valid-to-date": "2023-10-01",
-    "short-description": "Short description for Item 64",
-    "price": "11.22",
+    "companyName": "Company 64",
+    "itemName": "Item 64",
+    "validToDate": "2023-10-08",
+    "shortDescription": "Short description for Item 64",
+    "price": "88.06",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
+      "name": "pexels-erik-mclean-7524996.jpg"
     },
     "long-description": "Long description for Item 64",
     "tags": [
-      "tag5",
-      "tag3",
-      "tag2"
-    ]
+      "tag4"
+    ],
+    "creationDate": "2023-02-11"
   },
   {
-    "company-name": "Company 65",
-    "item-name": "Item 65",
-    "valid-to-date": "2023-10-15",
-    "short-description": "Short description for Item 65",
-    "price": "6.55",
+    "companyName": "Company 65",
+    "itemName": "Item 65",
+    "validToDate": "2023-10-06",
+    "shortDescription": "Short description for Item 65",
+    "price": "15.94",
     "chooseFile": {
-      "name": "pexels-murillo-molissani-10854279.jpg"
+      "name": "pexels-cottonbro-studio-9818645.jpg"
     },
     "long-description": "Long description for Item 65",
     "tags": [
       "tag2",
       "tag1"
-    ]
+    ],
+    "creationDate": "2023-08-29"
   },
   {
-    "company-name": "Company 66",
-    "item-name": "Item 66",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 66",
-    "price": "61.56",
+    "companyName": "Company 66",
+    "itemName": "Item 66",
+    "validToDate": "2023-09-27",
+    "shortDescription": "Short description for Item 66",
+    "price": "94.49",
     "chooseFile": {
-      "name": "pexels-dids-3844788.jpg"
+      "name": "pexels-karolina-grabowska-6956661.jpg"
     },
     "long-description": "Long description for Item 66",
     "tags": [
-      "tag5"
-    ]
+      "tag3"
+    ],
+    "creationDate": "2023-03-27"
   },
   {
-    "company-name": "Company 67",
-    "item-name": "Item 67",
-    "valid-to-date": "2023-10-03",
-    "short-description": "Short description for Item 67",
-    "price": "1.53",
+    "companyName": "Company 67",
+    "itemName": "Item 67",
+    "validToDate": "2023-10-03",
+    "shortDescription": "Short description for Item 67",
+    "price": "81.11",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386404.jpg"
+      "name": "pexels-murillo-molissani-10854279.jpg"
     },
     "long-description": "Long description for Item 67",
     "tags": [
-      "tag4",
-      "tag3"
-    ]
+      "tag5",
+      "tag4"
+    ],
+    "creationDate": "2023-08-26"
   },
   {
-    "company-name": "Company 68",
-    "item-name": "Item 68",
-    "valid-to-date": "2023-10-07",
-    "short-description": "Short description for Item 68",
-    "price": "10.68",
+    "companyName": "Company 68",
+    "itemName": "Item 68",
+    "validToDate": "2023-10-20",
+    "shortDescription": "Short description for Item 68",
+    "price": "24.50",
     "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
+      "name": "pexels-erik-mclean-7524996.jpg"
     },
     "long-description": "Long description for Item 68",
     "tags": [
-      "tag6",
-      "tag2"
-    ]
+      "tag4",
+      "tag5",
+      "tag6"
+    ],
+    "creationDate": "2023-07-17"
   },
   {
-    "company-name": "Company 69",
-    "item-name": "Item 69",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 69",
-    "price": "20.97",
+    "companyName": "Company 69",
+    "itemName": "Item 69",
+    "validToDate": "2023-09-26",
+    "shortDescription": "Short description for Item 69",
+    "price": "63.32",
     "chooseFile": {
-      "name": "pexels-steve-johnson-1000366.jpg"
+      "name": "pexels-karolina-grabowska-4226881.jpg"
     },
     "long-description": "Long description for Item 69",
     "tags": [
       "tag3"
-    ]
+    ],
+    "creationDate": "2023-06-05"
   },
   {
-    "company-name": "Company 70",
-    "item-name": "Item 70",
-    "valid-to-date": "2023-10-02",
-    "short-description": "Short description for Item 70",
-    "price": "85.83",
+    "companyName": "Company 70",
+    "itemName": "Item 70",
+    "validToDate": "2023-10-13",
+    "shortDescription": "Short description for Item 70",
+    "price": "67.27",
     "chooseFile": {
-      "name": "pexels-dids-3799324.jpg"
+      "name": "pexels-erik-mclean-6654177.jpg"
     },
     "long-description": "Long description for Item 70",
     "tags": [
-      "tag4"
-    ]
+      "tag4",
+      "tag7",
+      "tag1"
+    ],
+    "creationDate": "2023-07-16"
   },
   {
-    "company-name": "Company 71",
-    "item-name": "Item 71",
-    "valid-to-date": "2023-10-12",
-    "short-description": "Short description for Item 71",
-    "price": "92.37",
+    "companyName": "Company 71",
+    "itemName": "Item 71",
+    "validToDate": "2023-10-08",
+    "shortDescription": "Short description for Item 71",
+    "price": "99.80",
     "chooseFile": {
-      "name": "pexels-steve-johnson-1000366.jpg"
+      "name": "pexels-erik-mclean-6654177.jpg"
     },
     "long-description": "Long description for Item 71",
     "tags": [
-      "tag6"
-    ]
+      "tag1"
+    ],
+    "creationDate": "2023-07-15"
   },
   {
-    "company-name": "Company 72",
-    "item-name": "Item 72",
-    "valid-to-date": "2023-10-14",
-    "short-description": "Short description for Item 72",
-    "price": "46.72",
+    "companyName": "Company 72",
+    "itemName": "Item 72",
+    "validToDate": "2023-10-16",
+    "shortDescription": "Short description for Item 72",
+    "price": "15.48",
     "chooseFile": {
-      "name": "pexels-steve-johnson-1000366.jpg"
+      "name": "pexels-karolina-grabowska-4033323.jpg"
     },
     "long-description": "Long description for Item 72",
     "tags": [
-      "tag1",
-      "tag6"
-    ]
+      "tag5",
+      "tag4"
+    ],
+    "creationDate": "2023-06-26"
   },
   {
-    "company-name": "Company 73",
-    "item-name": "Item 73",
-    "valid-to-date": "2023-10-15",
-    "short-description": "Short description for Item 73",
-    "price": "10.50",
+    "companyName": "Company 73",
+    "itemName": "Item 73",
+    "validToDate": "2023-10-05",
+    "shortDescription": "Short description for Item 73",
+    "price": "64.28",
     "chooseFile": {
       "name": "pexels-monstera-production-7794266.jpg"
     },
     "long-description": "Long description for Item 73",
     "tags": [
-      "tag2",
-      "tag3"
-    ]
+      "tag2"
+    ],
+    "creationDate": "2022-11-08"
   },
   {
-    "company-name": "Company 74",
-    "item-name": "Item 74",
-    "valid-to-date": "2023-09-27",
-    "short-description": "Short description for Item 74",
-    "price": "12.46",
+    "companyName": "Company 74",
+    "itemName": "Item 74",
+    "validToDate": "2023-10-02",
+    "shortDescription": "Short description for Item 74",
+    "price": "3.63",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4386402.jpg"
     },
     "long-description": "Long description for Item 74",
     "tags": [
-      "tag1",
-      "tag2"
-    ]
-  },
-  {
-    "company-name": "Company 75",
-    "item-name": "Item 75",
-    "valid-to-date": "2023-10-01",
-    "short-description": "Short description for Item 75",
-    "price": "86.78",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386402.jpg"
-    },
-    "long-description": "Long description for Item 75",
-    "tags": [
       "tag7"
-    ]
+    ],
+    "creationDate": "2023-05-24"
   },
   {
-    "company-name": "Company 76",
-    "item-name": "Item 76",
-    "valid-to-date": "2023-09-26",
-    "short-description": "Short description for Item 76",
-    "price": "45.40",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386402.jpg"
-    },
-    "long-description": "Long description for Item 76",
-    "tags": [
-      "tag3",
-      "tag7",
-      "tag2"
-    ]
-  },
-  {
-    "company-name": "Company 77",
-    "item-name": "Item 77",
-    "valid-to-date": "2023-10-09",
-    "short-description": "Short description for Item 77",
-    "price": "48.77",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4226881.jpg"
-    },
-    "long-description": "Long description for Item 77",
-    "tags": [
-      "tag7",
-      "tag3",
-      "tag6"
-    ]
-  },
-  {
-    "company-name": "Company 78",
-    "item-name": "Item 78",
-    "valid-to-date": "2023-10-04",
-    "short-description": "Short description for Item 78",
-    "price": "13.95",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386402.jpg"
-    },
-    "long-description": "Long description for Item 78",
-    "tags": [
-      "tag5"
-    ]
-  },
-  {
-    "company-name": "Company 79",
-    "item-name": "Item 79",
-    "valid-to-date": "2023-10-05",
-    "short-description": "Short description for Item 79",
-    "price": "93.51",
-    "chooseFile": {
-      "name": "pexels-karolina-grabowska-4033323.jpg"
-    },
-    "long-description": "Long description for Item 79",
-    "tags": [
-      "tag6",
-      "tag5"
-    ]
-  },
-  {
-    "company-name": "Company 80",
-    "item-name": "Item 80",
-    "valid-to-date": "2023-09-27",
-    "short-description": "Short description for Item 80",
-    "price": "10.21",
-    "chooseFile": {
-      "name": "pexels-dids-3844788.jpg"
-    },
-    "long-description": "Long description for Item 80",
-    "tags": [
-      "tag1"
-    ]
-  },
-  {
-    "company-name": "Company 81",
-    "item-name": "Item 81",
-    "valid-to-date": "2023-09-30",
-    "short-description": "Short description for Item 81",
-    "price": "98.34",
-    "chooseFile": {
-      "name": "pexels-dids-3799324.jpg"
-    },
-    "long-description": "Long description for Item 81",
-    "tags": [
-      "tag6",
-      "tag3",
-      "tag5"
-    ]
-  },
-  {
-    "company-name": "Company 82",
-    "item-name": "Item 82",
-    "valid-to-date": "2023-10-16",
-    "short-description": "Short description for Item 82",
-    "price": "13.59",
-    "chooseFile": {
-      "name": "pexels-erik-mclean-6654177.jpg"
-    },
-    "long-description": "Long description for Item 82",
-    "tags": [
-      "tag5",
-      "tag1",
-      "tag7"
-    ]
-  },
-  {
-    "company-name": "Company 83",
-    "item-name": "Item 83",
-    "valid-to-date": "2023-10-21",
-    "short-description": "Short description for Item 83",
-    "price": "62.02",
-    "chooseFile": {
-      "name": "pexels-erik-mclean-7524996.jpg"
-    },
-    "long-description": "Long description for Item 83",
-    "tags": [
-      "tag4"
-    ]
-  },
-  {
-    "company-name": "Company 84",
-    "item-name": "Item 84",
-    "valid-to-date": "2023-10-11",
-    "short-description": "Short description for Item 84",
-    "price": "48.90",
+    "companyName": "Company 75",
+    "itemName": "Item 75",
+    "validToDate": "2023-10-08",
+    "shortDescription": "Short description for Item 75",
+    "price": "83.08",
     "chooseFile": {
       "name": "pexels-karolina-grabowska-4022082.jpg"
     },
-    "long-description": "Long description for Item 84",
+    "long-description": "Long description for Item 75",
     "tags": [
-      "tag3",
-      "tag6"
-    ]
+      "tag4"
+    ],
+    "creationDate": "2023-07-11"
   },
   {
-    "company-name": "Company 85",
-    "item-name": "Item 85",
-    "valid-to-date": "2023-10-17",
-    "short-description": "Short description for Item 85",
-    "price": "82.85",
+    "companyName": "Company 76",
+    "itemName": "Item 76",
+    "validToDate": "2023-10-25",
+    "shortDescription": "Short description for Item 76",
+    "price": "16.93",
+    "chooseFile": {
+      "name": "pexels-murillo-molissani-10854279.jpg"
+    },
+    "long-description": "Long description for Item 76",
+    "tags": [
+      "tag4",
+      "tag3",
+      "tag2"
+    ],
+    "creationDate": "2022-12-04"
+  },
+  {
+    "companyName": "Company 77",
+    "itemName": "Item 77",
+    "validToDate": "2023-10-01",
+    "shortDescription": "Short description for Item 77",
+    "price": "23.35",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4041268.jpg"
+    },
+    "long-description": "Long description for Item 77",
+    "tags": [
+      "tag2"
+    ],
+    "creationDate": "2023-05-08"
+  },
+  {
+    "companyName": "Company 78",
+    "itemName": "Item 78",
+    "validToDate": "2023-10-09",
+    "shortDescription": "Short description for Item 78",
+    "price": "8.96",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 78",
+    "tags": [
+      "tag1",
+      "tag2",
+      "tag5"
+    ],
+    "creationDate": "2023-08-18"
+  },
+  {
+    "companyName": "Company 79",
+    "itemName": "Item 79",
+    "validToDate": "2023-10-15",
+    "shortDescription": "Short description for Item 79",
+    "price": "41.27",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4386402.jpg"
+    },
+    "long-description": "Long description for Item 79",
+    "tags": [
+      "tag3",
+      "tag2",
+      "tag1"
+    ],
+    "creationDate": "2023-09-16"
+  },
+  {
+    "companyName": "Company 80",
+    "itemName": "Item 80",
+    "validToDate": "2023-10-12",
+    "shortDescription": "Short description for Item 80",
+    "price": "87.89",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4022082.jpg"
+    },
+    "long-description": "Long description for Item 80",
+    "tags": [
+      "tag4",
+      "tag2"
+    ],
+    "creationDate": "2023-05-07"
+  },
+  {
+    "companyName": "Company 81",
+    "itemName": "Item 81",
+    "validToDate": "2023-10-14",
+    "shortDescription": "Short description for Item 81",
+    "price": "51.22",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-4386404.jpg"
+    },
+    "long-description": "Long description for Item 81",
+    "tags": [
+      "tag1",
+      "tag5",
+      "tag3"
+    ],
+    "creationDate": "2023-08-25"
+  },
+  {
+    "companyName": "Company 82",
+    "itemName": "Item 82",
+    "validToDate": "2023-10-20",
+    "shortDescription": "Short description for Item 82",
+    "price": "24.28",
+    "chooseFile": {
+      "name": "pexels-karolina-grabowska-6956661.jpg"
+    },
+    "long-description": "Long description for Item 82",
+    "tags": [
+      "tag3",
+      "tag1"
+    ],
+    "creationDate": "2023-09-08"
+  },
+  {
+    "companyName": "Company 83",
+    "itemName": "Item 83",
+    "validToDate": "2023-10-07",
+    "shortDescription": "Short description for Item 83",
+    "price": "5.40",
+    "chooseFile": {
+      "name": "pexels-dids-3844788.jpg"
+    },
+    "long-description": "Long description for Item 83",
+    "tags": [
+      "tag1",
+      "tag6"
+    ],
+    "creationDate": "2023-05-28"
+  },
+  {
+    "companyName": "Company 84",
+    "itemName": "Item 84",
+    "validToDate": "2023-09-29",
+    "shortDescription": "Short description for Item 84",
+    "price": "7.87",
+    "chooseFile": {
+      "name": "pexels-dids-3844788.jpg"
+    },
+    "long-description": "Long description for Item 84",
+    "tags": [
+      "tag6",
+      "tag1",
+      "tag3"
+    ],
+    "creationDate": "2022-12-17"
+  },
+  {
+    "companyName": "Company 85",
+    "itemName": "Item 85",
+    "validToDate": "2023-10-21",
+    "shortDescription": "Short description for Item 85",
+    "price": "78.76",
     "chooseFile": {
       "name": "pexels-erik-mclean-7524996.jpg"
     },
     "long-description": "Long description for Item 85",
     "tags": [
-      "tag7"
-    ]
+      "tag1",
+      "tag7",
+      "tag3"
+    ],
+    "creationDate": "2023-08-08"
   },
   {
-    "company-name": "Company 86",
-    "item-name": "Item 86",
-    "valid-to-date": "2023-10-18",
-    "short-description": "Short description for Item 86",
-    "price": "30.05",
+    "companyName": "Company 86",
+    "itemName": "Item 86",
+    "validToDate": "2023-10-25",
+    "shortDescription": "Short description for Item 86",
+    "price": "41.96",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4033323.jpg"
+      "name": "pexels-steve-johnson-1000366.jpg"
     },
     "long-description": "Long description for Item 86",
     "tags": [
+      "tag2",
       "tag1",
-      "tag3",
-      "tag6"
-    ]
+      "tag5"
+    ],
+    "creationDate": "2023-04-17"
   },
   {
-    "company-name": "Company 87",
-    "item-name": "Item 87",
-    "valid-to-date": "2023-10-22",
-    "short-description": "Short description for Item 87",
-    "price": "64.16",
+    "companyName": "Company 87",
+    "itemName": "Item 87",
+    "validToDate": "2023-10-11",
+    "shortDescription": "Short description for Item 87",
+    "price": "49.63",
     "chooseFile": {
-      "name": "pexels-monstera-production-7794266.jpg"
+      "name": "pexels-karolina-grabowska-6956661.jpg"
     },
     "long-description": "Long description for Item 87",
     "tags": [
+      "tag7",
       "tag3"
-    ]
+    ],
+    "creationDate": "2023-03-19"
   },
   {
-    "company-name": "Company 88",
-    "item-name": "Item 88",
-    "valid-to-date": "2023-10-18",
-    "short-description": "Short description for Item 88",
-    "price": "53.72",
+    "companyName": "Company 88",
+    "itemName": "Item 88",
+    "validToDate": "2023-10-05",
+    "shortDescription": "Short description for Item 88",
+    "price": "42.72",
     "chooseFile": {
-      "name": "pexels-dids-3799324.jpg"
+      "name": "pexels-cottonbro-studio-9818645.jpg"
     },
     "long-description": "Long description for Item 88",
     "tags": [
-      "tag5",
-      "tag7"
-    ]
+      "tag6"
+    ],
+    "creationDate": "2022-11-16"
   },
   {
-    "company-name": "Company 89",
-    "item-name": "Item 89",
-    "valid-to-date": "2023-10-24",
-    "short-description": "Short description for Item 89",
-    "price": "16.60",
+    "companyName": "Company 89",
+    "itemName": "Item 89",
+    "validToDate": "2023-09-29",
+    "shortDescription": "Short description for Item 89",
+    "price": "92.82",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4386402.jpg"
+      "name": "pexels-erik-mclean-7524996.jpg"
     },
     "long-description": "Long description for Item 89",
     "tags": [
-      "tag3",
-      "tag1"
-    ]
+      "tag2",
+      "tag6"
+    ],
+    "creationDate": "2023-01-20"
   },
   {
-    "company-name": "Company 90",
-    "item-name": "Item 90",
-    "valid-to-date": "2023-10-12",
-    "short-description": "Short description for Item 90",
-    "price": "38.24",
+    "companyName": "Company 90",
+    "itemName": "Item 90",
+    "validToDate": "2023-10-23",
+    "shortDescription": "Short description for Item 90",
+    "price": "82.34",
     "chooseFile": {
-      "name": "pexels-karolina-grabowska-4041268.jpg"
+      "name": "pexels-jj-jordan-9304725.jpg"
     },
     "long-description": "Long description for Item 90",
     "tags": [
-      "tag2",
-      "tag7"
-    ]
+      "tag4",
+      "tag2"
+    ],
+    "creationDate": "2023-02-22"
   }
 ]

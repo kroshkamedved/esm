@@ -39,18 +39,24 @@ const fileNames = [
     // Generate between 1 and 3 random tags from possibleTags
     const numTags = Math.floor(Math.random() * 3) + 1; // Random between 1 and 3
     const randomTags = shuffleArray(possibleTags).slice(0, numTags);
+    const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+    const randomCreationDate = new Date(
+      oneYearAgo.getTime() + Math.random() * (365 * 24 * 60 * 60 * 1000)
+    );
   
     const json = {
-      "company-name": `Company ${i + 1}`,
-      "item-name": `Item ${i + 1}`,
-      "valid-to-date": futureDates[i],
-      "short-description": `Short description for Item ${i + 1}`,
+      "companyName": `Company ${i + 1}`,
+      "itemName": `Item ${i + 1}`,
+      "validToDate": futureDates[i],
+      "shortDescription": `Short description for Item ${i + 1}`,
       "price": (Math.random() * 100).toFixed(2), // Generates a random price
       "chooseFile": {
         "name": randomFileName
       },
       "long-description": `Long description for Item ${i + 1}`,
-      "tags": randomTags
+      "tags": randomTags,
+      "creationDate": randomCreationDate.toISOString().split('T')[0] // Format as YYYY-MM-DD
     };
   
     generatedJSONs.push(json);

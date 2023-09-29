@@ -29,3 +29,14 @@
       transform: translateX(100%);
     }
   }
+
+  img.coupon {
+    max-height: 100%;
+    width: 100%; /* Ensures the image fits the container width */
+    height: auto; /* Maintains the aspect ratio */
+    object-fit: contain; /* Specifies how the image should fit (e.g., 'cover') */
+  }
+
+  .coupon-action {
+    padding: 0 3% 1% 3%;
+  }

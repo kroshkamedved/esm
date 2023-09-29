@@ -3,36 +3,147 @@ const loader = document.getElementById('loader');
 const couponCount = document.getElementById('coupon-count');
 const couponTotal = document.getElementById('coupon-total');
 
-const couponLimit = 90;
+let allCollection = JSON.parse(localStorage.getItem('couponCollection'));
+allCollection.sort((a, b) => {
+    const creationDateA = new Date(a.creationDate);
+    const creationDateB = new Date(b.creationDate);
+    return creationDateA - creationDateB;
+})
+
+const finalCollection = allCollection;
+
+const couponLimit = allCollection.length;
 couponTotal.innerHTML = couponLimit;
 
 const couponIncrease = 10;
-const pageCount = Math.ceil(couponLimit/couponIncrease);
+const pageCount = Math.ceil(couponLimit / couponIncrease);
 
-let currentPage = 1;
+let index = 0;
 
-const fs = require('fs');
-const path = require('path');
-const fileDir = '/Users/kroshkamedved/IdeaProjects/esm/src/main/resources/static'
-
-fs.readFile('/Users/kroshkamedved/IdeaProjects/esm/src/main/resources/static/output.json','utf-8',(err,content) => {
-    if(err){
-        console.error('Error reading the file:', err);
-        return;
-    }
-    try{
-        const jsonArray = JSON.parse(content);
-        localStorage.setItem('AllCertificates',JSON.stringify(jsonArray));
-        console.log('jsons saved to the localhost');
-    } catch(error){
-        console.log('Error parsing JSON',error)
-    }
-})
-
-const deserializeCoupon = (index,  ) => {
+const visualizeCoupon = (index, collection) => {
     const coupon = document.createElement('div');
     coupon.className = 'coupon-unit';
 
     const imgDiv = document.createElement('div');
     imgDiv.className = 'coupon-image-placeholder';
+    imgDiv.innerHTML = `<img class ='coupon' src='../static/pictures/${collection[index].chooseFile.name}'>`;
+
+    let expiresIn = Math.floor((new Date(collection[index].validToDate) - new Date()) / (1000 * 60 * 60 * 24));
+
+    coupon.appendChild(imgDiv);
+    const coupInfo = document.createElement('div');
+    coupInfo.className = 'coupon-info';
+    coupInfo.innerHTML =
+        `<div class="coupon-info-parts">
+            <span>${collection[index].itemName}</span>
+            <a href="#add_to_favourite"><img src="../static/icons/favorite_FILL0_wght400_GRAD0_opsz24.svg"
+         alt="favourite"></a>
+        </div>
+            <div class="coupon-info-parts">
+                <span class="brief-desc">${collection[index].shortDescription}</span>
+                <label>Expires in ${expiresIn} days</label>
+            </div>
+                <hr>
+    <div class="coupon-info-parts">
+        <span>$${collection[index].price}</span>
+        <button type="button" class="add-item-button">Add to Cart</button>
+    </div>`
+    coupon.appendChild(coupInfo);
+    couponGrid.appendChild(coupon);
 }
+
+const addCoupons = (collection) => {
+    for (let i = index, end = index + couponIncrease; i < end && i < collection.length; i++) {
+        visualizeCoupon(index, collection);
+        index++;
+    }
+    couponCount.innerHTML = `${index}`
+}
+
+window.onload = function () {
+    addCoupons(allCollection);
+}
+
+
+const handleInfiniteScroll = () => {
+    if (window.innerHeight + window.scrollY >= (document.body.offsetHeight * 0.8)) {
+        addCoupons(allCollection);
+    }
+    if (index == couponLimit || index == allCollection.length) {
+        loader.style.display = 'none';
+    }
+}
+
+const func = handleInfiniteScroll.bind(this);
+
+
+
+//DEBAUNCE IMPLEMENTATION
+const debaunce = (func, threshold, immediately) => {
+    let timeout;
+    return function debaunced() {
+        var context = this, args = arguments;
+
+        function delayed() {
+            if (!immediately) {
+                func.apply(context, args);
+            }
+            timeout = null;
+        }
+
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        else if (immediately) {
+            func.apply(context, args);
+        }
+        timeout = setTimeout(delayed, threshold | 500);
+    };
+}
+
+
+//THROTTLE IMPLEMENTATION
+const throttle = (func, threshold) => {
+    let timeout;
+    return function () {
+        let context = this, args = arguments;
+
+        function later() {
+            timeout = false;
+        }
+
+        if (!timeout) {
+            func.apply(context, args);
+            timeout = true;
+            setTimeout(later, threshold);
+        }
+    }
+}
+
+
+//window.addEventListener('scroll', debaunce(func, 500, false));
+window.addEventListener('scroll', throttle(func, 500, false));
+
+
+
+
+
+// //SEARCH IMPLEMENTATION  
+// searchField.addEventListener('input', (e) => {
+//     let text = document.getElementById('search-field').value.toLowerCase();
+//     let filteredCollection = collection.filter((coupon) => {
+//         if (coupon.itemName.toLowerCase().includes(text)
+//             ||
+//             coupon.shortDescription.toLowerCase().includes(text)) {
+//             return true;
+//         }
+//         for (let i = 0; i < coupon.tags.length; i++) {
+//             if (coupon.tags[i].toLowerCase().includes(text)) {
+//                 return true;
+//             }
+//         }
+//     })
+//     index = 0;
+//     couponGrid.innerHTML = '';
+//     visualizeCoupon(index, filteredCollection);
+// })
