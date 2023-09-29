@@ -39,6 +39,11 @@ img.coupon {
   /* Maintains the aspect ratio */
   object-fit: contain;
   /* Specifies how the image should fit (e.g., 'cover') */
+  transition: transform 0.25s;
+}
+
+img.coupon:hover {
+  transform: scale(1.3);
 }
 
 .coupon-action {
@@ -61,6 +66,26 @@ img.coupon {
   font-size: 18px;
 }
 
-#myBtn::hower{
+#myBtn::hower {
   background-color: grey;
+}
+
+h4 {
+  text-align: center;
+  font: bold;
+}
+
+.category-unit {
+  transition: transform 0.25s;
+  z-index: 99;
+}
+
+.category-unit:hover {
+  transform: scale(1.4);
+}
+
+.category-unit input[type="checkbox"] {
+  appearance: none;
+  opacity: 0;
+  z-index: 3;
 }

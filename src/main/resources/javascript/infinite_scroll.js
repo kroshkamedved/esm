@@ -1,3 +1,5 @@
+
+
 const couponGrid = document.querySelector('.coupon-grid');
 const loader = document.getElementById('loader');
 const couponCount = document.getElementById('coupon-count');
@@ -9,6 +11,16 @@ allCollection.sort((a, b) => {
     const creationDateB = new Date(b.creationDate);
     return creationDateA - creationDateB;
 })
+
+const categories = [];
+for (let i = 0; i < allCollection.length; i++) {
+    for (let y = 0; y < allCollection[i].tags.length; y++) {
+        if (categories.includes(allCollection[i].tags[y])) {
+            continue;
+        }
+        categories.push(allCollection[i].tags[y]);
+    }
+}
 
 const finalCollection = allCollection;
 
@@ -63,7 +75,7 @@ const addCoupons = (collection) => {
 window.onload = function () {
     let val = localStorage.getItem('lastScrollPosition');
     let position = Number.parseInt(val);
-    while(document.documentElement.scrollHeight < position ){
+    while (document.documentElement.scrollHeight < position) {
         addCoupons(allCollection);
     }
     addCoupons(allCollection);
@@ -156,33 +168,78 @@ window.addEventListener('scroll', throttle(func, 500, false));
 
 //Add "to Top" button;
 const btn = document.getElementById('upBtn');
-document.addEventListener('click', goUp);
-document.addEventListener('scroll',onScroll);
+btn.addEventListener('click', goUp);
+document.addEventListener('scroll', onScroll);
 document.addEventListener('scroll', debaunce(savePosition, 500));
 
-function savePosition(){
+function savePosition() {
     localStorage.setItem('lastScrollPosition', window.scrollY);
 }
 
-function onScroll(){
-    if ( window.scrollY >= 50) {
+function onScroll() {
+    if (window.scrollY >= 50) {
         btn.style.display = 'block';
     }
-    else{
+    else {
         btn.style.display = 'none';
     }
 }
 
-function goUp(){
+function goUp() {
     document.documentElement.scrollTop = 0;
 }
 
 //Find last scroll position on the page;
 
-function loadPosition () {
-   let val = localStorage.getItem('lastScrollPosition');
-   let position = Number.parseInt(val);
-   document.documentElement.scrollTop =position;
-   console.log(position);
-   console.log(document.documentElement.scrollTop)
+function loadPosition() {
+    let val = localStorage.getItem('lastScrollPosition');
+    let position = Number.parseInt(val);
+    document.documentElement.scrollTop = position;
+    console.log(position);
+    console.log(document.documentElement.scrollTop)
+}
+
+function visualizeCategories() {
+    const categoryCatalog = document.querySelector('.category-catalog');
+    const searchField = document.getElementById('search-field');
+    const select = document.getElementById('tags');
+    for (let i = 0; i < categories.length; i++) {
+        let innerHtmlCategory = `
+                <div class="image-placeholder"></div>
+                <h4>${categories[i]}</h4>
+        `;
+        let tmp = document.createElement('div');
+        tmp.classList.add('category-unit');
+        tmp.setAttribute('id', categories[i]);
+        tmp.innerHTML = innerHtmlCategory;
+        categoryCatalog.appendChild(tmp);
+
+        let option = document.createElement('option');
+        option.text = categories[i];
+        option.value = option.text;
+        select.appendChild(option);
+
+        tmp.addEventListener('click', (e) => {
+            searchField.value = e.target.closest('.category-unit').id;
+
+            const inputEvent = new Event('input', {
+                bubbles: true,
+                cancelable: true,
+            });
+            searchField.dispatchEvent(inputEvent);
+        })
+
+        select.addEventListener('click', () => {
+            select.addEventListener('change', (e) => {
+                let searchKey = e.target.value;
+                searchField.value = (e.target.value == 'All Categories') ? '' : searchKey;
+
+                const inputEvent = new Event('input', {
+                    bubbles: true,
+                    cancelable: true,
+                });
+                searchField.dispatchEvent(inputEvent);
+            })
+        })
+    }
 }

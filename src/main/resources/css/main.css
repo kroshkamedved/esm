@@ -26,6 +26,7 @@ main{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    z-index : 1000;
 }
 
 .left-part {
@@ -74,6 +75,12 @@ main{
 
 a:visited {
     color: rgb(128, 128, 128);
+}
+
+.right-side-icons:hover,#login:hover,#signup:hover{
+    padding: 5px;
+    background-color: lightskyblue;
+    border-radius: 10px;
 }
 
 a {

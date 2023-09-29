@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const nav = document.querySelector('#header-for-all')
@@ -10,7 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const menuList = document.getElementById('menu-list');
             const searchField = document.getElementById('search-field');
 
-            searchField.addEventListener('input', debaunce(addSearch,500))
+            searchField.addEventListener('input', debaunce(addSearch, 500))
+            visualizeCategories();
 
 
             document.addEventListener('click', (event) => {
@@ -25,10 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
         })
 })
 //Search implementation
-function addSearch (e) {
+function addSearch(e) {
     let text = document.getElementById('search-field').value.toLowerCase();
     //min relevant value for search execution
-    if(text.length >= 2){
+    if (text.length >= 2) {
         let filteredCollection = finalCollection.filter((coupon) => {
             if (coupon.itemName.toLowerCase().includes(text)
                 ||
@@ -43,10 +45,11 @@ function addSearch (e) {
         })
         allCollection = filteredCollection;
     }
-    index = 0;  
+    index = 0;
     couponGrid.innerHTML = '';
-    if(text==''){
+    if (text == '') {
         allCollection = finalCollection;
     }
     addCoupons(allCollection);
 }
+

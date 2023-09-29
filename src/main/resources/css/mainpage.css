@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-evenly;
     background-color: darkgrey;
+    height: auto;
 }
 
 .category-unit {
@@ -24,6 +25,7 @@
     background-color: darkgrey;
     height: 12rem;
     width: 100%;
+    overflow:hidden;
 }
 
 .coupon-info {
