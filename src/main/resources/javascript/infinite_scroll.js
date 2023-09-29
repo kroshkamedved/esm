@@ -61,7 +61,13 @@ const addCoupons = (collection) => {
 }
 
 window.onload = function () {
+    let val = localStorage.getItem('lastScrollPosition');
+    let position = Number.parseInt(val);
+    while(document.documentElement.scrollHeight < position ){
+        addCoupons(allCollection);
+    }
     addCoupons(allCollection);
+    loadPosition();
 }
 
 
@@ -147,3 +153,36 @@ window.addEventListener('scroll', throttle(func, 500, false));
 //     couponGrid.innerHTML = '';
 //     visualizeCoupon(index, filteredCollection);
 // })
+
+//Add "to Top" button;
+const btn = document.getElementById('upBtn');
+document.addEventListener('click', goUp);
+document.addEventListener('scroll',onScroll);
+document.addEventListener('scroll', debaunce(savePosition, 500));
+
+function savePosition(){
+    localStorage.setItem('lastScrollPosition', window.scrollY);
+}
+
+function onScroll(){
+    if ( window.scrollY >= 50) {
+        btn.style.display = 'block';
+    }
+    else{
+        btn.style.display = 'none';
+    }
+}
+
+function goUp(){
+    document.documentElement.scrollTop = 0;
+}
+
+//Find last scroll position on the page;
+
+function loadPosition () {
+   let val = localStorage.getItem('lastScrollPosition');
+   let position = Number.parseInt(val);
+   document.documentElement.scrollTop =position;
+   console.log(position);
+   console.log(document.documentElement.scrollTop)
+}
