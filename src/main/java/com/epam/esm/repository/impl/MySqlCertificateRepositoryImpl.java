@@ -128,13 +128,21 @@ public class MySqlCertificateRepositoryImpl implements CertificateRepository {
         Root<GiftCertificate> root = criteriaQuery.from(GiftCertificate.class);
 
         ArrayList<Predicate> predicates = new ArrayList<>();
-
-        if (description != null) {
-            predicates.add(criteriaBuilder.like(root.get("description"), MessageFormat.format("%{0}%", description)));
-        }
-        if (name != null) {
+        if (name != null && description != null) {
+            // Case 1: Both name and description are specified
+            Predicate nameLike = criteriaBuilder.like(root.get("name"), MessageFormat.format("%{0}%", name));
+            Predicate descriptionLike = criteriaBuilder.like(root.get("description"), MessageFormat.format("%{0}%", description));
+            predicates.add(criteriaBuilder.and(nameLike, descriptionLike));
+        } else if (name != null) {
+            // Case 2: Only name is specified
             predicates.add(criteriaBuilder.like(root.get("name"), MessageFormat.format("%{0}%", name)));
+        } else if (description != null) {
+            // Case 3: Only description is specified
+            Predicate nameLikeDescriptionValue = criteriaBuilder.like(root.get("name"), MessageFormat.format("%{0}%", description));
+            Predicate descriptionLikeDescriptionValue = criteriaBuilder.like(root.get("description"), MessageFormat.format("%{0}%", description));
+            predicates.add(criteriaBuilder.or(nameLikeDescriptionValue, descriptionLikeDescriptionValue));
         }
+
         if (sortOrder != null) {
             boolean desc = sortOrder.equals("DESC");
             List<Order> orders = new ArrayList<>();
