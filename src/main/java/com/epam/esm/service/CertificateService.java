@@ -20,11 +20,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -85,7 +85,7 @@ public class CertificateService {
         }
     }
 
-    public List<GiftCertificate> getGiftCertificatesParametrized(String tagName,
+    public List<GiftCertificate> getGiftCertificatesParametrized(String[] tagName,
                                                                  String name,
                                                                  String description,
                                                                  String sortOrder,
@@ -98,11 +98,11 @@ public class CertificateService {
         return filterByTagName(list, tagName);
     }
 
-    private List<GiftCertificate> filterByTagName(List<GiftCertificate> giftCertificateDTOS, String tagName) {
+    private List<GiftCertificate> filterByTagName(List<GiftCertificate> giftCertificateDTOS, String[] tags) {
         return giftCertificateDTOS.stream()
                 .filter(
-                        e -> e.getTags().stream()
-                                .anyMatch(t -> t.getName().contains(tagName))
+                        e -> Arrays.stream(tags)
+                                .allMatch(tag -> e.getTags().stream().anyMatch(t -> t.getName().contains(tag)))
                 ).toList();
     }
 

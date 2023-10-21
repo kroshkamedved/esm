@@ -21,7 +21,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorDetails> handleEntityNotFoundException(EntityNotFoundException exception) {
         ErrorDetails errorDetails = ErrorDetails.detailsOf(exception, exception.getError());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorDetails);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorDetails);
     }
 
     @ExceptionHandler(EntityCannotBeSaved.class)

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,11 +23,15 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final SpringDataUserRepository springDataUserRepository;
 
+    @Transactional
     public Optional<User> getUser(long id) {
+        System.out.println("execution");
         return springDataUserRepository.findById(id);
     }
 
+    @Transactional
     public Optional<User> getUser(String login) {
+        System.out.println("execution");
         return springDataUserRepository.findByLogin(login);
     }
 
@@ -51,7 +56,9 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("execution");
         return springDataUserRepository.findByLogin(username).orElseThrow(() -> new EntityNotFoundException("user not found", Error.UserNotFound));
     }
 }

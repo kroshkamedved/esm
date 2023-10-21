@@ -4,6 +4,7 @@ import com.epam.esm.domain.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -16,6 +17,5 @@ public interface SpringDataUserRepository extends CrudRepository<User, Long> {
     void deleteByLogin(String username);
 
     boolean existsByLogin(String username);
-
     Optional<User> findByLogin(String login);
 }

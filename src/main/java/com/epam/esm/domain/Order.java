@@ -34,7 +34,7 @@ public class Order extends RepresentationModel<Order> {
     @Column(name = "create_time", insertable = false)
     private Instant createDate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "orders_certificates",
             joinColumns = {@JoinColumn(name = "order_id")},

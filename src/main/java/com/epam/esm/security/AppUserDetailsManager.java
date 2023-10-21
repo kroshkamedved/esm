@@ -39,6 +39,7 @@ public class AppUserDetailsManager implements UserDetailsManager {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("Execution form detail manager");
         return userService.loadUserByUsername(username);
     }
 }

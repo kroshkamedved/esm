@@ -44,7 +44,7 @@ public class GiftCertificate extends RepresentationModel<GiftCertificate> {
     private Instant createDate;
     @Column(name = "update_time")
     private Instant lastUpdateDate;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
     @JoinTable(name = "certificates_to_tags", joinColumns = @JoinColumn(name = "certificate_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
     Set<Tag> tags;
 }

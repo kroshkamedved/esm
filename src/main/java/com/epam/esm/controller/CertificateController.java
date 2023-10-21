@@ -112,7 +112,7 @@ public class CertificateController {
      */
     @GetMapping
     @ResponseStatus(OK)
-    public List<CertificateModel> fetchAllCertificatesParametrized(@RequestParam(required = false) String tagName,
+    public List<CertificateModel> fetchAllCertificatesParametrized(@RequestParam(required = false) String[] tagName,
                                                                    @RequestParam(required = false) String name,
                                                                    @RequestParam(required = false) String description,
                                                                    @RequestParam(required = false) String sortOrder,
@@ -168,6 +168,7 @@ public class CertificateController {
 
     @GetMapping("/all")
     public PagedModel<CertificateModel> fetchAll(Pageable pageable){
+        System.out.println("********************************EXECUTED************************************");
         return pagedResourcesAssembler.toModel(certificateService.getAll(pageable),modelAssembler);
     }
 }

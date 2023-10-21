@@ -23,5 +23,5 @@ public class CertificateModel extends RepresentationModel<GiftCertificate> {
     private Instant lastUpdateDate;
     @JsonIgnore
     private Set<Order> orders;
-    List<Tag> tags;
+    Set<Tag> tags;
 }

@@ -122,7 +122,7 @@ function redundant(str) {
  * @return {number}
  */
 function towerHanoi(disks) {
-
+    
 }
 
 /**
