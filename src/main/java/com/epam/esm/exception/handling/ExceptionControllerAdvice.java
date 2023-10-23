@@ -45,6 +45,8 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorDetails> handleParsingRequestException(DataIntegrityViolationException e) {
         ErrorDetails errorDetails = ErrorDetails.detailsOf(e, HttpStatus.BAD_REQUEST.toString());
+        errorDetails.setErrorMessage("Data integrity violation");
+        errorDetails.setErrorCode(HttpStatus.BAD_REQUEST.toString());
         return ResponseEntity.badRequest().body(errorDetails);
     }
 
