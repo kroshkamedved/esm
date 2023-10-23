@@ -1,10 +1,13 @@
 HELP.md
 target/
+esm-frontednd/.vscode
+esm-frontednd/node_modules
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 /src/main/resources/static/pictures
+
 
 ### STS ###
 .apt_generated
