@@ -1,0 +1,3 @@
+[submodule "esm-frontend"]
+	path = esm-frontend
+	url = git@github.com:kroshkamedved/esm-react-front.git
