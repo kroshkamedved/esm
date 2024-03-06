@@ -1,6 +1,10 @@
 package com.epam.esm.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +17,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.hateoas.RepresentationModel;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -29,4 +35,8 @@ public class Tag extends RepresentationModel<Tag> {
     long id;
     @Column(name = "tag_name")
     String name;
+
+    @ManyToMany(mappedBy = "tags")
+    @JsonBackReference
+    List<GiftCertificate> certificates;
 }

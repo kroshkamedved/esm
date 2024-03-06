@@ -1,5 +1,9 @@
 package com.epam.esm.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,7 +48,10 @@ public class GiftCertificate extends RepresentationModel<GiftCertificate> {
     private Instant createDate;
     @Column(name = "update_time")
     private Instant lastUpdateDate;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.MERGE,CascadeType.DETACH})
-    @JoinTable(name = "certificates_to_tags", joinColumns = @JoinColumn(name = "certificate_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
+    @JoinTable(name = "certificates_to_tags",
+            joinColumns = @JoinColumn(name = "certificate_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    @JsonBackReference
     Set<Tag> tags;
 }

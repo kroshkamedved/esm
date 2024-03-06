@@ -16,6 +16,7 @@ public class TagModelAssembler implements RepresentationModelAssembler<Tag, TagM
     public TagModel toModel(Tag entity) {
         TagModel tagModel = new TagModel();
         BeanUtils.copyProperties(entity, tagModel);
+        tagModel.setCertificates(entity.getCertificates());
         tagModel.add(linkTo(methodOn(TagController.class).fetchById(entity.getId())).withSelfRel());
         return tagModel;
     }
